@@ -40,6 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
 
     override fun bindVM(binding: FragmentHomeLayoutBinding, vm: HomeFragmentViewModel) {
         this.binding = binding
+        binding.adapter = mAdapter
     }
 
     override fun init() {
