@@ -3,6 +3,7 @@ package com.arabam.android.assigment.ui.fragments.listing
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.base.BaseFragment
@@ -39,7 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         initAdapter()
         subscribeObservers()
         getNavigationResult<SortItem>(R.id.home, Constants.SORT_KEY) {
-
+            mViewModel.updateSortOrder(it)
         }
     }
 
@@ -80,7 +81,9 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         launchOnLifecycleScope {
             activityViewModel.sortClick.collectLatest {
                 if (it.isClicked) {
-
+                    val action =
+                        HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortOrder())
+                    findNavController().navigate(action)
                 }
             }
         }

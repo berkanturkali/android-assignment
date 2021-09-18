@@ -38,6 +38,10 @@ class SortFragment : BottomSheetDialogFragment(), ItemClickListener<SortItem> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.clearBtn.setOnClickListener {
+            setNavigationResult(SORT_KEY, SortItem(""))
+            dialog?.dismiss()
+        }
         initRecycler()
     }
 

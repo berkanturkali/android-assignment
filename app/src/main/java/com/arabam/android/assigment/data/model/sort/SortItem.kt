@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class SortItem(
     var title:String,
-    var type:SortTypes?,
-    var direction:SortDirections?,
+    var type:SortTypes? = null,
+    var direction:SortDirections? = null,
     var isSelected:Boolean = false
 ):Parcelable
