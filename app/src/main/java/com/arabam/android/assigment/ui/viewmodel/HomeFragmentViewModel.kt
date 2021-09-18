@@ -2,13 +2,16 @@ package com.arabam.android.assigment.ui.viewmodel
 
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.arabam.android.assigment.base.BaseViewModel
+import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.data.model.sort.SortItem
 import com.arabam.android.assigment.data.model.year.YearItem
 import com.arabam.android.assigment.data.repository.AdvertRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
@@ -24,10 +27,9 @@ class HomeFragmentViewModel @Inject constructor(
 
     private val _adverts = combine(
         sortOrder,
-        year
-    ) { order, year ->
-        Pair(order, year)
-    }.flatMapLatest {
+        year,
+        ::Pair
+    ).flatMapLatest {
         repo.allAdverts(it.first.type?.value,
             it.first.direction?.value,
             it.second.minYear,
@@ -46,4 +48,9 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     fun getSortOrder() = sortOrder.value
+
+    data class UiState(
+        val hasNotScrolledForCurrentResult:Boolean = false,
+        val pagingData: PagingData<ListingAdvert> = PagingData.empty()
+    )
 }
