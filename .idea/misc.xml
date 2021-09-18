@@ -27,6 +27,8 @@
         <entry key="app/src/main/res/layout/fragment_home_layout.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/fragment_info_layout.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/fragment_sort_layout.xml" value="0.24138804457953394" />
+        <entry key="app/src/main/res/layout/info_with_text_item.xml" value="0.24138804457953394" />
+        <entry key="app/src/main/res/layout/info_with_title_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/sort_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/view_pager_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3972222222222222" />
