@@ -6,10 +6,13 @@ import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.base.BaseFragment
+import com.arabam.android.assigment.data.model.sort.SortItem
 import com.arabam.android.assigment.databinding.FragmentHomeLayoutBinding
 import com.arabam.android.assigment.ui.adapters.AdvertLoadStateAdapter
 import com.arabam.android.assigment.ui.adapters.ListingAdapter
 import com.arabam.android.assigment.ui.viewmodel.HomeFragmentViewModel
+import com.arabam.android.assigment.utils.Constants
+import com.arabam.android.assigment.utils.getNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -35,6 +38,9 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
     override fun init() {
         initAdapter()
         subscribeObservers()
+        getNavigationResult<SortItem>(R.id.home, Constants.SORT_KEY) {
+
+        }
     }
 
     private fun initAdapter() {

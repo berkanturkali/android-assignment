@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.arabam.android.assigment.data.ItemClickListener
 import com.arabam.android.assigment.data.model.sort.SortItem
 import com.arabam.android.assigment.databinding.SortItemBinding
 import javax.inject.Inject
 
 class SortAdapter @Inject constructor() : ListAdapter<SortItem, SortAdapter.ViewHolder>(SORT_COMPARATOR){
+
+    private lateinit var listener:ItemClickListener<SortItem>
 
     companion object{
         val SORT_COMPARATOR =  object : DiffUtil.ItemCallback<SortItem>() {
@@ -43,7 +46,7 @@ class SortAdapter @Inject constructor() : ListAdapter<SortItem, SortAdapter.View
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
                     item?.let {
-
+                        listener.onClick(it)
                     }
                 }
             }
@@ -52,5 +55,9 @@ class SortAdapter @Inject constructor() : ListAdapter<SortItem, SortAdapter.View
         fun bind(item: SortItem) {
             binding.item = item
         }
+    }
+
+    fun setClickListener(listener:ItemClickListener<SortItem>){
+        this.listener = listener
     }
 }
