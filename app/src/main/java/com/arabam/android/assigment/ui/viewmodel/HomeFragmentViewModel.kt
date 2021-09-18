@@ -4,10 +4,13 @@ import androidx.paging.PagingData
 import com.arabam.android.assigment.base.BaseViewModel
 import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.data.model.sort.SortItem
+import com.arabam.android.assigment.data.model.year.YearItem
 import com.arabam.android.assigment.data.repository.AdvertRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,6 +19,8 @@ class HomeFragmentViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val sortOrder = MutableStateFlow<SortItem>(SortItem(""))
+
+    private val year = MutableStateFlow(YearItem())
 
     private lateinit var _adverts: Flow<PagingData<ListingAdvert>>
 
@@ -27,7 +32,17 @@ class HomeFragmentViewModel @Inject constructor(
 
     private fun getAdverts() {
         launchPagingAsync({
-            repo.allAdverts(null, null, null, null)
+            combine(
+                sortOrder,
+                year
+            ) { order, year ->
+                Pair(order, year)
+            }.flatMapLatest {
+                repo.allAdverts(it.first.type?.value,
+                    it.first.direction?.value,
+                    it.second.minYear,
+                    it.second.maxYear)
+            }
         }, {
             _adverts = it
         })
@@ -35,6 +50,10 @@ class HomeFragmentViewModel @Inject constructor(
 
     fun updateSortOrder(item: SortItem) {
         sortOrder.value = item
+    }
+
+    fun updateYear(year: YearItem) {
+        this.year.value = year
     }
 
     fun getSortOrder() = sortOrder.value

@@ -8,14 +8,17 @@ import androidx.paging.LoadState
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.base.BaseFragment
 import com.arabam.android.assigment.data.model.sort.SortItem
+import com.arabam.android.assigment.data.model.year.YearItem
 import com.arabam.android.assigment.databinding.FragmentHomeLayoutBinding
 import com.arabam.android.assigment.ui.adapters.AdvertLoadStateAdapter
 import com.arabam.android.assigment.ui.adapters.ListingAdapter
 import com.arabam.android.assigment.ui.viewmodel.HomeFragmentViewModel
 import com.arabam.android.assigment.utils.Constants
+import com.arabam.android.assigment.utils.Constants.YEAR_KEY
 import com.arabam.android.assigment.utils.getNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,6 +44,10 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         subscribeObservers()
         getNavigationResult<SortItem>(R.id.home, Constants.SORT_KEY) {
             mViewModel.updateSortOrder(it)
+        }
+        getNavigationResult<YearItem>(R.id.home,YEAR_KEY){
+            Timber.i("year: $it")
+            mViewModel.updateYear(it)
         }
     }
 
@@ -90,7 +97,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         launchOnLifecycleScope {
             activityViewModel.yearFilterClick.collectLatest {
                 if (it.isClicked) {
-
+                    findNavController().navigate(R.id.action_home_to_filterByYearFragment)
                 }
             }
         }
