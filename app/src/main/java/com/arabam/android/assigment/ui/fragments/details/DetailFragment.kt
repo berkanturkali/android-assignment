@@ -31,6 +31,7 @@ import com.arabam.android.assigment.utils.resize
 import com.arabam.android.assigment.utils.showSnack
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -88,6 +89,18 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                     activityViewModel.showProgress(false)
                 }
             }
+        }
+        launchOnLifecycleScope {
+            activityViewModel.isFavChecked.collectLatest {
+                if(it){
+                    graphViewModel.addToFav(args.advert)
+                }else{
+                    graphViewModel.removeFromFav(args.advert)
+                }
+            }
+        }
+        launchOnLifecycleScope {
+            activityViewModel.setIsInFavorites(graphViewModel.getAdvert(args.advert.id) != null)
         }
     }
 

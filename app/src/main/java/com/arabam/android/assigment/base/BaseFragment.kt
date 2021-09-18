@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
@@ -24,7 +25,7 @@ abstract class BaseFragment<DB:ViewDataBinding,VM:ViewModel>:Fragment() {
 
     val activityViewModel by activityViewModels<MainActivityViewModel>()
 
-    val graphViewModel by navGraphViewModels<AppGraphViewModel>(R.id.app_graph)
+    val graphViewModel by hiltNavGraphViewModels<AppGraphViewModel>(R.id.app_graph)
 
     @get:LayoutRes
     abstract val layoutId: Int

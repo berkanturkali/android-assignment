@@ -1,6 +1,10 @@
 package com.arabam.android.assigment
 
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.BounceInterpolator
+import android.view.animation.ScaleAnimation
+import android.widget.ToggleButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -25,11 +29,16 @@ class MainActivity : AppCompatActivity() {
 
     private val mViewModel by viewModels<MainActivityViewModel>()
 
+    private lateinit var favButton: ToggleButton
+
+    private lateinit var scaleAnimation: ScaleAnimation
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.contentMain.viewmodel = mViewModel
         initNavigation()
+        initFavButton()
         subscribeObservers()
     }
 
@@ -47,7 +56,25 @@ class MainActivity : AppCompatActivity() {
             mViewModel.setFloatingVisibility(destination.id == R.id.home)
             binding.contentMain.bottomNavigationView.isVisible =
                 appBarConfiguration.topLevelDestinations.contains(destination.id)
+            binding.addToFav.isVisible = destination.id == R.id.detailFragment
         }
+    }
+
+    private fun initFavButton() {
+        scaleAnimation = ScaleAnimation(
+            0.7f,
+            1.0f,
+            0.7f,
+            1.0f,
+            Animation.RELATIVE_TO_SELF,
+            0.7f,
+            Animation.RELATIVE_TO_SELF,
+            0.7f
+        )
+        scaleAnimation.duration = 500
+        val bounceInterpolator = BounceInterpolator()
+        scaleAnimation.interpolator = bounceInterpolator
+        favButton = binding.addToFav
     }
 
     private fun subscribeObservers(){
@@ -59,6 +86,16 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenCreated {
             mViewModel.isFloatingVisible.collectLatest {
                 binding.contentMain.menu.isVisible = it
+            }
+        }
+        lifecycleScope.launchWhenCreated {
+            mViewModel.isAdvertInFavorites.collectLatest {
+                favButton.setOnCheckedChangeListener(null)
+                favButton.isChecked = it
+                favButton.setOnCheckedChangeListener { element, isChecked ->
+                    mViewModel.setFavChecked(isChecked)
+                    element.startAnimation(scaleAnimation)
+                }
             }
         }
     }
