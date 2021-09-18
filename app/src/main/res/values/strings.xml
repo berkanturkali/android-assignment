@@ -19,4 +19,5 @@
     <string name="min_year_hint">Min:Örn 2011</string>
     <string name="max_year_hint">Max:Örn 2030</string>
     <string name="apply">Uygula</string>
+    <string name="no_image">İlana ait resim bulunmamaktır.</string>
 </resources>
