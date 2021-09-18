@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">arabam</string>
-    <string name="home">Home</string>
-    <string name="favorites">favorites</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="favorites">Favoriler</string>
     <string name="try_again">Tekrar dene</string>
     <string name="no_result">Sonuç Bulunamadı.</string>
     <string name="no_favorite">Favori Bulunmamaktadır.</string>

@@ -10,9 +10,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesLayoutBinding, AppGraphV
     override val layoutId: Int
         get() = R.layout.fragment_favorites_layout
 
-    override fun getVM(): AppGraphViewModel {
-        TODO("Not yet implemented")
-    }
+    override fun getVM(): AppGraphViewModel =graphViewModel
 
     override fun bindVM(binding: FragmentFavoritesLayoutBinding, vm: AppGraphViewModel) {
 

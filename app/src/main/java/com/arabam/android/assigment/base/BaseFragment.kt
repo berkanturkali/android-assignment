@@ -10,12 +10,17 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.navGraphViewModels
+import com.arabam.android.assigment.R
+import com.arabam.android.assigment.ui.viewmodel.AppGraphViewModel
 
 abstract class BaseFragment<DB:ViewDataBinding,VM:ViewModel>:Fragment() {
 
     private lateinit var binding:DB
 
     private lateinit var  viewModel:VM
+
+    val graphViewModel by navGraphViewModels<AppGraphViewModel>(R.id.app_graph)
 
     @get:LayoutRes
     abstract val layoutId: Int
