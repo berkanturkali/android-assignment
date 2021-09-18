@@ -9,4 +9,6 @@ object Constants {
     const val YEAR_KEY ="year_key"
 
     const val ADVERT_KEY = "advert_key"
+
+    const val DB_NAME = "arabam_db"
 }
