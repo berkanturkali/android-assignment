@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-abstract class BaseViewModel:ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     inline fun <T> launchAsync(
         crossinline execute: suspend () -> Response<T>,
@@ -26,16 +26,6 @@ abstract class BaseViewModel:ViewModel() {
             } catch (e: Exception) {
                 onError(e.message!!)
             }
-        }
-    }
-
-    inline fun <T> launchPagingAsync(
-        crossinline execute: suspend () -> Flow<T>,
-        crossinline onSuccess: (Flow<T>) -> Unit,
-    ) {
-        viewModelScope.launch {
-            val result = execute()
-            onSuccess(result)
         }
     }
 }

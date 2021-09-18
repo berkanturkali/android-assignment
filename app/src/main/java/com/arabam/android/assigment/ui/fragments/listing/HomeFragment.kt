@@ -24,7 +24,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewModel>(),ItemClickListener<ListingAdvert>{
+class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewModel>(),
+    ItemClickListener<ListingAdvert> {
 
     private val mViewModel by viewModels<HomeFragmentViewModel>()
 
@@ -47,7 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         getNavigationResult<SortItem>(R.id.home, Constants.SORT_KEY) {
             mViewModel.updateSortOrder(it)
         }
-        getNavigationResult<YearItem>(R.id.home,YEAR_KEY){
+        getNavigationResult<YearItem>(R.id.home, YEAR_KEY) {
             Timber.i("year: $it")
             mViewModel.updateYear(it)
         }
@@ -83,8 +84,8 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
     }
 
     private fun subscribeObservers() {
-        launchOnLifecycleScope {
-            mViewModel.adverts.collectLatest {
+        mViewModel.adverts.observe(viewLifecycleOwner) {
+            launchOnLifecycleScope {
                 mAdapter.submitData(it)
             }
         }
