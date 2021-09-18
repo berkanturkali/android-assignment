@@ -3,13 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/divider.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/home_selector.xml" value="0.30092592592592593" />
+        <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_home_outlined.xml" value="0.30092592592592593" />
+        <entry key="app/src/main/res/drawable/ic_location.xml" value="0.30092592592592593" />
+        <entry key="app/src/main/res/drawable/ic_location_custom_dimen.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_star.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_star_outlined.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/star_selector.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/advert_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.24316109422492402" />
         <entry key="app/src/main/res/layout/fragment_favorites_layout.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/fragment_home_layout.xml" value="0.24138804457953394" />

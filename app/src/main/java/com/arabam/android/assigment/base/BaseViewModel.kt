@@ -3,6 +3,7 @@ package com.arabam.android.assigment.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -25,6 +26,16 @@ abstract class BaseViewModel:ViewModel() {
             } catch (e: Exception) {
                 onError(e.message!!)
             }
+        }
+    }
+
+    inline fun <T> launchPagingAsync(
+        crossinline execute: suspend () -> Flow<T>,
+        crossinline onSuccess: (Flow<T>) -> Unit,
+    ) {
+        viewModelScope.launch {
+            val result = execute()
+            onSuccess(result)
         }
     }
 }

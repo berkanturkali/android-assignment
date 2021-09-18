@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.data.service.Api
+import com.arabam.android.assigment.utils.resize
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -26,7 +27,10 @@ class AdvertsPagingSource(
         val take = 10
         return try {
             val response =
-                service.allAdverts(skip, sort = sort, direction = direction, min = min, max = max)
+                service.allAdverts(skip, sort = sort, direction = direction, min = min, max = max).map {
+                    it.photo = it.photo.resize()
+                    it
+                }
             val prevKey = if (skip == 0) {
                 null
             } else {

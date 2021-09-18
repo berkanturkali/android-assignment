@@ -1,6 +1,6 @@
 package com.arabam.android.assigment.data.model
 
-import android.location.Location
+
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -16,5 +16,5 @@ data class ListingAdvert(
     val price: Int,
     val priceFormatted: String,
     val properties: List<Property>,
-    val title: String
-):Parcelable
+    val title: String,
+) : Parcelable
