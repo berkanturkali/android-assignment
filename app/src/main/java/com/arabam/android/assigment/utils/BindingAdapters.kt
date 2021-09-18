@@ -6,12 +6,14 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assigment.R
 import com.bumptech.glide.Glide
 
-@BindingAdapter("url")
+@BindingAdapter(value = ["url","circularProgressDrawable"],requireAll = false)
 fun ImageView.load(
     url: String?,
+    circularProgressDrawable:CircularProgressDrawable
 ) {
     url?.let {
         Glide.with(this).load(url)
+            .placeholder(circularProgressDrawable)
             .error(R.drawable.ic_camera).into(this)
     }
 }

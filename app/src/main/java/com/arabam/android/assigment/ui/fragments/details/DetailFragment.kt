@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.base.BaseFragment
 import com.arabam.android.assigment.data.ImageClickListener
@@ -43,6 +44,9 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
 
     @Inject
     lateinit var imagePagerAdapter: AdvertImagesViewPagerAdapter
+
+    @Inject
+     lateinit var circularProgressDrawable: CircularProgressDrawable
 
     private var currentAnimator: Animator? = null
 
@@ -128,7 +132,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         currentAnimator?.cancel()
 
         val expandedImageView: ImageView = binding.expandedImage
-        expandedImageView.load(url.resize("800x600"))
+        expandedImageView.load(url.resize("800x600"),circularProgressDrawable)
 
         val startBoundsInt = Rect()
         val finalBoundsInt = Rect()

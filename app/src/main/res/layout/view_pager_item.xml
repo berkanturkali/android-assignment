@@ -7,6 +7,9 @@
         <variable
             name="url"
             type="String" />
+        <variable
+            name="progressDrawable"
+            type="androidx.swiperefreshlayout.widget.CircularProgressDrawable" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +19,7 @@
         <ImageView
             android:id="@+id/advert_image"
             url="@{url}"
+            circularProgressDrawable="@{progressDrawable}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"

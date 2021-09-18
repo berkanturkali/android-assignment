@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assigment.data.ItemClickListener
 import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.databinding.AdvertItemBinding
@@ -12,6 +13,7 @@ import javax.inject.Inject
 
 
 class FavoritesAdapter @Inject constructor(
+    private val circularProgressDrawable: CircularProgressDrawable
 ) : ListAdapter<ListingAdvert, FavoritesAdapter.ViewHolder>(ADVERT_COMPARATOR) {
 
     private lateinit var listener: ItemClickListener<ListingAdvert>
@@ -65,6 +67,7 @@ class FavoritesAdapter @Inject constructor(
         fun bind(item: ListingAdvert) {
             binding.apply {
                 advert = item
+                progressDrawable = circularProgressDrawable
             }
         }
 

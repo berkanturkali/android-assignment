@@ -3,12 +3,14 @@ package com.arabam.android.assigment.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assigment.data.ImageClickListener
 import com.arabam.android.assigment.databinding.ViewPagerItemBinding
 import com.arabam.android.assigment.utils.resize
 import javax.inject.Inject
 
 class AdvertImagesViewPagerAdapter @Inject constructor(
+    private val circularProgressDrawable: CircularProgressDrawable
 ) : RecyclerView.Adapter<AdvertImagesViewPagerAdapter.ViewHolder>() {
 
     private lateinit var listener: ImageClickListener
@@ -46,6 +48,7 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
         fun bind(image: String) {
             binding.apply {
                 url = image.resize("800x600")
+                progressDrawable = circularProgressDrawable
             }
         }
     }

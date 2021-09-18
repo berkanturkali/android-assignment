@@ -10,6 +10,9 @@
             type="com.arabam.android.assigment.data.model.ListingAdvert" />
 
         <import type="com.arabam.android.assigment.utils.StringUtilsKt"/>
+        <variable
+            name="progressDrawable"
+            type="androidx.swiperefreshlayout.widget.CircularProgressDrawable" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +25,7 @@
         <ImageView
             android:id="@+id/advert_image"
             url="@{advert.photo}"
+            circularProgressDrawable="@{progressDrawable}"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:src="@mipmap/ic_launcher"

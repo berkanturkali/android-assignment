@@ -34,7 +34,6 @@ class DetailsFragmentPagerAdapter(
         })
     }
 
-
     override fun getItemCount(): Int = fragments.size
 
     override fun createFragment(position: Int): Fragment {

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assigment.data.ItemClickListener
 import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.databinding.AdvertItemBinding
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 
 class ListingAdapter @Inject constructor(
+    private val circularProgressDrawable: CircularProgressDrawable
 ) :
     PagingDataAdapter<ListingAdvert, ListingAdapter.AdvertViewHolder>(AdvertComparator) {
 
@@ -48,6 +50,7 @@ class ListingAdapter @Inject constructor(
         fun bind(item: ListingAdvert) {
             with(binding) {
                 advert = item
+                progressDrawable = circularProgressDrawable
             }
         }
     }
