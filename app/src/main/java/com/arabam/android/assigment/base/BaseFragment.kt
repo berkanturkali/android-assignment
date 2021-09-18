@@ -8,17 +8,21 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.ui.viewmodel.AppGraphViewModel
+import com.arabam.android.assigment.ui.viewmodel.MainActivityViewModel
 
 abstract class BaseFragment<DB:ViewDataBinding,VM:ViewModel>:Fragment() {
 
     private lateinit var binding:DB
 
     private lateinit var  viewModel:VM
+
+    val activityViewModel by activityViewModels<MainActivityViewModel>()
 
     val graphViewModel by navGraphViewModels<AppGraphViewModel>(R.id.app_graph)
 

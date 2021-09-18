@@ -45,6 +45,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
             )
             addLoadStateListener { loadState ->
                 val isListEmpty = loadState.refresh is LoadState.NotLoading && itemCount == 0
+                activityViewModel.showProgress(loadState.source.refresh is LoadState.Loading)
                 binding.advertsRv.isVisible = !isListEmpty
                 binding.emptyList.isVisible = isListEmpty
                 binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
