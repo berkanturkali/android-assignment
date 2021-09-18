@@ -5,7 +5,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:drawableStart="@drawable/ic_date"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="@dimen/padding"
                     android:inputType="number"
                     android:drawableTint="@color/primaryColor"
                     android:hint="@string/min_year_hint" />
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:drawableStart="@drawable/ic_date"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="@dimen/padding"
                     android:inputType="number"
                     android:drawableTint="@color/primaryColor"
                     android:hint="@string/max_year_hint" />

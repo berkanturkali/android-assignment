@@ -17,7 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/divider_height"
         android:background="@{position % 2 == 0 ? ContextCompat.getColor(context,R.color.light_gray) : ContextCompat.getColor(context,R.color.white)}"
         >
 
@@ -44,7 +44,7 @@
             android:layout_centerVertical="true"
             android:text="@{info.text}"
             android:textColor="@{ContextCompat.getColor(context,info.color)}"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -19,6 +19,7 @@ import com.arabam.android.assigment.utils.Constants
 import com.arabam.android.assigment.utils.Constants.YEAR_KEY
 import com.arabam.android.assigment.utils.getNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 import javax.inject.Inject
@@ -37,6 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         get() = R.layout.fragment_home_layout
 
     override fun getVM(): HomeFragmentViewModel = mViewModel
+
 
     override fun bindVM(binding: FragmentHomeLayoutBinding, vm: HomeFragmentViewModel) {
         this.binding = binding
@@ -90,7 +92,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
                 mAdapter.submitData(it)
             }
         }
-        launchOnLifecycleScope {
+           launchOnLifecycleScope {
             activityViewModel.sortClick.collectLatest {
                 if (it.isClicked) {
                     val action =

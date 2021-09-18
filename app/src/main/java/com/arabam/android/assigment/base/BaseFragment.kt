@@ -12,16 +12,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.navGraphViewModels
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.ui.viewmodel.AppGraphViewModel
 import com.arabam.android.assigment.ui.viewmodel.MainActivityViewModel
 
-abstract class BaseFragment<DB:ViewDataBinding,VM:ViewModel>:Fragment() {
+abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
 
-    private lateinit var binding:DB
+    private lateinit var binding: DB
 
-    private lateinit var  viewModel:VM
+    private lateinit var viewModel: VM
 
     val activityViewModel by activityViewModels<MainActivityViewModel>()
 
@@ -37,9 +36,9 @@ abstract class BaseFragment<DB:ViewDataBinding,VM:ViewModel>:Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,layoutId,container,false)
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         return binding.root
     }
 
@@ -50,11 +49,11 @@ abstract class BaseFragment<DB:ViewDataBinding,VM:ViewModel>:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindVM(binding,viewModel)
+        bindVM(binding, viewModel)
         init()
     }
 
-    fun launchOnLifecycleScope(execute: suspend () -> Unit){
+    fun launchOnLifecycleScope(execute: suspend () -> Unit) {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             execute()
         }

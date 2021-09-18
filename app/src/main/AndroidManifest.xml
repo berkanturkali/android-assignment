@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:name=".MyApp"
         android:usesCleartextTraffic="true"
+        android:screenOrientation="portrait"
         android:theme="@style/Theme.Arabam">
         <activity
             android:name=".MainActivity"

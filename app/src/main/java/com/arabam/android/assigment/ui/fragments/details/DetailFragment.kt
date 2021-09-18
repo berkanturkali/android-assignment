@@ -132,7 +132,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         currentAnimator?.cancel()
 
         val expandedImageView: ImageView = binding.expandedImage
-        expandedImageView.load(url.resize("800x600"),circularProgressDrawable)
+        expandedImageView.load(url.resize(),circularProgressDrawable)
 
         val startBoundsInt = Rect()
         val finalBoundsInt = Rect()

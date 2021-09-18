@@ -23,7 +23,7 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/view_pager_height"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.viewpager2.widget.ViewPager2

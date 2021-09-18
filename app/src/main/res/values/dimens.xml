@@ -1,3 +1,11 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="advert_item_height">90dp</dimen>
+    <dimen name="advert_item_margin">8dp</dimen>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="elevation">8dp</dimen>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="view_pager_height">200dp</dimen>
+    <dimen name="empty_favorites_icon_width_height">128dp</dimen>
+    <dimen name="divider_height">40dp</dimen>
 </resources>

@@ -29,7 +29,7 @@
         android:id="@+id/favorites"
         tools:layout="@layout/fragment_favorites_layout"
         android:name="com.arabam.android.assigment.ui.fragments.favorites.FavoritesFragment"
-        android:label="@string/favorites" >
+        android:label="" >
         <action
             android:id="@+id/action_favorites_to_detailFragment"
             app:destination="@id/detailFragment"

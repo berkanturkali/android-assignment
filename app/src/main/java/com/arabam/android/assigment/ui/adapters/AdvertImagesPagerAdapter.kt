@@ -47,7 +47,7 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
 
         fun bind(image: String) {
             binding.apply {
-                url = image.resize("800x600")
+                url = image.resize()
                 progressDrawable = circularProgressDrawable
             }
         }
