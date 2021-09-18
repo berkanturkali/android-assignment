@@ -1,6 +1,5 @@
 package com.arabam.android.assigment.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import com.arabam.android.assigment.base.BaseViewModel
 import com.arabam.android.assigment.data.model.ListingAdvert
@@ -11,8 +10,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
-    private val repo:AdvertRepo
-):BaseViewModel() {
+    private val repo: AdvertRepo,
+) : BaseViewModel() {
 
 
     private lateinit var _adverts: Flow<PagingData<ListingAdvert>>
@@ -23,14 +22,11 @@ class HomeFragmentViewModel @Inject constructor(
         getAdverts()
     }
 
-
-    private fun getAdverts(){
+    private fun getAdverts() {
         launchPagingAsync({
-            repo.allAdverts(null,null,null,null)
-        },{
+            repo.allAdverts(null, null, null, null)
+        }, {
             _adverts = it
         })
     }
-
-
 }
