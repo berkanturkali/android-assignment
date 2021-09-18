@@ -7,4 +7,6 @@ object Constants {
     const val SORT_KEY = "sort_key"
 
     const val YEAR_KEY ="year_key"
+
+    const val ADVERT_KEY = "advert_key"
 }

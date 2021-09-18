@@ -8,6 +8,7 @@ import com.arabam.android.assigment.base.BaseFragment
 import com.arabam.android.assigment.data.Resource
 import com.arabam.android.assigment.data.model.DetailAdvert
 import com.arabam.android.assigment.databinding.FragmentDetailLayoutBinding
+import com.arabam.android.assigment.ui.adapters.AdvertImagesViewPagerAdapter
 import com.arabam.android.assigment.ui.fragments.details.tabs.DescriptionFragment
 import com.arabam.android.assigment.ui.fragments.details.tabs.InfoFragment
 import com.arabam.android.assigment.ui.viewmodel.DetailFragmentViewModel
@@ -15,6 +16,7 @@ import com.arabam.android.assigment.utils.showSnack
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentViewModel>() {
@@ -22,6 +24,9 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     private val mViewModel by viewModels<DetailFragmentViewModel>()
 
     private val args by navArgs<DetailFragmentArgs>()
+
+    @Inject
+    lateinit var imagePagerAdapter:AdvertImagesViewPagerAdapter
 
     private lateinit var tabLayoutMediator: TabLayoutMediator
     private val titles = arrayOf("İlan Bilgileri", "Açıklama")
@@ -38,6 +43,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     override fun getVM(): DetailFragmentViewModel = mViewModel
 
     override fun bindVM(binding: FragmentDetailLayoutBinding, vm: DetailFragmentViewModel) {
+        binding.adapter = imagePagerAdapter
         this.binding = binding
     }
 
@@ -64,6 +70,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     }
 
     private fun bindAdvert(item: DetailAdvert) {
-        Timber.i("$item")
+        imagePagerAdapter.setList(item.photos)
     }
+
 }

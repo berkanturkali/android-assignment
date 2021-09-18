@@ -7,6 +7,6 @@ fun Int.formatPrice(): String {
     return formatter.format(this).replace(",",".")
 }
 
-fun String.resize():String{
-    return this.replace("{0}","160x120")
+fun String.resize(size:String = "160x120"):String{
+    return this.replace("{0}",size)
 }
