@@ -7,6 +7,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.base.BaseFragment
+import com.arabam.android.assigment.data.ItemClickListener
+import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.data.model.sort.SortItem
 import com.arabam.android.assigment.data.model.year.YearItem
 import com.arabam.android.assigment.databinding.FragmentHomeLayoutBinding
@@ -22,7 +24,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewModel>() {
+class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewModel>(),ItemClickListener<ListingAdvert>{
 
     private val mViewModel by viewModels<HomeFragmentViewModel>()
 
@@ -53,6 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
 
     private fun initAdapter() {
         mAdapter.apply {
+            setListener(this@HomeFragment)
             binding.advertsRv.adapter = withLoadStateHeaderAndFooter(
                 header = AdvertLoadStateAdapter { mAdapter.retry() },
                 footer = AdvertLoadStateAdapter { mAdapter.retry() }
@@ -101,5 +104,10 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
                 }
             }
         }
+    }
+
+    override fun onClick(item: ListingAdvert) {
+        val action = HomeFragmentDirections.actionHomeToDetailFragment(item)
+        findNavController().navigate(action)
     }
 }

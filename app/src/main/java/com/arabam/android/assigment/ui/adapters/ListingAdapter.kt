@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.arabam.android.assigment.data.ItemClickListener
 import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.databinding.AdvertItemBinding
 
@@ -14,6 +15,8 @@ import javax.inject.Inject
 class ListingAdapter @Inject constructor(
 ) :
     PagingDataAdapter<ListingAdvert, ListingAdapter.AdvertViewHolder>(AdvertComparator) {
+
+    private lateinit var listener:ItemClickListener<ListingAdvert>
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -36,7 +39,7 @@ class ListingAdapter @Inject constructor(
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
                     item?.let {
-
+                        listener.onClick(it)
                     }
                 }
             }
@@ -47,6 +50,10 @@ class ListingAdapter @Inject constructor(
                 advert = item
             }
         }
+    }
+
+    fun setListener(listener:ItemClickListener<ListingAdvert>){
+        this.listener = listener
     }
 
     object AdvertComparator : DiffUtil.ItemCallback<ListingAdvert>() {
