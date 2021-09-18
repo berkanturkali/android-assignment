@@ -3,9 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="info"
+            type="com.arabam.android.assigment.data.model.info.Info.InfoWithTitle" />
+        <import type="androidx.core.content.ContextCompat"/>
+        <variable
+            name="position"
+            type="Integer" />
+        <import type="com.arabam.android.assigment.R"/>
+        <import type="com.arabam.android.assigment.utils.StringUtilsKt"/>
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:background="@{position % 2 == 0 ? ContextCompat.getColor(context,R.color.light_gray) : ContextCompat.getColor(context,R.color.white)}"
+        >
 
         <TextView
             android:id="@+id/title_tv"
@@ -14,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
+            android:text="@{info.title}"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:text="@{info.text}"
+            android:textColor="@{ContextCompat.getColor(context,info.color)}"
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
