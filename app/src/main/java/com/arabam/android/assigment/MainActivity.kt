@@ -42,12 +42,23 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar
             .setupWithNavController(navController, appBarConfiguration)
         binding.contentMain.bottomNavigationView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.toolbarTitle.text = destination.label
+            mViewModel.setFloatingVisibility(destination.id == R.id.home)
+            binding.contentMain.bottomNavigationView.isVisible =
+                appBarConfiguration.topLevelDestinations.contains(destination.id)
+        }
     }
 
     private fun subscribeObservers(){
         lifecycleScope.launchWhenCreated {
             mViewModel.showProgress.collectLatest {
                 binding.contentMain.progressBar.isVisible = it.show
+            }
+        }
+        lifecycleScope.launchWhenCreated {
+            mViewModel.isFloatingVisible.collectLatest {
+                binding.contentMain.menu.isVisible = it
             }
         }
     }

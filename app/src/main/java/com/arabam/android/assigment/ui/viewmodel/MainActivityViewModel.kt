@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.arabam.android.assigment.utils.ClickEvent
 import com.arabam.android.assigment.utils.ShowEvent
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,10 @@ class MainActivityViewModel : ViewModel() {
 
     val yearFilterClick = _yearFilterClick.receiveAsFlow()
 
+    private val _isFloatingVisible = Channel<Boolean>()
+
+    val isFloatingVisible get() = _isFloatingVisible.receiveAsFlow()
+
     fun showProgress(show: Boolean) {
         viewModelScope.launch {
             _showProgress.send(ShowEvent.ShowProgressEvent(show))
@@ -37,6 +42,12 @@ class MainActivityViewModel : ViewModel() {
     fun setYearFilterClick(isClick: Boolean) {
         viewModelScope.launch {
             _yearFilterClick.send(ClickEvent.YearItemClick(isClick))
+        }
+    }
+
+    fun setFloatingVisibility(isVisible:Boolean){
+        viewModelScope.launch {
+            _isFloatingVisible.send(isVisible)
         }
     }
 }
