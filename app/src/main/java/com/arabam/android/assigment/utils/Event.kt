@@ -2,6 +2,11 @@ package com.arabam.android.assigment.utils
 
 sealed class Event
 
-open class ShowEvent : Event(){
+sealed class ShowEvent : Event(){
     data class ShowProgressEvent(val show:Boolean): ShowEvent()
+}
+
+sealed class ClickEvent:Event(){
+    data class SortItemClick(val isClicked:Boolean):ClickEvent()
+    data class YearItemClick(val isClicked:Boolean):ClickEvent()
 }

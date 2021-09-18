@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.arabam.android.assigment.ui.viewmodel.MainActivityViewModel" />
+    </data>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -80,6 +85,7 @@
             android:src="@drawable/ic_sort"
             app:fab_colorNormal="@color/primaryColor"
             app:fab_label="@string/sort"
+            android:onClick="@{() ->viewmodel.setSortClick(true)}"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -88,6 +94,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_date"
             app:fab_colorNormal="@color/primaryColor"
+            android:onClick="@{()->viewmodel.setYearFilterClick(true)}"
             app:fab_label="@string/filter_by_year"
             fab:fab_size="mini" />
 

@@ -71,5 +71,19 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
                 mAdapter.submitData(it)
             }
         }
+        launchOnLifecycleScope {
+            activityViewModel.sortClick.collectLatest {
+                if (it.isClicked) {
+
+                }
+            }
+        }
+        launchOnLifecycleScope {
+            activityViewModel.yearFilterClick.collectLatest {
+                if (it.isClicked) {
+
+                }
+            }
+        }
     }
 }
