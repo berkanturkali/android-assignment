@@ -12,4 +12,6 @@
     qui officia deserunt mollit anim id est laborum</string>
     <string name="advert_location">%1s, %2s</string>
     <string name="advert_price">%1s TL</string>
+    <string name="sort">Sırala</string>
+    <string name="filter_by_year">Yıla göre filtrele</string>
 </resources>
