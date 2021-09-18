@@ -3,12 +3,15 @@ package com.arabam.android.assigment.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.arabam.android.assigment.data.ImageClickListener
 import com.arabam.android.assigment.databinding.ViewPagerItemBinding
 import com.arabam.android.assigment.utils.resize
 import javax.inject.Inject
 
 class AdvertImagesViewPagerAdapter @Inject constructor(
 ) : RecyclerView.Adapter<AdvertImagesViewPagerAdapter.ViewHolder>() {
+
+    private lateinit var listener: ImageClickListener
 
     private var images = emptyList<String>()
 
@@ -35,7 +38,7 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
                 val position = absoluteAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val url = images[position]
-
+                    listener.onImageClick(binding.advertImage, url)
                 }
             }
         }
@@ -50,5 +53,9 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
     fun setList(images: List<String>) {
         this.images = images
         notifyDataSetChanged()
+    }
+
+    fun setListener(listener: ImageClickListener) {
+        this.listener = listener
     }
 }
