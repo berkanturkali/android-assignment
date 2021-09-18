@@ -16,4 +16,7 @@
     <string name="filter_by_year">Yıla göre filtrele</string>
     <string name="clear">Temizle</string>
     <string name="sort_text">%1s - %2s</string>
+    <string name="min_year_hint">Min:Örn 2011</string>
+    <string name="max_year_hint">Max:Örn 2030</string>
+    <string name="apply">Uygula</string>
 </resources>

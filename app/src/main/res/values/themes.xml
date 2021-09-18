@@ -23,4 +23,21 @@
     <style name="Theme.Arabam.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Arabam.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="inputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:drawablePadding">8dp</item>
+        <item name="boxStrokeColor">@color/primaryColor</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="hintTextColor">@color/primaryColor</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="endIconTint">@color/primaryColor</item>
+        <item name="endIconMode">clear_text</item>
+    </style>
+
+    <style name="buttonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primaryColor</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>
