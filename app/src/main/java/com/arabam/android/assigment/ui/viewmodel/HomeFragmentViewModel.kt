@@ -48,9 +48,4 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     fun getSortOrder() = sortOrder.value
-
-    data class UiState(
-        val hasNotScrolledForCurrentResult:Boolean = false,
-        val pagingData: PagingData<ListingAdvert> = PagingData.empty()
-    )
 }
