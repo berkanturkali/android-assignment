@@ -5,6 +5,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arabam.android.assigment.R
 import com.arabam.android.assigment.base.BaseFragment
 import com.arabam.android.assigment.data.ItemClickListener
@@ -19,8 +22,8 @@ import com.arabam.android.assigment.utils.Constants
 import com.arabam.android.assigment.utils.Constants.YEAR_KEY
 import com.arabam.android.assigment.utils.getNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -39,14 +42,13 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
 
     override fun getVM(): HomeFragmentViewModel = mViewModel
 
-
     override fun bindVM(binding: FragmentHomeLayoutBinding, vm: HomeFragmentViewModel) {
         this.binding = binding
         binding.adapter = mAdapter
+
     }
 
     override fun init() {
-        initAdapter()
         subscribeObservers()
         getNavigationResult<SortItem>(R.id.home, Constants.SORT_KEY) {
             mViewModel.updateSortOrder(it)
@@ -55,9 +57,11 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
             Timber.i("year: $it")
             mViewModel.updateYear(it)
         }
+        initAdapter()
     }
 
     private fun initAdapter() {
+        binding.layoutManager = GridLayoutManager(requireContext(),1)
         mAdapter.apply {
             setListener(this@HomeFragment)
             binding.advertsRv.adapter = withLoadStateHeaderAndFooter(
@@ -92,7 +96,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
                 mAdapter.submitData(it)
             }
         }
-           launchOnLifecycleScope {
+        launchOnLifecycleScope {
             activityViewModel.sortClick.collectLatest {
                 if (it.isClicked) {
                     val action =
@@ -106,6 +110,20 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
                 if (it.isClicked) {
                     findNavController().navigate(R.id.action_home_to_filterByYearFragment)
                 }
+            }
+        }
+        launchOnLifecycleScope {
+            activityViewModel.isGridItemClick.collectLatest {
+                if (it) {
+                    mViewModel.setGridMode(!mViewModel.isGridMode.value)
+                }
+            }
+        }
+        launchOnLifecycleScope {
+            mViewModel.isGridMode.collectLatest {
+                mAdapter.setGridMode(it)
+                binding.advertsRv.layoutManager?.requestSimpleAnimationsInNextLayout()
+                mAdapter.notifyItemRangeChanged(0,mAdapter.itemCount)
             }
         }
     }

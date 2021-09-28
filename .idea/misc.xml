@@ -6,9 +6,12 @@
         <entry key="app/src/main/res/drawable/divider.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/favorite_bg.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/home_selector.xml" value="0.30092592592592593" />
+        <entry key="app/src/main/res/drawable/ic_calendar_custom_dimen.xml" value="0.30092592592592593" />
+        <entry key="app/src/main/res/drawable/ic_calender.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_check.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.30092592592592593" />
+        <entry key="app/src/main/res/drawable/ic_gridview.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_home_outlined.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/drawable/ic_location.xml" value="0.30092592592592593" />
@@ -30,11 +33,15 @@
         <entry key="app/src/main/res/layout/fragment_home_layout.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/fragment_info_layout.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/fragment_sort_layout.xml" value="0.24138804457953394" />
+        <entry key="app/src/main/res/layout/grid_advert_item_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/grid_listing_item_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/ic_calendar_custom_dimen.xml" value="0.21757852077001014" />
         <entry key="app/src/main/res/layout/info_with_text_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/info_with_title_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/sort_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/layout/view_pager_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3972222222222222" />
+        <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.32220555138784696" />
       </map>
     </option>
   </component>

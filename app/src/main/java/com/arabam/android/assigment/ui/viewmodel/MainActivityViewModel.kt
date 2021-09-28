@@ -35,6 +35,10 @@ class MainActivityViewModel : ViewModel() {
 
     val isFavChecked get() = _isFavChecked.receiveAsFlow()
 
+    private val _isGridItemClick = Channel<Boolean>()
+
+    val isGridItemClick = _isGridItemClick.receiveAsFlow()
+
     fun showProgress(show: Boolean) {
         viewModelScope.launch {
             _showProgress.send(ShowEvent.ShowProgressEvent(show))
@@ -67,6 +71,12 @@ class MainActivityViewModel : ViewModel() {
     fun setFavChecked(isChecked: Boolean) {
         viewModelScope.launch {
             _isFavChecked.send(isChecked)
+        }
+    }
+
+    fun setGridItemClick(isClicked:Boolean){
+        viewModelScope.launch {
+            _isGridItemClick.send(isClicked)
         }
     }
 }

@@ -9,27 +9,46 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assigment.data.ItemClickListener
 import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.databinding.AdvertItemBinding
+import com.arabam.android.assigment.databinding.GridAdvertItemLayoutBinding
 
 import javax.inject.Inject
 
 
 class ListingAdapter @Inject constructor(
-    private val circularProgressDrawable: CircularProgressDrawable
+    private val circularProgressDrawable: CircularProgressDrawable,
 ) :
-    PagingDataAdapter<ListingAdvert, ListingAdapter.AdvertViewHolder>(AdvertComparator) {
+    PagingDataAdapter<ListingAdvert, RecyclerView.ViewHolder>(AdvertComparator) {
 
-    private lateinit var listener:ItemClickListener<ListingAdvert>
+    private var isGridMode = false
+
+    private lateinit var listener: ItemClickListener<ListingAdvert>
+
+    companion object{
+        const val GRID = 0
+        const val LINEAR = 1
+    }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        AdvertViewHolder(
-            AdvertItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder {
+      return  if (viewType == LINEAR) {
+            AdvertViewHolder(
+                AdvertItemBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
             )
-        )
+        } else {
+            GridAdvertViewHolder(GridAdvertItemLayoutBinding.inflate(LayoutInflater.from(parent.context),
+                parent,
+                false))
+        }
+    }
 
-    override fun onBindViewHolder(holder: AdvertViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (!isGridMode) {
+            getItem(position)?.let { (holder as AdvertViewHolder).bind(it) }
+        } else {
+            getItem(position)?.let { (holder as GridAdvertViewHolder).bind(it) }
+        }
     }
 
     inner class AdvertViewHolder(private val binding: AdvertItemBinding) :
@@ -55,8 +74,34 @@ class ListingAdapter @Inject constructor(
         }
     }
 
-    fun setListener(listener:ItemClickListener<ListingAdvert>){
+    inner class GridAdvertViewHolder(private val binding: GridAdvertItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                val position = absoluteAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    item?.let {
+                        listener.onClick(it)
+                    }
+                }
+            }
+        }
+
+        fun bind(item: ListingAdvert) {
+            with(binding) {
+                advert = item
+                progressDrawable = circularProgressDrawable
+            }
+        }
+    }
+
+    fun setListener(listener: ItemClickListener<ListingAdvert>) {
         this.listener = listener
+    }
+
+    fun setGridMode(isGridMode: Boolean) {
+        this.isGridMode = isGridMode
     }
 
     object AdvertComparator : DiffUtil.ItemCallback<ListingAdvert>() {
@@ -65,5 +110,13 @@ class ListingAdapter @Inject constructor(
 
         override fun areContentsTheSame(oldItem: ListingAdvert, newItem: ListingAdvert) =
             oldItem == newItem
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if(isGridMode){
+            GRID
+        }else{
+            LINEAR
+        }
     }
 }

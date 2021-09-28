@@ -30,5 +30,4 @@ class DetailFragmentViewModel @Inject constructor(
             }
         )
     }
-
 }

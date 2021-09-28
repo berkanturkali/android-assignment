@@ -2,10 +2,8 @@ package com.arabam.android.assigment.ui.viewmodel
 
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.arabam.android.assigment.base.BaseViewModel
-import com.arabam.android.assigment.data.model.ListingAdvert
 import com.arabam.android.assigment.data.model.sort.SortItem
 import com.arabam.android.assigment.data.model.year.YearItem
 import com.arabam.android.assigment.data.repository.AdvertRepo
@@ -24,6 +22,10 @@ class HomeFragmentViewModel @Inject constructor(
     private val sortOrder = MutableStateFlow<SortItem>(SortItem(""))
 
     private val year = MutableStateFlow(YearItem())
+
+    private val _isGridMode = MutableStateFlow(false)
+
+    val isGridMode: StateFlow<Boolean> get() = _isGridMode
 
     private val _adverts = combine(
         sortOrder,
@@ -48,4 +50,8 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     fun getSortOrder() = sortOrder.value
+
+    fun setGridMode(isGridMode: Boolean) {
+        _isGridMode.value = isGridMode
+    }
 }

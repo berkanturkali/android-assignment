@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var navController:NavController
+    private lateinit var navController: NavController
 
     private val mViewModel by viewModels<MainActivityViewModel>()
 
@@ -37,12 +37,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.contentMain.viewmodel = mViewModel
+        binding.viewmodel = mViewModel
         initNavigation()
         initFavButton()
         subscribeObservers()
     }
 
-    private fun initNavigation(){
+    private fun initNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
         navController = navHostFragment.findNavController()
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             binding.contentMain.bottomNavigationView.isVisible =
                 appBarConfiguration.topLevelDestinations.contains(destination.id)
             binding.addToFav.isVisible = destination.id == R.id.detailFragment
+            binding.ivGrid.isVisible = destination.id ==R.id.home
         }
     }
 
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         favButton = binding.addToFav
     }
 
-    private fun subscribeObservers(){
+    private fun subscribeObservers() {
         lifecycleScope.launchWhenCreated {
             mViewModel.showProgress.collectLatest {
                 binding.contentMain.progressBar.isVisible = it.show
