@@ -4,76 +4,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.arabam.android.assigment.ui.viewmodel.MainActivityViewModel" />
-    </data>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbarLayout"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="noScroll">
+            android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primaryColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_scrollFlags="noScroll"
-            app:titleTextColor="@color/white" />
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="noScroll">
 
-            <TextView
-                android:id="@+id/toolbar_title"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                tools:text="Lorem" />
-            <ToggleButton
-                android:id="@+id/add_to_fav"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="end|center_vertical"
-                android:background="@drawable/favorite_bg"
-                android:elevation="@dimen/elevation"
-                android:visibility="invisible"
-                android:layout_marginEnd="@dimen/margin"
-                android:textOff=""
-                android:textOn="" />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primaryColor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_scrollFlags="noScroll"
+                    app:titleTextColor="@color/white" />
 
-            <ImageView
-                android:id="@+id/iv_grid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_gridview"
-                android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{() -> viewmodel.setGridItemClick(true)}"
-                android:layout_marginEnd="@dimen/margin"
-                android:layout_gravity="center_vertical|end"/>
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:text="Lorem" />
 
-</com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    <include
-        android:id="@+id/content_main"
-        layout="@layout/content_main"
-        />
+        <include
+            android:id="@+id/content_main"
+            layout="@layout/content_main"
+            />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

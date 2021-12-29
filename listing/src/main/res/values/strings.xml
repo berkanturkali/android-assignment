@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="advert_location">%1s, %2s</string>
+    <string name="advert_price">%1s TL</string>
+    <string name="sort">Sırala</string>
+    <string name="filter_by_year">Yıla göre filtrele</string>
+    <string name="clear">Temizle</string>
+    <string name="sort_text">%1s - %2s</string>
+    <string name="min_year_hint">Min:Örn 2011</string>
+    <string name="max_year_hint">Max:Örn 2030</string>
+    <string name="apply">Uygula</string>
+    <string name="no_image">İlana ait resim bulunmamaktır.</string>
+    <string name="address_tv">%1s/%2s</string>
+    <string name="properties_text">%1s . %2s km . %3s</string>
+    <string name="grid_list_mode">Grid/List Mode</string>
+</resources>

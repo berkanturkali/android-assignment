@@ -1,0 +1,44 @@
+package com.arabam.android.assignment.favorites
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.repo.DbRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class FavoritesFragmentViewModel @Inject constructor(
+    private val repo: DbRepo,
+) : ViewModel() {
+
+    private val _favorites = MutableLiveData<List<ListingAdvert>>()
+
+    val favorites: LiveData<List<ListingAdvert>> get() = _favorites
+
+    init {
+        favorites()
+    }
+
+    private fun favorites() {
+        viewModelScope.launch(Dispatchers.IO) {
+             repo.favorites().onEach {
+                _favorites.value = it
+            }
+                 .launchIn(viewModelScope)
+        }
+    }
+
+    fun removeFromFav(advert: ListingAdvert) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.removeFromFav(advert)
+        }
+    }
+}

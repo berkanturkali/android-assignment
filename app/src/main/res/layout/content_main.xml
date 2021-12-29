@@ -1,85 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.arabam.android.assigment.ui.viewmodel.MainActivityViewModel" />
-    </data>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_container"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
-        app:navGraph="@navigation/app_graph" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/app_graph" />
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="@dimen/elevation"
-        android:layout_gravity="bottom"
-        app:itemIconTint="@color/bottom_nav_color"
-        app:itemTextColor="@color/bottom_nav_text_color"
-        app:labelVisibilityMode="labeled"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:menu="@menu/bottom_navigation_menu" />
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottom_navigation_view"
-        app:layout_anchorGravity="top|end"
-        android:layout_gravity="top"
-        android:layout_margin="@dimen/fab_margin"
-        app:menu_colorNormal="@color/primaryColor"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_host_container">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/sort_btn"
-            android:layout_width="wrap_content"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_sort"
-            app:fab_colorNormal="@color/primaryColor"
-            app:fab_label="@string/sort"
-            android:onClick="@{() ->viewmodel.setSortClick(true)}"
-            fab:fab_size="mini" />
+            android:layout_gravity="bottom"
+            app:elevation="@dimen/elevation"
+            app:itemIconTint="@color/bottom_nav_color"
+            app:itemTextColor="@color/bottom_nav_text_color"
+            app:labelVisibilityMode="labeled"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navigation_menu" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/filter_by_date_btn"
-            android:layout_width="wrap_content"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_date"
-            app:fab_colorNormal="@color/primaryColor"
-            android:onClick="@{()->viewmodel.setYearFilterClick(true)}"
-            app:fab_label="@string/filter_by_year"
-            fab:fab_size="mini" />
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primaryColor"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/nav_host_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    </com.github.clans.fab.FloatingActionMenu>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/primaryColor"
-        android:indeterminateTintMode="src_atop"
-        android:visibility="gone" />
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

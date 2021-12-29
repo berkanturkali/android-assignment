@@ -1,66 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_graph"
-    app:startDestination="@id/home">
+    app:startDestination="@id/home_graph">
 
-    <fragment
-        android:id="@+id/home"
-        tools:layout="@layout/fragment_home_layout"
-        android:name="com.arabam.android.assigment.ui.fragments.listing.HomeFragment"
-        android:label="" >
-        <action
-            android:id="@+id/action_home_to_sortFragment"
-            app:destination="@id/sortFragment" />
-        <action
-            android:id="@+id/action_home_to_filterByYearFragment"
-            app:destination="@id/filterByYearFragment" />
-        <action
-            android:id="@+id/action_home_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+    <include app:graph="@navigation/home_graph" />
+    <include app:graph="@navigation/favorites_graph" />
 
-    <fragment
-        android:id="@+id/favorites"
-        tools:layout="@layout/fragment_favorites_layout"
-        android:name="com.arabam.android.assigment.ui.fragments.favorites.FavoritesFragment"
-        android:label="" >
-        <action
-            android:id="@+id/action_favorites_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-    <dialog
-        android:id="@+id/sortFragment"
-        tools:layout="@layout/fragment_sort_layout"
-        android:name="com.arabam.android.assigment.ui.fragments.listing.sort.SortFragment"
-        android:label="" >
-
-        <argument
-            android:name="lastOrder"
-            app:argType="com.arabam.android.assigment.data.model.sort.SortItem" />
-    </dialog>
-    <dialog
-        android:id="@+id/filterByYearFragment"
-        tools:layout="@layout/fragment_filter_by_year_layout"
-        android:name="com.arabam.android.assigment.ui.fragments.listing.FilterByYearFragment"
-        android:label="" />
-    <fragment
-        android:id="@+id/detailFragment"
-        tools:layout="@layout/fragment_detail_layout"
-        android:name="com.arabam.android.assigment.ui.fragments.details.DetailFragment"
-        android:label="İlan Detayı" >
-        <argument
-            android:name="advert"
-            app:argType="com.arabam.android.assigment.data.model.ListingAdvert" />
-    </fragment>
 
 </navigation>
