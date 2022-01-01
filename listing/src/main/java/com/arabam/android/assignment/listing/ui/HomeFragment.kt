@@ -25,7 +25,6 @@ import com.arabam.android.assignment.listing.viewmodel.HomeFragmentViewModel
 import com.example.core.utils.getNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -59,7 +58,6 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
             mViewModel.updateSortOrder(it)
         }
         getNavigationResult<YearItem>(R.id.home, YEAR_KEY) {
-            Timber.i("year: $it")
             mViewModel.updateYear(it)
         }
         initAdapter()

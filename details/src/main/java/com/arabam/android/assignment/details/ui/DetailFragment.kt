@@ -42,7 +42,6 @@ import com.arabam.android.assignment.utils.resize
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import timber.log.Timber
 import javax.inject.Inject
 
 private const val TAG = "DetailFragment"
@@ -115,7 +114,6 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                 }
                 is Resource.Success -> {
                     it.data?.let { advert ->
-                        Timber.d(advert.photos.get(0).resize())
                         bindAdvert(advert)
                         this.advert = ListingAdvert(
                             category = advert.category,

@@ -9,7 +9,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.arabam.android.assignment.UIController
@@ -33,6 +32,7 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
         super.onAttach(context)
         setUIController()
     }
+
     private fun setUIController() {
         controller = requireActivity() as UIController
     }
@@ -63,7 +63,7 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
         }
     }
 
-    fun showProgress(show:Boolean){
+    fun showProgress(show: Boolean) {
         controller.displayProgress(show)
     }
 

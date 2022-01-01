@@ -1,4 +1,4 @@
-import Dependencies.AndroidX.timber
+import Dependencies.Logger.timber
 import Dependencies.ProjectLib.commons
 import Dependencies.ProjectLib.core
 import Dependencies.ProjectLib.data
@@ -80,7 +80,7 @@ hilt {
     enableExperimentalClasspathAggregation = true
 }
 
-kapt{
+kapt {
     javacOptions {
         // These options are normally set automatically via the Hilt Gradle plugin, but we
         // set them manually to workaround a bug in the Kotlin 1.5.20

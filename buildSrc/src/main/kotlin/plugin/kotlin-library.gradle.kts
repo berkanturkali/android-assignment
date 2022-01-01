@@ -3,7 +3,6 @@ import Dependencies.DI
 
 plugins {
     id("kotlin")
-//    id("kotlin-parcelize")
 }
 
 java {

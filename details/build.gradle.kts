@@ -1,8 +1,8 @@
 import BuildType.Companion.DEBUG
-import Dependencies.AndroidX.jsoup
 import Dependencies.ProjectLib.commons
 import Dependencies.ProjectLib.core
 import Dependencies.ProjectLib.domain
+import Dependencies.Util.jsoup
 
 plugins {
     androidLibrary

@@ -44,7 +44,7 @@ dependencies {
     implementation(DI.daggerHiltAndroid)
     implementation(project(database))
     implementation(Coroutines.core)
-    implementation(View.fragment)
+    implementation(Dependencies.AndroidX.fragmentKtx)
     implementation(View.appCompat)
     implementation(Dependencies.Network.gson)
     implementAll(Dependencies.Network.components)
