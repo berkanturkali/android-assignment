@@ -16,4 +16,10 @@
         <item name="endIconTint">@color/primaryColor</item>
         <item name="endIconMode">clear_text</item>
     </style>
+
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/primaryColor</item>
+        <item name="android:colorControlNormal">@color/black</item>
+    </style>
 </resources>

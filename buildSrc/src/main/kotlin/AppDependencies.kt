@@ -1,5 +1,6 @@
 import Dependencies.DB.Version.room_version
 import Dependencies.Network.Version.gson_version
+import Dependencies.Util.Version.dataStore
 import Dependencies.View.Version.glideVersion
 import Dependencies.View.Version.viewPager2
 
@@ -164,13 +165,17 @@ object Dependencies {
         object Version {
             const val timber = "4.7.1"
         }
+
         const val timber = "com.jakewharton.timber:timber:${Version.timber}"
     }
 
-    object Util{
-        object Version{
+    object Util {
+        object Version {
+            const val dataStore = "1.0.0"
             const val jsoup = "1.13.1"
         }
+
+        const val jetpackDataStore = "androidx.datastore:datastore-preferences:$dataStore"
         const val jsoup = "org.jsoup:jsoup:${Version.jsoup}"
     }
 

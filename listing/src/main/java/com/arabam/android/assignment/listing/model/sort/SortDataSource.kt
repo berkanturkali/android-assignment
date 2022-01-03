@@ -7,6 +7,6 @@ fun getSortList():List<SortItem>{
     sortList.add(SortItem("Tarih",SortTypes.BY_DATE,SortDirections.ASCENDING))
     sortList.add(SortItem("Tarih",SortTypes.BY_DATE,SortDirections.DESCENDING))
     sortList.add(SortItem("Yıl",SortTypes.BY_YEAR,SortDirections.ASCENDING))
-    sortList.add(SortItem("Yıl",SortTypes.BY_DATE,SortDirections.DESCENDING))
+    sortList.add(SortItem("Yıl",SortTypes.BY_YEAR,SortDirections.DESCENDING))
     return sortList
 }

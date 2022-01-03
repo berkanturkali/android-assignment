@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
-import com.arabam.android.assignment.listing.adapter.SortAdapter
 import com.arabam.android.assignment.commons.utils.Constants.SORT_KEY
+import com.arabam.android.assignment.listing.adapter.SortAdapter
 import com.arabam.android.assignment.listing.databinding.FragmentSortLayoutBinding
 import com.arabam.android.assignment.listing.model.ItemClickListener
 import com.arabam.android.assignment.listing.model.sort.SortItem
@@ -39,7 +39,7 @@ class SortFragment : BottomSheetDialogFragment(), ItemClickListener<SortItem> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.clearBtn.setOnClickListener {
-            setNavigationResult(SORT_KEY, SortItem(""))
+            setNavigationResult(SORT_KEY, SortItem())
             dialog?.dismiss()
         }
         initRecycler()
@@ -48,16 +48,16 @@ class SortFragment : BottomSheetDialogFragment(), ItemClickListener<SortItem> {
     private fun initRecycler() {
         binding.adapter = mAdapter
         mAdapter.setClickListener(this)
-        val orderList = getSortList().map {
-            if (it.title == args.lastOrder.title &&
-                it.direction?.value == args.lastOrder.direction?.value
-            ) {
-                it.isSelected = true
+        val items = getSortList()
+        if (args.lastOrder.type != null && args.lastOrder.direction != null) {
+            items.first {
+                it.type == args.lastOrder.type && it.direction == args.lastOrder.direction
+            }.apply {
+                this.isSelected = true
             }
-            it
         }
-        mAdapter.submitList(orderList)
-        binding.clearBtn.isVisible = orderList.any { it.isSelected }
+        mAdapter.submitList(items)
+        binding.clearBtn.isVisible = items.any { it.isSelected }
     }
 
     override fun onClick(item: SortItem) {

@@ -43,11 +43,13 @@
         <entry key="app/src/main/res/layout/view_pager_item.xml" value="0.24138804457953394" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3972222222222222" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.32220555138784696" />
+        <entry key="commons/src/main/res/drawable/divider.xml" value="0.30462962962962964" />
         <entry key="commons/src/main/res/drawable/favorite_bg.xml" value="0.30462962962962964" />
         <entry key="commons/src/main/res/drawable/ic_check.xml" value="0.30462962962962964" />
         <entry key="commons/src/main/res/drawable/ic_gridview.xml" value="0.30462962962962964" />
         <entry key="commons/src/main/res/drawable/ic_location.xml" value="0.30462962962962964" />
         <entry key="commons/src/main/res/drawable/ic_star.xml" value="0.30462962962962964" />
+        <entry key="commons/src/main/res/drawable/number_picker_bg.xml" value="0.30462962962962964" />
         <entry key="commons/src/main/res/layout/activity_main.xml" value="0.2322695035460993" />
         <entry key="commons/src/main/res/layout/advert_item.xml" value="0.23429584599797365" />
         <entry key="details/src/main/res/layout/fav_toggle.xml" value="0.22163120567375885" />
@@ -64,11 +66,12 @@
         <entry key="features/listing/src/main/res/menu/fragment_home_menu.xml" value="0.3972222222222222" />
         <entry key="listing/src/main/res/layout/advert_item.xml" value="0.23429584599797365" />
         <entry key="listing/src/main/res/layout/advert_load_state_footer_item_layout.xml" value="0.23429584599797365" />
-        <entry key="listing/src/main/res/layout/fragment_filter_by_year_layout.xml" value="0.23429584599797365" />
+        <entry key="listing/src/main/res/layout/fragment_filter_by_year_layout.xml" value="0.33" />
         <entry key="listing/src/main/res/layout/fragment_home_layout.xml" value="0.23429584599797365" />
         <entry key="listing/src/main/res/layout/fragment_sort_layout.xml" value="0.23429584599797365" />
         <entry key="listing/src/main/res/layout/grid_advert_item_layout.xml" value="0.23429584599797365" />
         <entry key="listing/src/main/res/layout/sort_item.xml" value="0.23429584599797365" />
+        <entry key="listing/src/main/res/menu/filter_by_year_menu.xml" value="0.3972222222222222" />
         <entry key="listing/src/main/res/menu/fragment_home_menu.xml" value="0.3972222222222222" />
       </map>
     </option>

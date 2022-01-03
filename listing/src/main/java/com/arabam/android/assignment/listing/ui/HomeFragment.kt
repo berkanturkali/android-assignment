@@ -1,6 +1,7 @@
 package com.arabam.android.assignment.listing.ui
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -40,6 +41,8 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
     override val layoutId: Int
         get() = R.layout.fragment_home_layout
 
+    private var isGridMode = false
+
     override fun getVM(): HomeFragmentViewModel = mViewModel
 
     override fun bindVM(binding: FragmentHomeLayoutBinding, vm: HomeFragmentViewModel) {
@@ -62,10 +65,11 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         }
         initAdapter()
         binding.filterByDateBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_home_to_filterByYearFragment)
+            val action = HomeFragmentDirections.actionHomeToFilterByYearFragment(mViewModel.getYearItem())
+            findNavController().navigate(action)
         }
         binding.sortBtn.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortOrder())
+            val action = HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortItem())
             findNavController().navigate(action)
         }
     }
@@ -107,10 +111,20 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
             }
         }
         launchOnLifecycleScope {
-            mViewModel.isGridMode.collectLatest {
-                mAdapter.setGridMode(it)
+            mViewModel.viewPreferencesFlow.collectLatest {
+                isGridMode = it.isRecyclerViewInGridMode
+                mAdapter.setGridMode(isGridMode)
                 binding.advertsRv.layoutManager?.requestSimpleAnimationsInNextLayout()
                 mAdapter.notifyItemRangeChanged(0, mAdapter.itemCount)
+            }
+        }
+        launchOnLifecycleScope {
+            mViewModel.shouldScrollToTop.collectLatest {
+                if(it) {
+                    binding.advertsRv.post {
+                        binding.advertsRv.layoutManager?.scrollToPosition(0)
+                    }
+                }
             }
         }
     }
@@ -123,7 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.grid_list_button -> {
-                mViewModel.setGridMode(!mViewModel.isGridMode.value)
+                mViewModel.setGridMode(!isGridMode)
                 true
             }
             else -> super.onOptionsItemSelected(item)

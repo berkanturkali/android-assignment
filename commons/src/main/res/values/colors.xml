@@ -14,5 +14,6 @@
     <color name="colorError">#db471e</color>
     <color name="colorSuccess">#188977</color>
     <color name="link_color">#328fcc</color>
-    <color name="light_gray">#F6F6F6</color>
+    <color name="x_light_gray">#F6F6F6</color>
+    <color name="light_gray">#AAB8C2</color>
 </resources>

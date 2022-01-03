@@ -43,7 +43,11 @@
         android:id="@+id/filterByYearFragment"
         android:name="com.arabam.android.assignment.listing.ui.FilterByYearFragment"
         android:label=""
-        tools:layout="@layout/fragment_filter_by_year_layout" />
+        tools:layout="@layout/fragment_filter_by_year_layout" >
+        <argument
+            android:name="year"
+            app:argType="com.arabam.android.assignment.listing.model.year.YearItem" />
+    </dialog>
 
     <include app:graph = "@navigation/details_graph"/>
 

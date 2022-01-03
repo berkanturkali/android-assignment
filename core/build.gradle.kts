@@ -1,5 +1,6 @@
 import Dependencies.Coroutines
 import Dependencies.DI
+import Dependencies.Logger.timber
 import Dependencies.ProjectLib.commons
 import Dependencies.ProjectLib.data
 import Dependencies.ProjectLib.database
@@ -51,6 +52,8 @@ dependencies {
     implementAll(Dependencies.DB.components)
     implementation(Dependencies.AndroidX.navigationFragmentKtx)
     implementation(View.swipeRefreshLayout)
+    implementation(Dependencies.Util.jetpackDataStore)
+    implementation(timber)
     kapt(DI.AnnotationProcessor.daggerHilt)
     kapt(Dependencies.DB.roomCompiler)
 }
