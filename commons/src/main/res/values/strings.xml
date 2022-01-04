@@ -23,4 +23,5 @@
     <string name="address_tv">%1s/%2s</string>
     <string name="properties_text">%1s . %2s km . %3s</string>
     <string name="title_listing">Listing</string>
+    <string name="select">Seç</string>
 </resources>

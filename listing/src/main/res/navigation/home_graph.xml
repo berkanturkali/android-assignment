@@ -26,6 +26,9 @@
                 android:name="id"
                 app:argType="integer"/>
         </action>
+        <action
+            android:id="@+id/action_home_to_categoryContainerFragment"
+            app:destination="@id/categoryContainerFragment" />
     </fragment>
 
     <dialog
@@ -50,5 +53,15 @@
     </dialog>
 
     <include app:graph = "@navigation/details_graph"/>
+    <dialog
+        android:id="@+id/categoryContainerFragment"
+        tools:layout="@layout/fragment_category_container"
+        android:name="com.arabam.android.assignment.listing.ui.category.CategoryContainerFragment"
+        android:label="" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </dialog>
 
 </navigation>

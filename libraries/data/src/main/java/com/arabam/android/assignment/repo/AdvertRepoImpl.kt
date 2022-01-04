@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
+private const val TAG = "AdvertRepoImpl"
 @Singleton
 class AdvertRepoImpl @Inject constructor(
     private val api: ApiService,
@@ -25,6 +26,7 @@ class AdvertRepoImpl @Inject constructor(
 ) : AdvertRepo {
 
     override fun allAdverts(
+        categoryId: Int?,
         sort: Int?,
         direction: Int?,
         minYear: Int?,
@@ -32,7 +34,14 @@ class AdvertRepoImpl @Inject constructor(
     ): Flow<PagingData<ListingAdvert>> =
         Pager(
             config = PagingConfig(pageSize = 10, enablePlaceholders = false, maxSize = 100),
-            pagingSourceFactory = { AdvertsPagingSource(api, sort, direction, minYear, maxYear) }
+            pagingSourceFactory = {
+                AdvertsPagingSource(api,
+                    categoryId,
+                    sort,
+                    direction,
+                    minYear,
+                    maxYear)
+            }
         ).flow.map {
             it.map { dto ->
                 advertMapper.mapFromModel(dto)

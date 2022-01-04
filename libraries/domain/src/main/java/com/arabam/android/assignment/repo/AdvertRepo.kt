@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AdvertRepo {
     fun allAdverts(
+        categoryId:Int?,
         sort: Int?,
         direction: Int?,
         minYear: Int?,

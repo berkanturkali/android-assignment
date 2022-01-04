@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.arabam.android.assignment.listing.model.category.CategoryItem
 import com.arabam.android.assignment.listing.model.sort.SortDirections
 import com.arabam.android.assignment.listing.model.sort.SortItem
 import com.arabam.android.assignment.listing.model.sort.SortTypes
@@ -28,9 +29,11 @@ class HomeFragmentViewModel @Inject constructor(
 
     private lateinit var sortItem: SortItem
 
+    private var categoryId: Int? = null
+
     private val _shouldScrollToTop = MutableStateFlow<Boolean>(false)
 
-    val shouldScrollToTop:StateFlow<Boolean> get() = _shouldScrollToTop
+    val shouldScrollToTop: StateFlow<Boolean> get() = _shouldScrollToTop
 
     private lateinit var year: YearItem
     val viewPreferencesFlow =
@@ -38,6 +41,7 @@ class HomeFragmentViewModel @Inject constructor(
 
     private val _adverts = manager.filterPreferences
         .map { preferences ->
+            categoryId = preferences.category
             sortItem =
                 SortItem(type = SortTypes.values().firstOrNull { it.value == preferences.sortType },
                     direction = SortDirections.values()
@@ -46,7 +50,9 @@ class HomeFragmentViewModel @Inject constructor(
             preferences
         }
         .flatMapLatest {
-            repo.allAdverts(it.sortType,
+            repo.allAdverts(
+                it.category,
+                it.sortType,
                 it.sortDirection,
                 it.minYear,
                 it.maxYear)
@@ -69,9 +75,17 @@ class HomeFragmentViewModel @Inject constructor(
         }
     }
 
+    fun updateCategory(item: CategoryItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            manager.updateCategory(item.id)
+        }
+    }
+
     fun getSortItem() = sortItem
 
     fun getYearItem() = year
+
+    fun getCategory() = categoryId
 
     fun setGridMode(isGridMode: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {

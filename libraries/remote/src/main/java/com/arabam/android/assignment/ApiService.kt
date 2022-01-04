@@ -12,6 +12,7 @@ interface ApiService {
     suspend fun allAdverts(
         @Query("skip") skip: Int,
         @Query("take") take: Int = 10,
+        @Query("categoryId") id:Int?,
         @Query("sort") sort: Int?,
         @Query("sortDirection") direction: Int?,
         @Query("minYear") min: Int?,

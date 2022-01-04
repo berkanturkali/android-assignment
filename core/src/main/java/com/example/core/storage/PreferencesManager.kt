@@ -1,14 +1,17 @@
 package com.example.core.storage
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.arabam.android.assignment.commons.utils.Constants.IS_GRID_MODE
+import com.arabam.android.assignment.commons.utils.Constants.SELECTED_CATEGORY
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_DIRECTION
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_MAX_YEAR
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_MIN_YEAR
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_TYPE
+import com.example.core.storage.PreferencesManager.PreferencesKeys.CATEGORY
 import com.example.core.storage.PreferencesManager.PreferencesKeys.GRID_MODE
 import com.example.core.storage.PreferencesManager.PreferencesKeys.MAX_YEAR
 import com.example.core.storage.PreferencesManager.PreferencesKeys.MIN_YEAR
@@ -31,6 +34,7 @@ sealed class HomeScreenPreferences {
         val sortType: Int?,
         val minYear: Int?,
         val maxYear: Int?,
+        val category: Int?,
     ) : HomeScreenPreferences()
 }
 
@@ -70,15 +74,17 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
                 && (old[SORT_TYPE] == new[SORT_TYPE])
                 && (old[MIN_YEAR] == new[MIN_YEAR])
                 && (old[MAX_YEAR] == new[MAX_YEAR])
+                && (old[CATEGORY] == new[CATEGORY])
     }
         .map { preferences ->
-        val direction =
-            if (preferences[SORT_DIRECTION] == -1) null else preferences[SORT_DIRECTION]
-        val type = if (preferences[SORT_TYPE] == -1) null else preferences[SORT_TYPE]
-        val min = if (preferences[MIN_YEAR] == -1) null else preferences[MIN_YEAR]
-        val max = if (preferences[MAX_YEAR] == -1) null else preferences[MAX_YEAR]
-        HomeScreenPreferences.FilterPreferences(direction, type, min, max)
-    }
+            val direction =
+                if (preferences[SORT_DIRECTION] == -1) null else preferences[SORT_DIRECTION]
+            val type = if (preferences[SORT_TYPE] == -1) null else preferences[SORT_TYPE]
+            val min = if (preferences[MIN_YEAR] == -1) null else preferences[MIN_YEAR]
+            val max = if (preferences[MAX_YEAR] == -1) null else preferences[MAX_YEAR]
+            val category = if (preferences[CATEGORY] == -1) null else preferences[CATEGORY]
+            HomeScreenPreferences.FilterPreferences(direction, type, min, max, category)
+        }
 
     suspend fun updateMinMaxYear(minYear: Int?, maxYear: Int?) {
         dataStore.edit { preferences ->
@@ -101,11 +107,18 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
         }
     }
 
+    suspend fun updateCategory(id: Int?) {
+        dataStore.edit { preferences ->
+            preferences[CATEGORY] = id ?: -1
+        }
+    }
+
     private object PreferencesKeys {
         val GRID_MODE = booleanPreferencesKey(IS_GRID_MODE)
         val SORT_DIRECTION = intPreferencesKey(SELECTED_DIRECTION)
         val SORT_TYPE = intPreferencesKey(SELECTED_TYPE)
         val MIN_YEAR = intPreferencesKey(SELECTED_MIN_YEAR)
         val MAX_YEAR = intPreferencesKey(SELECTED_MAX_YEAR)
+        val CATEGORY = intPreferencesKey(SELECTED_CATEGORY)
     }
 }

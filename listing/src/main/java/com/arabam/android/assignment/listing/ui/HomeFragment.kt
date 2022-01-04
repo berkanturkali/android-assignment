@@ -1,7 +1,6 @@
 package com.arabam.android.assignment.listing.ui
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -13,6 +12,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arabam.android.assignment.commons.base.BaseFragment
 import com.arabam.android.assignment.commons.utils.Constants
+import com.arabam.android.assignment.commons.utils.Constants.CATEGORY_KEY
 import com.arabam.android.assignment.commons.utils.Constants.YEAR_KEY
 import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.adapter.AdvertLoadStateAdapter
@@ -20,6 +20,7 @@ import com.arabam.android.assignment.listing.adapter.ListingAdapter
 import com.arabam.android.assignment.listing.databinding.FragmentHomeLayoutBinding
 import com.arabam.android.assignment.listing.model.ItemClickListener
 import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.listing.model.category.CategoryItem
 import com.arabam.android.assignment.listing.model.sort.SortItem
 import com.arabam.android.assignment.listing.model.year.YearItem
 import com.arabam.android.assignment.listing.viewmodel.HomeFragmentViewModel
@@ -63,13 +64,23 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         getNavigationResult<YearItem>(R.id.home, YEAR_KEY) {
             mViewModel.updateYear(it)
         }
+        getNavigationResult<CategoryItem>(R.id.home, CATEGORY_KEY) {
+            mViewModel.updateCategory(it)
+        }
         initAdapter()
         binding.filterByDateBtn.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeToFilterByYearFragment(mViewModel.getYearItem())
+            val action =
+                HomeFragmentDirections.actionHomeToFilterByYearFragment(mViewModel.getYearItem())
             findNavController().navigate(action)
         }
         binding.sortBtn.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortItem())
+            findNavController().navigate(action)
+        }
+        binding.modelBtn.setOnClickListener {
+            val action =
+                HomeFragmentDirections.actionHomeToCategoryContainerFragment(mViewModel.getCategory()
+                    ?: -1)
             findNavController().navigate(action)
         }
     }
@@ -84,8 +95,8 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
             )
             addLoadStateListener { loadState ->
                 val isListEmpty = loadState.refresh is LoadState.NotLoading && itemCount == 0
-                showProgress(loadState.source.refresh is LoadState.Loading)
                 binding.advertsRv.isVisible = !isListEmpty
+                showProgress(loadState.source.refresh is LoadState.Loading)
                 binding.emptyList.isVisible = isListEmpty
                 binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
 
@@ -120,7 +131,7 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         }
         launchOnLifecycleScope {
             mViewModel.shouldScrollToTop.collectLatest {
-                if(it) {
+                if (it) {
                     binding.advertsRv.post {
                         binding.advertsRv.layoutManager?.scrollToPosition(0)
                     }

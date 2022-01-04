@@ -28,9 +28,19 @@
             android:layout_margin="@dimen/fab_margin"
             app:layout_anchorGravity="top|end"
             app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-            app:layout_constraintBottom_toBottomOf="@+id/adverts_rv"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:menu_colorNormal="@color/primaryColor">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/model_btn"
+                fab:fab_size="mini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_car"
+                app:fab_colorNormal="@color/primaryColor"
+                app:fab_label="Model seç" />
+
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/sort_btn"

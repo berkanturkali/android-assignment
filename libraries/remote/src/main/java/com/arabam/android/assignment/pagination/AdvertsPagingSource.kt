@@ -10,6 +10,7 @@ import java.io.IOException
 
 class AdvertsPagingSource(
     private val service: ApiService,
+    private val categoryId: Int?,
     private val sort: Int?,
     private val direction: Int?,
     private val min: Int?,
@@ -27,7 +28,12 @@ class AdvertsPagingSource(
         val take = 10
         return try {
             val response =
-                service.allAdverts(skip, sort = sort, direction = direction, min = min, max = max)
+                service.allAdverts(skip,
+                    id = categoryId,
+                    sort = sort,
+                    direction = direction,
+                    min = min,
+                    max = max)
                     .map {
                         it.photo = it.photo.resize()
                         it
