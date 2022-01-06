@@ -1,9 +1,13 @@
 package com.arabam.android.assignment.details.ui
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,6 +37,15 @@ import javax.inject.Inject
 class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentViewModel>(),
     ImageClickListener {
     private val mViewModel by viewModels<DetailFragmentViewModel>()
+
+    private val requestPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted){
+                makeCall()
+            }else{
+                openDial()
+            }
+        }
 
     @Inject
     lateinit var imagePagerAdapter: AdvertImagesViewPagerAdapter
@@ -72,6 +85,25 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         setHasOptionsMenu(true)
     }
 
+    private fun makeCall(){
+        val number = "tel:" + binding.callFab.contentDescription
+        startActivity(Intent(Intent.ACTION_CALL, Uri.parse(number)))
+    }
+
+    private fun openDial(){
+        val number = "tel:" + binding.callFab.contentDescription
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.setData(Uri.parse(number))
+        startActivity(intent)
+    }
+
+    private fun openMessageScreen(){
+        val number = "sms:" + binding.messageFab.contentDescription
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.setData(Uri.parse(number))
+        startActivity(intent)
+    }
+
     override fun init() {
         imagePagerAdapter.setListener(this)
         subscribeObservers()
@@ -83,6 +115,12 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                 mViewModel.addToFav(this.advert)
                 mViewModel.setFav(true)
             }
+        }
+        binding.callFab.setOnClickListener {
+            requestPermission.launch(Manifest.permission.CALL_PHONE)
+        }
+        binding.messageFab.setOnClickListener {
+            openMessageScreen()
         }
     }
 
@@ -117,7 +155,6 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                         binding.optionsLl.visibility = View.VISIBLE
                     }
                     showProgress(false)
-
                 }
             }
         }
@@ -146,6 +183,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     private fun bindAdvert(item: DetailAdvert) {
         initTabLayout(fragments, item)
         binding.callFab.contentDescription = item.userInfo.phoneFormatted
+        binding.messageFab.contentDescription = item.userInfo.phoneFormatted
         binding.noImageTv.isVisible = item.photos.isEmpty()
         imagePagerAdapter.setList(item.photos)
     }
