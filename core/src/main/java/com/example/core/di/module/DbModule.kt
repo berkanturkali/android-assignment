@@ -25,4 +25,7 @@ object DbModule {
 
     @Provides
     fun provideDao(db: ArabamDb) = db.dao()
+
+    @Provides
+    fun provideLastVisitedItemsDao(db: ArabamDb) = db.lastVisitedItemsDao()
 }

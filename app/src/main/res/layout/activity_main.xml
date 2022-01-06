@@ -19,7 +19,8 @@
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_scrollFlags="noScroll">
+                app:layout_scrollFlags="noScroll"
+                >
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -28,7 +29,6 @@
                     android:background="@color/primaryColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_scrollFlags="noScroll"
                     app:titleTextColor="@color/white" />
 
                 <TextView

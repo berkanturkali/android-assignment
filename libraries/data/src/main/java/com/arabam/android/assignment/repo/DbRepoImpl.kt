@@ -1,8 +1,9 @@
 package com.arabam.android.assignment.repo
 
 import com.arabam.android.assignment.database.dao.AdvertDao
+import com.arabam.android.assignment.database.dao.LastVisitedAdvertsDao
 import com.arabam.android.assignment.database.data.mapper.DbEntityMapper
-import com.arabam.android.assignment.detail.DetailAdvert
+import com.arabam.android.assignment.database.data.mapper.VisitedEntityMapper
 import com.arabam.android.assignment.listing.model.ListingAdvert
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -12,6 +13,8 @@ import javax.inject.Singleton
 @Singleton
 class DbRepoImpl @Inject constructor(
     private val mapper: DbEntityMapper,
+    private val visitedMapper: VisitedEntityMapper,
+    private val lastVisitedDao: LastVisitedAdvertsDao,
     private val dao: AdvertDao,
 ) : DbRepo {
     override suspend fun addToFav(advert: ListingAdvert): Long {
@@ -33,5 +36,14 @@ class DbRepoImpl @Inject constructor(
         return dao.getFavs().map {
             mapper.toDomainList(it)
         }
+    }
+
+    override suspend fun insertToLastVisited(advert: ListingAdvert) {
+        val entity = visitedMapper.fromDomain(advert)
+        lastVisitedDao.insertAndDeleteTransaction(entity)
+    }
+
+    override suspend fun getLastVisitedItems(): List<ListingAdvert> {
+        return visitedMapper.toDomainList(lastVisitedDao.lastAdverts())
     }
 }

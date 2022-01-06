@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.arabam.android.assignment.details.databinding.ViewPagerItemBinding
 import com.arabam.android.assignment.details.ImageClickListener
+import com.arabam.android.assignment.details.databinding.ViewPagerItemBinding
 import com.arabam.android.assignment.utils.resize
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val url = images[position]
-                    listener.onImageClick(binding.advertImage, url)
+                    listener.onImageClick(images, position)
                 }
             }
         }

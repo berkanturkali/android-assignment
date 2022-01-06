@@ -13,5 +13,23 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_detailFragment_to_sliderFragment"
+            app:destination="@id/sliderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sliderFragment"
+        tools:layout="@layout/fragment_slider"
+        android:name="com.arabam.android.assignment.details.ui.SliderFragment"
+        android:label="" >
+        <argument
+            android:name="images"
+            app:argType="string[]" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+        <argument
+            android:name="transitionName"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -67,7 +67,7 @@
             tools:text="Alfa Romeo 145 1.4" />
 
         <TextView
-            android:id="@+id/advert_title_tv"
+            android:id="@+id/advert_model_tv"
             style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             app:drawableStartCompat="@drawable/ic_location_custom_dimen"
             app:layout_constraintEnd_toStartOf="@+id/advert_date_tv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/advert_title_tv"
+            app:layout_constraintTop_toBottomOf="@+id/advert_model_tv"
             tools:text="İstanbul / Ümraniye" />
 
         <TextView
@@ -101,7 +101,7 @@
             app:drawableStartCompat="@drawable/ic_calendar_custom_dimen"
             app:drawableTint="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/advert_title_tv"
+            app:layout_constraintTop_toBottomOf="@+id/advert_model_tv"
             tools:text="17 Eylül 2021" />
 
         <TextView

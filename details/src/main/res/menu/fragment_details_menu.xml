@@ -3,11 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/add_to_fav_button"
-        android:title="Favorilere Ekle"
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_person"
         app:showAsAction="always"
-        android:visible="true"
-        android:checkable="true"
-        app:actionLayout="@layout/fav_toggle"
-        app:actionViewClass="android.widget.ToggleButton" />
+        android:title="@string/show_profile"/>
 </menu>

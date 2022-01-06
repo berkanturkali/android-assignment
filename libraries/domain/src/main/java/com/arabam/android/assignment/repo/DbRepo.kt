@@ -13,4 +13,8 @@ interface DbRepo {
     suspend fun getAdvert(id:Int):ListingAdvert?
 
     suspend fun favorites(): Flow<List<ListingAdvert>>
+
+    suspend fun insertToLastVisited(advert:ListingAdvert)
+
+    suspend fun getLastVisitedItems():List<ListingAdvert>
 }

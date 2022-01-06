@@ -39,7 +39,6 @@ dependencies {
         implementation(swipeRefreshLayout)
 
     }
-
     implementation(glide)
     annotationProcessor(glideAnnotation)
 }

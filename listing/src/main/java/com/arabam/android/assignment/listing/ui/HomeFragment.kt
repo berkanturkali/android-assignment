@@ -99,18 +99,6 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
                 showProgress(loadState.source.refresh is LoadState.Loading)
                 binding.emptyList.isVisible = isListEmpty
                 binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
-
-                val error = loadState.source.append as? LoadState.Error
-                    ?: loadState.source.prepend as? LoadState.Error
-                    ?: loadState.append as? LoadState.Error
-                    ?: loadState.prepend as? LoadState.Error
-
-                error?.let {
-                    Toast.makeText(requireContext(),
-                        it.error.localizedMessage,
-                        Toast.LENGTH_SHORT)
-                        .show()
-                }
             }
         }
     }

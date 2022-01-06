@@ -44,8 +44,8 @@ dependencies {
         implementAll(components)
         implementation(swipeRefreshLayout)
         implementation(viewPager)
-        implementation(jsoup)
     }
+    implementation(jsoup)
     implementation(Dependencies.DI.daggerHiltAndroid)
     implementAll(Dependencies.AndroidX.components)
     implementAll(Dependencies.Coroutines.components)

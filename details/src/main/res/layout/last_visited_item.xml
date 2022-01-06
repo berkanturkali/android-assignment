@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="advert"
+            type="com.arabam.android.assignment.listing.model.ListingAdvert" />
+
+        <import type="com.arabam.android.assignment.utils.StringUtilsKt" />
+
+        <variable
+            name="progressDrawable"
+            type="androidx.swiperefreshlayout.widget.CircularProgressDrawable" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        app:cardElevation="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/advert_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    url="@{advert.photo}"
+                    circularProgressDrawable="@{progressDrawable}"
+                    android:contentDescription="advert image" />
+
+                <TextView
+                    android:id="@+id/price_tv"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/primaryColor"
+                    android:padding="16dp"
+                    android:text="@{String.format(@string/advert_price(StringUtilsKt.formatPrice(advert.price)))}"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:text="450.000 TL" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/advert_model_tv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{advert.modelName}"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/relativeLayout"
+                tools:text="Model" />
+
+            <TextView
+                android:id="@+id/advert_address_tv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:drawablePadding="4dp"
+                android:text="@{String.format(@string/advert_location,advert.location.cityName, advert.location.townName)}"
+                app:drawableStartCompat="@drawable/ic_location"
+                app:drawableTint="@color/primaryColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/advert_model_tv"
+                tools:text="İstanbul / Ümraniye" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
