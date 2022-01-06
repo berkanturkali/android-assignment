@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -40,9 +41,9 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
 
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted){
+            if (isGranted) {
                 makeCall()
-            }else{
+            } else {
                 openDial()
             }
         }
@@ -56,9 +57,9 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     @Inject
     lateinit var lastVisitedAdapter: LastVisitedItemsAdapter
 
-    private lateinit var advert: ListingAdvert
-
     private lateinit var viewpagerAdapter: DetailsFragmentPagerAdapter
+
+    private lateinit var advert:DetailAdvert
 
     private lateinit var tabLayoutMediator: TabLayoutMediator
     private val titles = arrayOf("İlan Bilgileri", "Açıklama")
@@ -85,19 +86,19 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         setHasOptionsMenu(true)
     }
 
-    private fun makeCall(){
+    private fun makeCall() {
         val number = "tel:" + binding.callFab.contentDescription
         startActivity(Intent(Intent.ACTION_CALL, Uri.parse(number)))
     }
 
-    private fun openDial(){
+    private fun openDial() {
         val number = "tel:" + binding.callFab.contentDescription
         val intent = Intent(Intent.ACTION_DIAL)
         intent.setData(Uri.parse(number))
         startActivity(intent)
     }
 
-    private fun openMessageScreen(){
+    private fun openMessageScreen() {
         val number = "sms:" + binding.messageFab.contentDescription
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setData(Uri.parse(number))
@@ -105,15 +106,23 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     }
 
     override fun init() {
+        setMenuVisibility(false)
         imagePagerAdapter.setListener(this)
+        requireActivity().invalidateOptionsMenu()
         subscribeObservers()
+        initButtons()
+    }
+
+    private fun initButtons() {
         binding.addToFav.setOnClickListener {
-            if (mViewModel.setFav.value!!) {
-                mViewModel.removeFromFav(this.advert)
-                mViewModel.setFav(false)
-            } else {
-                mViewModel.addToFav(this.advert)
-                mViewModel.setFav(true)
+            mViewModel.setFav.value?.let {
+                if (it) {
+                    mViewModel.removeFromFav(mViewModel.getAdvert())
+                    mViewModel.setFav(false)
+                } else {
+                    mViewModel.addToFav(mViewModel.getAdvert())
+                    mViewModel.setFav(true)
+                }
             }
         }
         binding.callFab.setOnClickListener {
@@ -137,8 +146,9 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                 }
                 is Resource.Success -> {
                     it.data?.let { advert ->
+                        this.advert = advert
                         bindAdvert(advert)
-                        this.advert = ListingAdvert(
+                        val advert = ListingAdvert(
                             category = advert.category,
                             date = advert.date,
                             dateFormatted = advert.dateFormatted,
@@ -151,7 +161,8 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                             properties = advert.properties,
                             title = advert.title
                         )
-                        mViewModel.initAdvert(this.advert)
+                        mViewModel.initAdvert(advert)
+                        setMenuVisibility(true)
                         binding.optionsLl.visibility = View.VISIBLE
                     }
                     showProgress(false)
@@ -180,6 +191,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         }
     }
 
+
     private fun bindAdvert(item: DetailAdvert) {
         initTabLayout(fragments, item)
         binding.callFab.contentDescription = item.userInfo.phoneFormatted
@@ -202,6 +214,20 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.fragment_details_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.profile -> {
+                showUserProfile()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showUserProfile(){
+        // TODO: 6.01.2022 will be implemented
     }
 
     override fun onImageClick(images: List<String>, position: Int) {

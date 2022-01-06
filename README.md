@@ -2,7 +2,7 @@
 <a href="https://play.google.com/store/apps/details?id=com.dogan.arabam&hl=tr"><img src="https://arbimg1.mncdn.com/assets/dist/img/tek-tur-large.gif"/>
 </a>
 
-<img src="screenshots/arabam.gif" alt="arabam" width="350"/>
+<img src="screenshots/home.gif" alt="home" width="300"/> <img src="screenshots/details.gif" alt="details" width="300"/> <img src="screenshots/favorites.gif" alt="favorites" width="300"/>
 
 ## Libraries 
 
