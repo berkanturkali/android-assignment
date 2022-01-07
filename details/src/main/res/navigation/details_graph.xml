@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_detailFragment_to_sliderFragment"
             app:destination="@id/sliderFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_userInfoDialog"
+            app:destination="@id/userInfoDialog" />
     </fragment>
     <fragment
         android:id="@+id/sliderFragment"
@@ -32,4 +35,16 @@
             android:name="transitionName"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/userInfoDialog"
+        tools:layout="@layout/dialog_user_info"
+        android:name="com.arabam.android.assignment.details.ui.UserInfoDialog"
+        android:label="" >
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </dialog>
 </navigation>

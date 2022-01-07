@@ -59,7 +59,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
 
     private lateinit var viewpagerAdapter: DetailsFragmentPagerAdapter
 
-    private lateinit var advert:DetailAdvert
+    private lateinit var advert: DetailAdvert
 
     private lateinit var tabLayoutMediator: TabLayoutMediator
     private val titles = arrayOf("İlan Bilgileri", "Açıklama")
@@ -94,21 +94,20 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     private fun openDial() {
         val number = "tel:" + binding.callFab.contentDescription
         val intent = Intent(Intent.ACTION_DIAL)
-        intent.setData(Uri.parse(number))
+        intent.data = Uri.parse(number)
         startActivity(intent)
     }
 
     private fun openMessageScreen() {
         val number = "sms:" + binding.messageFab.contentDescription
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.setData(Uri.parse(number))
+        intent.data = Uri.parse(number)
         startActivity(intent)
     }
 
     override fun init() {
         setMenuVisibility(false)
         imagePagerAdapter.setListener(this)
-        requireActivity().invalidateOptionsMenu()
         subscribeObservers()
         initButtons()
     }
@@ -148,7 +147,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                     it.data?.let { advert ->
                         this.advert = advert
                         bindAdvert(advert)
-                        val advert = ListingAdvert(
+                        val listingAdvert = ListingAdvert(
                             category = advert.category,
                             date = advert.date,
                             dateFormatted = advert.dateFormatted,
@@ -161,7 +160,7 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
                             properties = advert.properties,
                             title = advert.title
                         )
-                        mViewModel.initAdvert(advert)
+                        mViewModel.initAdvert(listingAdvert)
                         setMenuVisibility(true)
                         binding.optionsLl.visibility = View.VISIBLE
                     }
@@ -226,8 +225,11 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         }
     }
 
-    private fun showUserProfile(){
-        // TODO: 6.01.2022 will be implemented
+    private fun showUserProfile() {
+        val action =
+            DetailFragmentDirections.actionDetailFragmentToUserInfoDialog(phone = advert.userInfo.phoneFormatted,
+                name = advert.userInfo.nameSurname)
+        findNavController().navigate(action)
     }
 
     override fun onImageClick(images: List<String>, position: Int) {
