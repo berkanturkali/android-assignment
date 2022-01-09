@@ -25,4 +25,6 @@
     <string name="title_listing">Listing</string>
     <string name="select">Seç</string>
     <string name="show_profile">Profili Görüntüle</string>
+    <string name="slider_transition_name">slider_transition</string>
+    <string name="advert_image_transition_name">advert_image_transition</string>
 </resources>

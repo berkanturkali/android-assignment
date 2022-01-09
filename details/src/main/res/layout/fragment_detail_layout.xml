@@ -13,7 +13,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+>
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -32,8 +33,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adapter="@{adapter}"
+                    android:transitionGroup="true"
                     android:orientation="horizontal"
-                    android:transitionName="transition" />
+                    />
 
                 <TextView
                     android:id="@+id/no_image_tv"

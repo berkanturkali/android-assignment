@@ -1,15 +1,16 @@
 package com.arabam.android.assignment.details.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.TransitionInflater
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.adapter.SliderFragmentAdapter
 import com.arabam.android.assignment.details.databinding.FragmentSliderBinding
+import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,8 +26,11 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_container
+            duration = 300
+            scrimColor = Color.TRANSPARENT
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,16 +40,13 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
         adapter.submitList(args.images.toList())
         val rv = binding.imageSlider.getChildAt(0) as RecyclerView
         rv.apply {
-            val itemCount = adapter?.itemCount ?: 0
-            if (itemCount >= args.position) {
-                viewTreeObserver.addOnGlobalLayoutListener(object :
-                    ViewTreeObserver.OnGlobalLayoutListener {
-                    override fun onGlobalLayout() {
-                        viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    }
-                })
-            }
-            scrollToPosition(args.position)
+            viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    scrollToPosition(args.position)
+                }
+            })
         }
     }
 

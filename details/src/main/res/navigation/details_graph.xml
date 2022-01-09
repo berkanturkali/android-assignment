@@ -31,9 +31,6 @@
         <argument
             android:name="position"
             app:argType="integer" />
-        <argument
-            android:name="transitionName"
-            app:argType="string" />
     </fragment>
     <dialog
         android:id="@+id/userInfoDialog"

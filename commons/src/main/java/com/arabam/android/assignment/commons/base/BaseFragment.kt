@@ -71,6 +71,7 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        controller.displayProgress(false)
         binding.unbind()
     }
 }

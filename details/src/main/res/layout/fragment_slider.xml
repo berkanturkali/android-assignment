@@ -11,12 +11,12 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:transitionName="@{@string/slider_transition_name}"
         android:background="@android:color/black">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/image_slider"
             android:layout_width="match_parent"
-            android:transitionName="transition"
             android:adapter="@{adapter}"
             android:orientation="horizontal"
             android:layout_height="match_parent"/>

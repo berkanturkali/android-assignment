@@ -39,8 +39,7 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val url = images[position]
-                    listener.onImageClick(images, position)
+                    listener.onImageClick(images, position,binding.container)
                 }
             }
         }

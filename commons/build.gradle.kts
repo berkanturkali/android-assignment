@@ -39,6 +39,11 @@ dependencies {
         implementation(swipeRefreshLayout)
 
     }
+    Dependencies.AndroidX.run {
+        implementation(coreKtx)
+        implementation(navigationFragmentKtx)
+        implementation(navigationUiKtx)
+    }
     implementation(glide)
     annotationProcessor(glideAnnotation)
 }

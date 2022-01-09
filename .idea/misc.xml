@@ -54,6 +54,7 @@
         <entry key="commons/src/main/res/drawable/number_picker_bg.xml" value="0.30462962962962964" />
         <entry key="commons/src/main/res/layout/activity_main.xml" value="0.2322695035460993" />
         <entry key="commons/src/main/res/layout/advert_item.xml" value="0.23429584599797365" />
+        <entry key="commons/src/main/res/menu/bottom_navigation_menu.xml" value="0.3972222222222222" />
         <entry key="commons/src/main/res/xml/shortcuts.xml" value="0.22416413373860183" />
         <entry key="details/src/main/res/layout-v23/fragment_detail_layout.xml" value="0.24138804457953394" />
         <entry key="details/src/main/res/layout/dialog_user_info.xml" value="0.33" />

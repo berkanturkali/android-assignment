@@ -9,9 +9,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assignment.commons.base.BaseFragment
@@ -30,6 +32,7 @@ import com.arabam.android.assignment.listing.model.ListingAdvert
 import com.arabam.android.assignment.listing.model.Resource
 import com.arabam.android.assignment.utils.resize
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -106,6 +109,8 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
     }
 
     override fun init() {
+        postponeEnterTransition()
+        binding.root.doOnPreDraw { startPostponedEnterTransition() }
         setMenuVisibility(false)
         imagePagerAdapter.setListener(this)
         subscribeObservers()
@@ -232,10 +237,15 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         findNavController().navigate(action)
     }
 
-    override fun onImageClick(images: List<String>, position: Int) {
+    override fun onImageClick(images: List<String>, position: Int,view:View) {
         val action =
             DetailFragmentDirections.actionDetailFragmentToSliderFragment(images.map { it.resize() }
-                .toTypedArray(), position, "transition")
-        findNavController().navigate(action)
+                .toTypedArray(), position)
+        val transitionName = resources.getString(R.string.slider_transition_name)
+        val extras = FragmentNavigatorExtras(view to transitionName)
+        findNavController().navigate(action,extras)
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration =300
+        }
     }
 }

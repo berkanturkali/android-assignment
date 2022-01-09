@@ -118,10 +118,12 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
             }
         }
         launchOnLifecycleScope {
-            mViewModel.shouldScrollToTop.collectLatest {
-                if (it) {
-                    binding.advertsRv.post {
-                        binding.advertsRv.layoutManager?.scrollToPosition(0)
+            mViewModel.shouldScrollToTop.observe(viewLifecycleOwner) {
+                it.getContentIfNotHandled()?.let {
+                    if (it) {
+                        binding.advertsRv.post {
+                            binding.advertsRv.layoutManager?.scrollToPosition(0)
+                        }
                     }
                 }
             }
