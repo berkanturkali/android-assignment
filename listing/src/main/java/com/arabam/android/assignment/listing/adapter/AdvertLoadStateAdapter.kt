@@ -5,7 +5,7 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import com.arabam.android.assignment.listing.adapter.viewholder.AdvertLoadStateViewHolder
 
-class AdvertLoadStateAdapter(private val retry :() -> Unit):LoadStateAdapter<AdvertLoadStateViewHolder>() {
+class AdvertLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<AdvertLoadStateViewHolder>() {
     override fun onBindViewHolder(holder: AdvertLoadStateViewHolder, loadState: LoadState) {
         holder.bind(loadState)
     }
@@ -14,5 +14,5 @@ class AdvertLoadStateAdapter(private val retry :() -> Unit):LoadStateAdapter<Adv
         parent: ViewGroup,
         loadState: LoadState,
     ): AdvertLoadStateViewHolder =
-        AdvertLoadStateViewHolder.create(parent,retry)
+        AdvertLoadStateViewHolder.create(parent, retry)
 }

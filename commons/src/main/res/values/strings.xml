@@ -27,4 +27,17 @@
     <string name="show_profile">Profili Görüntüle</string>
     <string name="slider_transition_name">slider_transition</string>
     <string name="advert_image_transition_name">advert_image_transition</string>
+    <string name="advert_info_tab_title">İlan Bilgileri</string>
+    <string name="advert_description_tab_title">Açıklama</string>
+    <string name="advert_no">İlan No</string>
+    <string name="advert_date">İlan Tarihi</string>
+    <string name="advert_series">Seri</string>
+    <string name="advert_model">Model</string>
+    <string name="advert_year">Yıl</string>
+    <string name="advert_fuel_type">Yakıt Tipi</string>
+    <string name="advert_gear_type">Vites Tipi</string>
+    <string name="advert_kilometers">Kilometre</string>
+    <string name="price">Fiyat</string>
+    <string name="minimum">Minimum</string>
+    <string name="maksimum">Maksimum</string>
 </resources>

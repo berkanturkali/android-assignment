@@ -18,25 +18,33 @@ class InfoFragmentAdapter
         val INFO_COMPARATOR = object : DiffUtil.ItemCallback<Info>() {
             override fun areItemsTheSame(oldItem: Info, newItem: Info) =
                 (oldItem is Info.InfoWithText && newItem is Info.InfoWithText && oldItem.text == newItem.text) ||
-                        (oldItem is Info.InfoWithTitle && newItem is Info.InfoWithTitle && oldItem.title == newItem.title)
+                    (oldItem is Info.InfoWithTitle && newItem is Info.InfoWithTitle && oldItem.title == newItem.title)
 
             override fun areContentsTheSame(oldItem: Info, newItem: Info) =
                 oldItem == newItem
         }
-
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             R.layout.info_with_text_item -> {
-                InfoWithTextViewHolder(InfoWithTextItemBinding.inflate(LayoutInflater.from(
-                    parent.context), parent, false))
+                InfoWithTextViewHolder(
+                    InfoWithTextItemBinding.inflate(
+                        LayoutInflater.from(
+                            parent.context
+                        ),
+                        parent, false
+                    )
+                )
             }
             R.layout.info_with_title_item -> {
-                InfoWithTitleViewHolder(InfoWithTitleItemBinding.inflate(LayoutInflater.from(parent.context),
-                    parent,
-                    false))
+                InfoWithTitleViewHolder(
+                    InfoWithTitleItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
             }
             else -> throw Exception("no type")
         }

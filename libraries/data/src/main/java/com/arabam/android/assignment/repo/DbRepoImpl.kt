@@ -4,7 +4,7 @@ import com.arabam.android.assignment.database.dao.AdvertDao
 import com.arabam.android.assignment.database.dao.LastVisitedAdvertsDao
 import com.arabam.android.assignment.database.data.mapper.DbEntityMapper
 import com.arabam.android.assignment.database.data.mapper.VisitedEntityMapper
-import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.model.ListingAdvert
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

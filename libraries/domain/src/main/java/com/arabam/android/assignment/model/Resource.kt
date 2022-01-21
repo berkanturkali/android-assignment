@@ -1,4 +1,4 @@
-package com.arabam.android.assignment.listing.model
+package com.arabam.android.assignment.model
 
 sealed class Resource<T>(
     val data: T? = null,

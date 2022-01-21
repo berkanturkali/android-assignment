@@ -17,14 +17,13 @@ interface RemoteModule {
     companion object {
         @get:[Provides Singleton]
         val gson: Gson get() = GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
-                .serializeNulls()
-                .setLenient()
-                .create()
-
+            .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+            .serializeNulls()
+            .setLenient()
+            .create()
 
         @[Provides Singleton]
-        fun provideApiService(gson:Gson): ApiService {
+        fun provideApiService(gson: Gson): ApiService {
             return ApiServiceFactory.makeApiService(gson)
         }
     }

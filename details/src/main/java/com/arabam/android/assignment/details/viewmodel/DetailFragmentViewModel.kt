@@ -1,15 +1,15 @@
 package com.arabam.android.assignment.details.viewmodel
 
 import androidx.lifecycle.*
-import com.arabam.android.assignment.detail.DetailAdvert
-import com.arabam.android.assignment.listing.model.ListingAdvert
-import com.arabam.android.assignment.listing.model.Resource
+import com.arabam.android.assignment.commons.utils.Constants.ADVERT_ID
+import com.arabam.android.assignment.model.DetailAdvert
+import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.model.Resource
 import com.arabam.android.assignment.repo.AdvertRepo
 import com.arabam.android.assignment.repo.DbRepo
 import com.example.core.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,7 +32,7 @@ class DetailFragmentViewModel @Inject constructor(
     val lastVisitedItems: LiveData<List<ListingAdvert>> get() = _lastVisitedItems
 
     init {
-        savedStateHandle.get<Int>("id")?.let {
+        savedStateHandle.get<Int>(ADVERT_ID)?.let {
             getAdvert(it)
             isAdvertInFavorites(it)
         }
@@ -41,11 +41,11 @@ class DetailFragmentViewModel @Inject constructor(
 
     private val _isAdvertInDb = MutableLiveData<Event<Boolean>>()
 
-    val isAdvertInDb:LiveData<Event<Boolean>> get() = _isAdvertInDb
+    val isAdvertInDb: LiveData<Event<Boolean>> get() = _isAdvertInDb
 
     private val _setFav = MutableStateFlow<Boolean?>(null)
 
-    val setFav:StateFlow<Boolean?> get() = _setFav
+    val setFav: StateFlow<Boolean?> get() = _setFav
 
     private fun getAdvert(id: Int) {
         _advert.value = Resource.Loading()
@@ -66,9 +66,9 @@ class DetailFragmentViewModel @Inject constructor(
         }
     }
 
-     private fun isAdvertInFavorites(id: Int) {
+    private fun isAdvertInFavorites(id: Int) {
         viewModelScope.launch(Dispatchers.Main) {
-            _isAdvertInDb.value =Event(withContext(Dispatchers.IO) { dbRepo.getAdvert(id) != null })
+            _isAdvertInDb.value = Event(withContext(Dispatchers.IO) { dbRepo.getAdvert(id) != null })
         }
     }
 
@@ -78,8 +78,8 @@ class DetailFragmentViewModel @Inject constructor(
         }
     }
 
-    fun initAdvert(advert: ListingAdvert){
-        if(!::listingAdvert.isInitialized){
+    fun initAdvert(advert: ListingAdvert) {
+        if (!::listingAdvert.isInitialized) {
             this.listingAdvert = advert
             insertIntoLastVisitedItems(this.listingAdvert)
         }
@@ -87,7 +87,7 @@ class DetailFragmentViewModel @Inject constructor(
 
     fun getAdvert() = listingAdvert
 
-    fun setFav(fav:Boolean){
+    fun setFav(fav: Boolean) {
         _setFav.value = fav
     }
 

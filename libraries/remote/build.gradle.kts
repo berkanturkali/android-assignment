@@ -6,6 +6,6 @@ plugins {
 }
 dependencies {
     implementation(project(domain))
-    api(pagingCommon)
+    implementation(pagingCommon)
     implementAll(Dependencies.Network.components)
 }

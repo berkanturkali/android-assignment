@@ -1,17 +1,15 @@
-package com.arabam.android.assignment.listing.model
+package com.arabam.android.assignment.model
 
-data class DetailAdvertDto(
+data class ListingAdvertDto(
     val category: CategoryDto,
     val date: String,
     val dateFormatted: String,
     val id: Int,
-    val location: Location,
+    val location: LocationDto,
     val modelName: String,
-    val photos: List<String>,
+    var photo: String,
     val price: Int,
     val priceFormatted: String,
     val properties: List<PropertyDto>,
-    val text: String,
     val title: String,
-    val userInfo: UserInfoDto
 )

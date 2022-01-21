@@ -1,8 +1,8 @@
 package com.arabam.android.assignment.mapper
 
 import com.arabam.android.assignment.mapper.base.RemoteModelMapper
-import com.arabam.android.assignment.listing.model.ListingAdvert
-import com.arabam.android.assignment.listing.model.ListingAdvertDto
+import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.model.ListingAdvertDto
 import javax.inject.Inject
 
 class AdvertRemoteMapper @Inject constructor(

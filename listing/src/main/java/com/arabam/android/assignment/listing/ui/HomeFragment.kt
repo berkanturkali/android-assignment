@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,23 +14,24 @@ import com.arabam.android.assignment.commons.base.BaseFragment
 import com.arabam.android.assignment.commons.utils.Constants
 import com.arabam.android.assignment.commons.utils.Constants.CATEGORY_KEY
 import com.arabam.android.assignment.commons.utils.Constants.YEAR_KEY
+import com.arabam.android.assignment.commons.utils.getNavigationResult
 import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.adapter.AdvertLoadStateAdapter
 import com.arabam.android.assignment.listing.adapter.ListingAdapter
 import com.arabam.android.assignment.listing.databinding.FragmentHomeLayoutBinding
-import com.arabam.android.assignment.listing.model.ItemClickListener
-import com.arabam.android.assignment.listing.model.ListingAdvert
 import com.arabam.android.assignment.listing.model.category.CategoryItem
 import com.arabam.android.assignment.listing.model.sort.SortItem
 import com.arabam.android.assignment.listing.model.year.YearItem
 import com.arabam.android.assignment.listing.viewmodel.HomeFragmentViewModel
-import com.example.core.utils.getNavigationResult
+import com.arabam.android.assignment.model.ItemClickListener
+import com.arabam.android.assignment.model.ListingAdvert
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewModel>(),
+class HomeFragment :
+    BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewModel>(),
     ItemClickListener<ListingAdvert> {
 
     private val mViewModel by viewModels<HomeFragmentViewModel>()
@@ -79,8 +80,10 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
         }
         binding.modelBtn.setOnClickListener {
             val action =
-                HomeFragmentDirections.actionHomeToCategoryContainerFragment(mViewModel.getCategory()
-                    ?: -1)
+                HomeFragmentDirections.actionHomeToCategoryContainerFragment(
+                    mViewModel.getCategory()
+                        ?: -1
+                )
             findNavController().navigate(action)
         }
     }
@@ -128,6 +131,10 @@ class HomeFragment : BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewMod
                 }
             }
         }
+    }
+
+    private fun showProgress(show: Boolean) {
+        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

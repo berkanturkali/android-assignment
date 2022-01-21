@@ -1,13 +1,13 @@
 package com.arabam.android.assignment.database.data.mapper
 
 import com.arabam.android.assignment.database.data.entity.VisitedAdvert
-import com.arabam.android.assignment.listing.model.Category
-import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.model.Category
+import com.arabam.android.assignment.model.ListingAdvert
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class VisitedEntityMapper @Inject constructor(): Mapper<VisitedAdvert, ListingAdvert> {
+class VisitedEntityMapper @Inject constructor() : Mapper<VisitedAdvert, ListingAdvert> {
     override fun toDomain(entity: VisitedAdvert?): ListingAdvert? {
         return entity?.let {
             ListingAdvert(

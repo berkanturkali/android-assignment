@@ -13,8 +13,6 @@ import com.example.core.storage.PreferencesManager
 import com.example.core.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -42,9 +40,11 @@ class HomeFragmentViewModel @Inject constructor(
         .map { preferences ->
             categoryId = preferences.category
             sortItem =
-                SortItem(type = SortTypes.values().firstOrNull { it.value == preferences.sortType },
+                SortItem(
+                    type = SortTypes.values().firstOrNull { it.value == preferences.sortType },
                     direction = SortDirections.values()
-                        .firstOrNull { preferences.sortDirection == it.value })
+                        .firstOrNull { preferences.sortDirection == it.value }
+                )
             year = YearItem(preferences.minYear, preferences.maxYear)
             preferences
         }
@@ -54,11 +54,11 @@ class HomeFragmentViewModel @Inject constructor(
                 it.sortType,
                 it.sortDirection,
                 it.minYear,
-                it.maxYear)
+                it.maxYear
+            )
         }
 
     val adverts = _adverts.asLiveData().cachedIn(viewModelScope)
-
 
     fun updateSortOrder(item: SortItem) {
         _shouldScrollToTop.value = Event(true)

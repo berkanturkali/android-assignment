@@ -2,12 +2,10 @@ package com.arabam.android.assignment.listing.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arabam.android.assignment.listing.databinding.BrandItemBinding
-import com.arabam.android.assignment.listing.model.ItemClickListener
 import com.arabam.android.assignment.listing.model.category.CategoryItem
+import com.arabam.android.assignment.model.ItemClickListener
 import javax.inject.Inject
 
 class CategoriesAdapter @Inject constructor() :
@@ -18,9 +16,13 @@ class CategoriesAdapter @Inject constructor() :
     private lateinit var categories: Map<String?, List<CategoryItem>>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CategoryViewHolder(BrandItemBinding.inflate(LayoutInflater.from(parent.context),
-            parent,
-            false))
+        return CategoryViewHolder(
+            BrandItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -53,5 +55,5 @@ class CategoriesAdapter @Inject constructor() :
         this.listener = listener
     }
 
-    override fun getItemCount(): Int = if(::categories.isInitialized) categories.size else 0
+    override fun getItemCount(): Int = if (::categories.isInitialized) categories.size else 0
 }

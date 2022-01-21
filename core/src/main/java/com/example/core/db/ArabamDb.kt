@@ -8,7 +8,7 @@ import com.arabam.android.assignment.database.data.entity.AdvertEntity
 import com.arabam.android.assignment.database.data.entity.VisitedAdvert
 
 @Database(
-    entities = [AdvertEntity::class,VisitedAdvert::class],
+    entities = [AdvertEntity::class, VisitedAdvert::class],
     version = 1,
     exportSchema = false
 )

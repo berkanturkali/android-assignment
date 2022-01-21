@@ -1,6 +1,5 @@
 package com.arabam.android.assignment.commons.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
-import com.arabam.android.assignment.UIController
 
 abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
 
@@ -19,23 +17,12 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     private lateinit var viewModel: VM
 
-    private lateinit var controller: UIController
-
     @get:LayoutRes
     abstract val layoutId: Int
 
     abstract fun getVM(): VM
 
     abstract fun bindVM(binding: DB, vm: VM)
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        setUIController()
-    }
-
-    private fun setUIController() {
-        controller = requireActivity() as UIController
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,15 +50,10 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
         }
     }
 
-    fun showProgress(show: Boolean) {
-        controller.displayProgress(show)
-    }
-
     abstract fun init()
 
     override fun onDestroyView() {
         super.onDestroyView()
-        controller.displayProgress(false)
         binding.unbind()
     }
 }

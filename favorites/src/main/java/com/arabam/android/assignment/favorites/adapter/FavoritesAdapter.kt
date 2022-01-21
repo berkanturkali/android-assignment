@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assignment.commons.databinding.AdvertItemBinding
-import com.arabam.android.assignment.listing.model.ItemClickListener
-import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.model.ItemClickListener
+import com.arabam.android.assignment.model.ListingAdvert
 import javax.inject.Inject
-
 
 class FavoritesAdapter @Inject constructor(
     private val circularProgressDrawable: CircularProgressDrawable,
@@ -28,7 +27,6 @@ class FavoritesAdapter @Inject constructor(
                 newItem: ListingAdvert,
             ): Boolean =
                 oldItem == newItem
-
         }
     }
 
@@ -70,7 +68,6 @@ class FavoritesAdapter @Inject constructor(
                 progressDrawable = circularProgressDrawable
             }
         }
-
     }
 
     fun setListener(listener: ItemClickListener<ListingAdvert>) {

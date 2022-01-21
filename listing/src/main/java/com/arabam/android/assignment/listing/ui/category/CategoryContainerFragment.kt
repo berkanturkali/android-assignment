@@ -11,10 +11,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.arabam.android.assignment.commons.utils.Constants.CATEGORY_KEY
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_CATEGORY
+import com.arabam.android.assignment.commons.utils.setNavigationResult
 import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.databinding.FragmentCategoryContainerBinding
 import com.example.core.observe
-import com.example.core.utils.setNavigationResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class CategoryContainerFragment : BottomSheetDialogFragment() {

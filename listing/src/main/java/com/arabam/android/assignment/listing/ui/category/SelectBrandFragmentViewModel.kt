@@ -38,9 +38,11 @@ private fun getCategories(context: Context): List<CategoryItem> {
     val names = context.resources.getStringArray(R.array.model_names)
     val categories = mutableListOf<CategoryItem>()
     for (i in ids.indices) {
-        val category = CategoryItem(id = ids[i].toInt(),
+        val category = CategoryItem(
+            id = ids[i].toInt(),
             title = names[i].generateTitle(),
-            name = names[i])
+            name = names[i]
+        )
         categories.add(category)
     }
     return categories

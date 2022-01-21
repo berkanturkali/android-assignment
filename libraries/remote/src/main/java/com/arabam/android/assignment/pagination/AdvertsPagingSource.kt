@@ -3,7 +3,7 @@ package com.arabam.android.assignment.pagination
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.arabam.android.assignment.ApiService
-import com.arabam.android.assignment.listing.model.ListingAdvertDto
+import com.arabam.android.assignment.model.ListingAdvertDto
 import com.arabam.android.assignment.utils.resize
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,12 +28,14 @@ class AdvertsPagingSource(
         val take = 10
         return try {
             val response =
-                service.allAdverts(skip,
+                service.allAdverts(
+                    skip,
                     id = categoryId,
                     sort = sort,
                     direction = direction,
                     min = min,
-                    max = max)
+                    max = max
+                )
                     .map {
                         it.photo = it.photo.resize()
                         it

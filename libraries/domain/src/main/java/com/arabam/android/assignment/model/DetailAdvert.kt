@@ -1,10 +1,4 @@
-package com.arabam.android.assignment.detail
-
-import com.arabam.android.assignment.listing.model.Category
-import com.arabam.android.assignment.listing.model.Location
-import com.arabam.android.assignment.listing.model.Property
-import com.arabam.android.assignment.listing.model.UserInfo
-
+package com.arabam.android.assignment.model
 
 data class DetailAdvert(
     val category: Category,

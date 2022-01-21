@@ -2,6 +2,8 @@ package com.arabam.android.assignment.details.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.arabam.android.assignment.commons.utils.Constants.USER_NAME
+import com.arabam.android.assignment.commons.utils.Constants.USER_PHONE
 import com.arabam.android.assignment.details.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -27,10 +29,10 @@ class UserInfoViewModel @Inject constructor(
     private var image: Int = -1
 
     init {
-        savedStateHandle.get<String>("phone")?.let {
+        savedStateHandle.get<String>(USER_PHONE)?.let {
             phone = it
         }
-        savedStateHandle.get<String>("name")?.let {
+        savedStateHandle.get<String>(USER_NAME)?.let {
             name = it
         }
         val random = getRandom(listOfAvatars.size)
@@ -42,7 +44,6 @@ class UserInfoViewModel @Inject constructor(
     fun getName() = name
 
     fun getImage() = image
-
 
     private fun getRandom(limit: Int): Int {
         return (0 until limit).random()

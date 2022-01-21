@@ -1,0 +1,28 @@
+name: Android Build
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Run Spotless Apply
+        run: ./gradlew spotlessApply
+
+      - name: Run Spotless Check
+        run: ./gradlew spotlessCheck
+
+      - name: Build Project
+        run: ./gradlew assembleDebug

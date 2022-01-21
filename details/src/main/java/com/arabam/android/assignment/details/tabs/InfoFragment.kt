@@ -26,8 +26,10 @@ class InfoFragment : Fragment(R.layout.fragment_info_layout) {
         binding = FragmentInfoLayoutBinding.bind(view)
         val infoList = arguments?.getParcelableArray(Constants.INFO_KEY)!!.toList() as List<Info>
         binding.adapter = mAdapter
-        val dividerItemDecoration = DividerItemDecoration(binding.infoRv.context,
-            LinearLayoutManager(requireContext()).orientation)
+        val dividerItemDecoration = DividerItemDecoration(
+            binding.infoRv.context,
+            LinearLayoutManager(requireContext()).orientation
+        )
         binding.infoRv.addItemDecoration(dividerItemDecoration)
         mAdapter.submitList(infoList)
     }

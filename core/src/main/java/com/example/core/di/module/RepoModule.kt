@@ -15,8 +15,8 @@ import javax.inject.Singleton
 interface RepoModule {
 
     @get:[Binds Singleton]
-    val AdvertRepoImpl.advertRepo:AdvertRepo
+    val AdvertRepoImpl.advertRepo: AdvertRepo
 
     @get:[Binds Singleton]
-    val DbRepoImpl.dbRepo:DbRepo
+    val DbRepoImpl.dbRepo: DbRepo
 }

@@ -9,11 +9,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter.FragmentTransactionCallback.OnPostEventListener
 import com.arabam.android.assignment.commons.utils.Constants.DESCRIPTION_KEY
 import com.arabam.android.assignment.commons.utils.Constants.INFO_KEY
-import com.arabam.android.assignment.detail.DetailAdvert
 import com.arabam.android.assignment.details.model.info.getInfoList
 import com.arabam.android.assignment.details.tabs.DescriptionFragment
 import com.arabam.android.assignment.details.tabs.InfoFragment
-
+import com.arabam.android.assignment.model.DetailAdvert
 
 class DetailsFragmentPagerAdapter(
     fragmentManager: FragmentManager,
@@ -25,20 +24,20 @@ class DetailsFragmentPagerAdapter(
 
     init {
         registerFragmentTransactionCallback(object :
-            FragmentStateAdapter.FragmentTransactionCallback() {
-            override fun onFragmentMaxLifecyclePreUpdated(
-                fragment: Fragment,
-                maxLifecycleState: Lifecycle.State,
-            ) = if (maxLifecycleState == Lifecycle.State.RESUMED) {
-                OnPostEventListener {
-                    fragment.parentFragmentManager.commitNow {
-                        setPrimaryNavigationFragment(fragment)
+                FragmentStateAdapter.FragmentTransactionCallback() {
+                override fun onFragmentMaxLifecyclePreUpdated(
+                    fragment: Fragment,
+                    maxLifecycleState: Lifecycle.State,
+                ) = if (maxLifecycleState == Lifecycle.State.RESUMED) {
+                    OnPostEventListener {
+                        fragment.parentFragmentManager.commitNow {
+                            setPrimaryNavigationFragment(fragment)
+                        }
                     }
+                } else {
+                    super.onFragmentMaxLifecyclePreUpdated(fragment, maxLifecycleState)
                 }
-            } else {
-                super.onFragmentMaxLifecyclePreUpdated(fragment, maxLifecycleState)
-            }
-        })
+            })
     }
 
     override fun getItemCount(): Int = fragments.size
@@ -53,7 +52,7 @@ class DetailsFragmentPagerAdapter(
             }
             is InfoFragment -> {
                 fragment.arguments = Bundle().apply {
-                    val infoList = getInfoList(advert,parentFragment.requireContext())
+                    val infoList = getInfoList(advert, parentFragment.requireContext())
                     putParcelableArray(INFO_KEY, infoList.toTypedArray())
                 }
             }

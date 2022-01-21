@@ -7,7 +7,7 @@
 
         <variable
             name="advert"
-            type="com.arabam.android.assignment.listing.model.ListingAdvert" />
+            type="com.arabam.android.assignment.model.ListingAdvert" />
 
         <import type="com.arabam.android.assignment.utils.StringUtilsKt" />
 
@@ -34,8 +34,7 @@
                 url="@{advert.photo}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                />
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/price_tv"
@@ -58,9 +57,9 @@
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textStyle="bold"
+            android:layout_margin="@dimen/margin_padding_16dp"
             android:text="@{advert.modelName}"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
@@ -71,7 +70,7 @@
             style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/margin_padding_16dp"
             android:text="@{advert.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +81,7 @@
             android:id="@+id/advert_address_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/margin_padding_16dp"
             android:text="@{String.format(@string/advert_location,advert.location.cityName, advert.location.townName)}"
             app:drawableStartCompat="@drawable/ic_location_custom_dimen"
             app:layout_constraintEnd_toStartOf="@+id/advert_date_tv"
@@ -95,9 +94,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:drawablePadding="4dp"
             android:gravity="center_vertical"
             android:text="@{advert.dateFormatted}"
-            android:drawablePadding="4dp"
             app:drawableStartCompat="@drawable/ic_calendar_custom_dimen"
             app:drawableTint="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,15 +105,15 @@
 
         <TextView
             android:id="@+id/full_tv"
+            style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:padding="8dp"
-            style="@style/TextAppearance.AppCompat.Small"
-            android:gravity="center_horizontal"
-            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
             android:background="@drawable/divider"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/margin_padding_8dp"
             android:text="@{String.format(@string/properties_text,advert.properties[2].value,advert.properties[0].value,advert.properties[1].value)}"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/advert_address_tv" />

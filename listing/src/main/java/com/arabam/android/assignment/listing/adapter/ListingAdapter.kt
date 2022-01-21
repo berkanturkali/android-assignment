@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assignment.commons.databinding.AdvertItemBinding
 import com.arabam.android.assignment.listing.databinding.GridAdvertItemLayoutBinding
-import com.arabam.android.assignment.listing.model.ItemClickListener
-import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.model.ItemClickListener
+import com.arabam.android.assignment.model.ListingAdvert
 import javax.inject.Inject
-
 
 class ListingAdapter @Inject constructor(
     private val circularProgressDrawable: CircularProgressDrawable,
@@ -27,7 +26,6 @@ class ListingAdapter @Inject constructor(
         const val LINEAR = 1
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == LINEAR) {
             AdvertViewHolder(
@@ -36,9 +34,13 @@ class ListingAdapter @Inject constructor(
                 )
             )
         } else {
-            GridAdvertViewHolder(GridAdvertItemLayoutBinding.inflate(LayoutInflater.from(parent.context),
-                parent,
-                false))
+            GridAdvertViewHolder(
+                GridAdvertItemLayoutBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         }
     }
 

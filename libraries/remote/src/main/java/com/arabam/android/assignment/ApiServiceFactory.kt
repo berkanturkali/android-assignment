@@ -11,12 +11,12 @@ object ApiServiceFactory {
 
     private const val BASE_URL = "http://sandbox.arabamd.com/"
 
-    fun makeApiService(gson:Gson): ApiService {
+    fun makeApiService(gson: Gson): ApiService {
         val okHttpClient = makeOkHttpClient(makeHttpLoggingInterceptor())
-        return makeApiService(gson,okHttpClient)
+        return makeApiService(gson, okHttpClient)
     }
 
-    private fun makeApiService(gson:Gson,okHttpClient: OkHttpClient): ApiService {
+    private fun makeApiService(gson: Gson, okHttpClient: OkHttpClient): ApiService {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -36,5 +36,4 @@ object ApiServiceFactory {
             .readTimeout(5, TimeUnit.SECONDS)
             .readTimeout(5, TimeUnit.SECONDS)
     }.build()
-
 }

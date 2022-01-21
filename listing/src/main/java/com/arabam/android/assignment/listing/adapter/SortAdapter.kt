@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.arabam.android.assignment.listing.databinding.SortItemBinding
-import com.arabam.android.assignment.listing.model.ItemClickListener
 import com.arabam.android.assignment.listing.model.sort.SortItem
+import com.arabam.android.assignment.model.ItemClickListener
 import javax.inject.Inject
 
 class SortAdapter @Inject constructor() :
@@ -22,7 +22,6 @@ class SortAdapter @Inject constructor() :
 
             override fun areContentsTheSame(oldItem: SortItem, newItem: SortItem): Boolean =
                 oldItem == newItem
-
         }
     }
 

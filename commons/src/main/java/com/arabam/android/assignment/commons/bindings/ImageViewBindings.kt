@@ -1,6 +1,5 @@
 package com.arabam.android.assignment.commons.bindings
 
-
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable

@@ -1,29 +1,26 @@
 package com.arabam.android.assignment.listing.ui.category
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_CATEGORY
-import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.adapter.CategoriesAdapter
 import com.arabam.android.assignment.listing.databinding.FragmentSelectBrandBinding
-import com.arabam.android.assignment.listing.model.ItemClickListener
 import com.arabam.android.assignment.listing.model.category.CategoryItem
+import com.arabam.android.assignment.model.ItemClickListener
 import com.example.core.observe
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SelectBrandFragment : Fragment(),
+class SelectBrandFragment :
+    Fragment(),
     ItemClickListener<List<CategoryItem>> {
 
     private lateinit var binding: FragmentSelectBrandBinding
@@ -56,8 +53,8 @@ class SelectBrandFragment : Fragment(),
         subscribeObservers()
     }
 
-    private fun subscribeObservers(){
-        viewModel.categories.observe(viewLifecycleOwner){
+    private fun subscribeObservers() {
+        viewModel.categories.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.setCategories(it)
             }
@@ -74,9 +71,9 @@ class SelectBrandFragment : Fragment(),
         }
         val action =
             SelectBrandFragmentDirections.actionSelectCategoryFragmentToSelectModelFragment(
-                item.toTypedArray())
+                item.toTypedArray()
+            )
         findNavController().navigate(action)
-
     }
 
     override fun onDestroyView() {

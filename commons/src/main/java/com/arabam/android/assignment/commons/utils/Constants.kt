@@ -4,17 +4,15 @@ object Constants {
 
     const val SORT_KEY = "sort_key"
 
-    const val YEAR_KEY ="year_key"
-
-    const val ADVERT_KEY = "advert_key"
+    const val YEAR_KEY = "year_key"
 
     const val DESCRIPTION_KEY = "description"
 
-    const val INFO_KEY ="info"
+    const val INFO_KEY = "info"
 
     const val CATEGORY_KEY = "category_key"
 
-    const val IS_GRID_MODE  ="is_grid"
+    const val IS_GRID_MODE = "is_grid"
 
     const val SELECTED_DIRECTION = "selected_direction"
 
@@ -26,4 +24,11 @@ object Constants {
 
     const val SELECTED_CATEGORY = "selected_category"
 
+    const val USER_NAME = "name"
+
+    const val USER_PHONE = "phone"
+
+    const val ADVERT_ID = "id"
+
+    const val PREFERENCES_NAME = "preferences"
 }

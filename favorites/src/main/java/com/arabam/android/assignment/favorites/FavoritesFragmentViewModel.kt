@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.model.ListingAdvert
 import com.arabam.android.assignment.repo.DbRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -29,10 +28,10 @@ class FavoritesFragmentViewModel @Inject constructor(
 
     private fun favorites() {
         viewModelScope.launch(Dispatchers.IO) {
-             repo.favorites().onEach {
+            repo.favorites().onEach {
                 _favorites.value = it
             }
-                 .launchIn(viewModelScope)
+                .launchIn(viewModelScope)
         }
     }
 

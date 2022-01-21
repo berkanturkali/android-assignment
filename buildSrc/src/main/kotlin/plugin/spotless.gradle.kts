@@ -9,11 +9,11 @@ spotless {
                 mapOf(
                     "dir" to ".",
                     "include" to listOf("**/*.kt"),
-                    "exclude" to listOf("**/build/**", "**/buildSrc/**", "**/.*", ".idea/")
+                    "exclude" to listOf("**/build/**", "**/buildSrc/**", "**/.*", ".idea/","**/test/**","**/androidTest/**")
                 )
             )
         )
-        ktlint(ktLintVersion)
+        ktlint(ktLintVersion).userData(mapOf("disabled_rules" to "no-wildcard-imports"))
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()

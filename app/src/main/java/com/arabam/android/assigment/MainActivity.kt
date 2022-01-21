@@ -1,8 +1,6 @@
 package com.arabam.android.assigment
 
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -12,11 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.arabam.android.assigment.databinding.ActivityMainBinding
-import com.arabam.android.assignment.UIController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),UIController {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -33,6 +30,9 @@ class MainActivity : AppCompatActivity(),UIController {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
         navController = navHostFragment.findNavController()
+        val inflater = navController.navInflater
+        val graph = inflater.inflate(R.navigation.app_graph)
+        navHostFragment.navController.graph = graph
         val appBarConfiguration =
             AppBarConfiguration(setOf(R.id.home, R.id.favoritesFragment))
         binding.toolbar
@@ -43,9 +43,5 @@ class MainActivity : AppCompatActivity(),UIController {
             binding.contentMain.bottomNavigationView.isVisible =
                 appBarConfiguration.topLevelDestinations.contains(destination.id)
         }
-    }
-
-    override fun displayProgress(isDisplayed: Boolean) {
-        binding.contentMain.progressBar.visibility = if(isDisplayed) View.VISIBLE else View.GONE
     }
 }

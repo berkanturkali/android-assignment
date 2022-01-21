@@ -8,10 +8,10 @@ import androidx.navigation.fragment.navArgs
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_MAX_YEAR
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_MIN_YEAR
 import com.arabam.android.assignment.commons.utils.Constants.YEAR_KEY
+import com.arabam.android.assignment.commons.utils.setNavigationResult
 import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.databinding.FragmentFilterByYearLayoutBinding
 import com.arabam.android.assignment.listing.model.year.YearItem
-import com.example.core.utils.setNavigationResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.*
 

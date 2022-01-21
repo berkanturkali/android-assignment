@@ -1,11 +1,11 @@
 package com.example.core.storage
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.arabam.android.assignment.commons.utils.Constants.IS_GRID_MODE
+import com.arabam.android.assignment.commons.utils.Constants.PREFERENCES_NAME
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_CATEGORY
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_DIRECTION
 import com.arabam.android.assignment.commons.utils.Constants.SELECTED_MAX_YEAR
@@ -41,7 +41,7 @@ sealed class HomeScreenPreferences {
 @Singleton
 class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "preferences")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
 
     private val dataStore = context.dataStore
 
@@ -70,11 +70,11 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
             throw exception
         }
     }.distinctUntilChanged { old, new ->
-        (old[SORT_DIRECTION] == new[SORT_DIRECTION])
-                && (old[SORT_TYPE] == new[SORT_TYPE])
-                && (old[MIN_YEAR] == new[MIN_YEAR])
-                && (old[MAX_YEAR] == new[MAX_YEAR])
-                && (old[CATEGORY] == new[CATEGORY])
+        (old[SORT_DIRECTION] == new[SORT_DIRECTION]) &&
+            (old[SORT_TYPE] == new[SORT_TYPE]) &&
+            (old[MIN_YEAR] == new[MIN_YEAR]) &&
+            (old[MAX_YEAR] == new[MAX_YEAR]) &&
+            (old[CATEGORY] == new[CATEGORY])
     }
         .map { preferences ->
             val direction =

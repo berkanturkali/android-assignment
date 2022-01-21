@@ -4,9 +4,9 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
+import com.arabam.android.assignment.commons.utils.inflate
 import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.databinding.AdvertLoadStateFooterItemLayoutBinding
-import com.example.core.ext.inflate
 
 class AdvertLoadStateViewHolder(
     private val binding: AdvertLoadStateFooterItemLayoutBinding,

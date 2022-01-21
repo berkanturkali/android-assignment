@@ -1,7 +1,7 @@
 package com.arabam.android.assignment
 
-import com.arabam.android.assignment.listing.model.DetailAdvertDto
-import com.arabam.android.assignment.listing.model.ListingAdvertDto
+import com.arabam.android.assignment.model.DetailAdvertDto
+import com.arabam.android.assignment.model.ListingAdvertDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,7 +12,7 @@ interface ApiService {
     suspend fun allAdverts(
         @Query("skip") skip: Int,
         @Query("take") take: Int = 10,
-        @Query("categoryId") id:Int?,
+        @Query("categoryId") id: Int?,
         @Query("sort") sort: Int?,
         @Query("sortDirection") direction: Int?,
         @Query("minYear") min: Int?,

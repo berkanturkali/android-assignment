@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.arabam.android.assignment.commons.utils.inflate
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.databinding.ViewPagerItemBinding
-import com.example.core.ext.inflate
 import javax.inject.Inject
 
 class SliderFragmentAdapter @Inject constructor(
-    private val circularProgressDrawable: CircularProgressDrawable
+    private val circularProgressDrawable: CircularProgressDrawable,
 ) :
     ListAdapter<String, RecyclerView.ViewHolder>(URL_COMPARATOR) {
 
@@ -27,7 +27,6 @@ class SliderFragmentAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         SliderViewHolder(ViewPagerItemBinding.bind(parent.inflate(R.layout.view_pager_item)))
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)

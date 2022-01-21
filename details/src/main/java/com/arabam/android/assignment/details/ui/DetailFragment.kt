@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -18,7 +19,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assignment.commons.base.BaseFragment
 import com.arabam.android.assignment.commons.utils.showSnack
-import com.arabam.android.assignment.detail.DetailAdvert
 import com.arabam.android.assignment.details.ImageClickListener
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.adapter.AdvertImagesViewPagerAdapter
@@ -28,8 +28,9 @@ import com.arabam.android.assignment.details.databinding.FragmentDetailLayoutBin
 import com.arabam.android.assignment.details.tabs.DescriptionFragment
 import com.arabam.android.assignment.details.tabs.InfoFragment
 import com.arabam.android.assignment.details.viewmodel.DetailFragmentViewModel
-import com.arabam.android.assignment.listing.model.ListingAdvert
-import com.arabam.android.assignment.listing.model.Resource
+import com.arabam.android.assignment.model.DetailAdvert
+import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.model.Resource
 import com.arabam.android.assignment.utils.resize
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.transition.MaterialElevationScale
@@ -38,7 +39,8 @@ import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentViewModel>(),
+class DetailFragment :
+    BaseFragment<FragmentDetailLayoutBinding, DetailFragmentViewModel>(),
     ImageClickListener {
     private val mViewModel by viewModels<DetailFragmentViewModel>()
 
@@ -174,10 +176,10 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
             }
         }
         mViewModel.isAdvertInDb.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let {
-                val bg = if (it) R.drawable.ic_star else R.drawable.ic_star_outlined
+            it.getContentIfNotHandled()?.let { inDb ->
+                val bg = if (inDb) R.drawable.ic_star else R.drawable.ic_star_outlined
                 binding.addToFav.setImageResource(bg)
-                mViewModel.setFav(it)
+                mViewModel.setFav(inDb)
             }
         }
 
@@ -195,6 +197,9 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
         }
     }
 
+    private fun showProgress(show: Boolean) {
+        binding.progressBar.visibility = if (show) View.VISIBLE else GONE
+    }
 
     private fun bindAdvert(item: DetailAdvert) {
         initTabLayout(fragments, item)
@@ -232,20 +237,25 @@ class DetailFragment : BaseFragment<FragmentDetailLayoutBinding, DetailFragmentV
 
     private fun showUserProfile() {
         val action =
-            DetailFragmentDirections.actionDetailFragmentToUserInfoDialog(phone = advert.userInfo.phoneFormatted,
-                name = advert.userInfo.nameSurname)
+            DetailFragmentDirections.actionDetailFragmentToUserInfoDialog(
+                phone = advert.userInfo.phoneFormatted,
+                name = advert.userInfo.nameSurname
+            )
         findNavController().navigate(action)
     }
 
-    override fun onImageClick(images: List<String>, position: Int,view:View) {
+    override fun onImageClick(images: List<String>, position: Int, view: View) {
         val action =
-            DetailFragmentDirections.actionDetailFragmentToSliderFragment(images.map { it.resize() }
-                .toTypedArray(), position)
+            DetailFragmentDirections.actionDetailFragmentToSliderFragment(
+                images.map { it.resize() }
+                    .toTypedArray(),
+                position
+            )
         val transitionName = resources.getString(R.string.slider_transition_name)
         val extras = FragmentNavigatorExtras(view to transitionName)
-        findNavController().navigate(action,extras)
+        findNavController().navigate(action, extras)
         reenterTransition = MaterialElevationScale(true).apply {
-            duration =300
+            duration = 300
         }
     }
 }

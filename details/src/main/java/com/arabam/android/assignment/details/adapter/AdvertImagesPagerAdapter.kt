@@ -21,9 +21,13 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
         parent: ViewGroup,
         viewType: Int,
     ): AdvertImagesViewPagerAdapter.ViewHolder {
-        return ViewHolder(ViewPagerItemBinding.inflate(LayoutInflater.from(parent.context),
-            parent,
-            false))
+        return ViewHolder(
+            ViewPagerItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: AdvertImagesViewPagerAdapter.ViewHolder, position: Int) {
@@ -39,7 +43,7 @@ class AdvertImagesViewPagerAdapter @Inject constructor(
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    listener.onImageClick(images, position,binding.container)
+                    listener.onImageClick(images, position, binding.container)
                 }
             }
         }

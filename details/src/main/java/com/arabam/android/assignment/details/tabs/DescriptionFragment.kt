@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import com.arabam.android.assignment.commons.utils.Constants
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.databinding.FragmentDescriptionLayoutBinding
-import com.arabam.android.assignment.detail.DetailAdvert
 
 class DescriptionFragment : Fragment(R.layout.fragment_description_layout) {
 
@@ -23,5 +22,4 @@ class DescriptionFragment : Fragment(R.layout.fragment_description_layout) {
         super.onDestroyView()
         binding.unbind()
     }
-
 }

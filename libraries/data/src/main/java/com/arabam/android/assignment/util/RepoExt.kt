@@ -1,7 +1,7 @@
 package com.arabam.android.assignment.util
 
 import com.arabam.android.assignment.mapper.base.RemoteModelMapper
-import com.arabam.android.assignment.listing.model.Resource
+import com.arabam.android.assignment.model.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
@@ -43,7 +43,6 @@ suspend fun <T, D> safeApiCall(
         }
     }
 }
-
 
 private fun convertErrorBody(throwable: HttpException): String? {
     return try {

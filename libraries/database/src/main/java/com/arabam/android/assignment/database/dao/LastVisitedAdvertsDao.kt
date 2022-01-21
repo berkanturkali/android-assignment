@@ -1,7 +1,6 @@
 package com.arabam.android.assignment.database.dao
 
 import androidx.room.*
-import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.OnConflictStrategy.REPLACE
 import com.arabam.android.assignment.database.data.entity.VisitedAdvert
 
@@ -21,7 +20,7 @@ interface LastVisitedAdvertsDao {
     suspend fun lastAdverts(): List<VisitedAdvert>
 
     @Query("SELECT COUNT(id) FROM last_visited_adverts")
-    fun getItemCount(): Int
+    suspend fun getItemCount(): Int
 
     @Transaction
     suspend fun insertAndDeleteTransaction(advert: VisitedAdvert) {

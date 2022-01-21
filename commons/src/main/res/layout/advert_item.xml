@@ -7,7 +7,7 @@
 
         <variable
             name="advert"
-            type="com.arabam.android.assignment.listing.model.ListingAdvert" />
+            type="com.arabam.android.assignment.model.ListingAdvert" />
 
         <import type="com.arabam.android.assignment.utils.StringUtilsKt" />
 
@@ -19,9 +19,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/advert_item_height"
-        android:layout_marginTop="@dimen/advert_item_margin"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
         android:background="@drawable/divider"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/margin_padding_8dp">
 
         <ImageView
             android:id="@+id/advert_image"
@@ -37,7 +37,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/advert_item_margin"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/advert_image"

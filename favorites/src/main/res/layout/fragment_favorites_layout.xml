@@ -46,7 +46,6 @@
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/emptyCartIv"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/no_favorite"
                 android:textColor="@color/gray" />

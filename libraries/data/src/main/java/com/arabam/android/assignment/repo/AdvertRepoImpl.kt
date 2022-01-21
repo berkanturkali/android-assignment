@@ -7,9 +7,9 @@ import androidx.paging.map
 import com.arabam.android.assignment.ApiService
 import com.arabam.android.assignment.mapper.AdvertRemoteMapper
 import com.arabam.android.assignment.mapper.DetailAdvertMapper
-import com.arabam.android.assignment.detail.DetailAdvert
-import com.arabam.android.assignment.listing.model.ListingAdvert
-import com.arabam.android.assignment.listing.model.Resource
+import com.arabam.android.assignment.model.DetailAdvert
+import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.model.Resource
 import com.arabam.android.assignment.pagination.AdvertsPagingSource
 import com.arabam.android.assignment.util.safeApiCall
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val TAG = "AdvertRepoImpl"
 @Singleton
 class AdvertRepoImpl @Inject constructor(
     private val api: ApiService,
@@ -35,12 +34,14 @@ class AdvertRepoImpl @Inject constructor(
         Pager(
             config = PagingConfig(pageSize = 10, enablePlaceholders = false, maxSize = 100),
             pagingSourceFactory = {
-                AdvertsPagingSource(api,
+                AdvertsPagingSource(
+                    api,
                     categoryId,
                     sort,
                     direction,
                     minYear,
-                    maxYear)
+                    maxYear
+                )
             }
         ).flow.map {
             it.map { dto ->

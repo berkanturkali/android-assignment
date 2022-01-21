@@ -6,7 +6,7 @@
     <data>
         <variable
             name="advert"
-            type="com.arabam.android.assignment.listing.model.ListingAdvert" />
+            type="com.arabam.android.assignment.model.ListingAdvert" />
 
         <import type="com.arabam.android.assignment.utils.StringUtilsKt" />
 
@@ -18,7 +18,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
         app:cardElevation="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,7 +60,7 @@
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin_padding_8dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@{advert.modelName}"
@@ -76,7 +75,7 @@
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_margin="@dimen/margin_padding_8dp"
                 android:drawablePadding="4dp"
                 android:text="@{String.format(@string/advert_location,advert.location.cityName, advert.location.townName)}"
                 app:drawableStartCompat="@drawable/ic_location"

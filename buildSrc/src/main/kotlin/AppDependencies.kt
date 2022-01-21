@@ -111,23 +111,17 @@ object Dependencies {
         object Version {
             const val javaxInject: String = "1"
             const val daggerHilt: String = "2.38.1"
-            const val hiltViewModel: String = "1.0.0-alpha02"
             const val hiltFragment: String = "1.0.0"
         }
 
         object AnnotationProcessor {
             const val daggerHilt: String =
                 "com.google.dagger:hilt-compiler:${Version.daggerHilt}"
-            const val jetpackHiltCompiler: String =
-                "androidx.hilt:hilt-compiler:${Version.hiltViewModel}"
         }
 
         const val javaxInject: String = "javax.inject:javax.inject:${Version.javaxInject}"
         const val daggerHiltAndroid: String =
             "com.google.dagger:hilt-android:${Version.daggerHilt}"
-        const val hiltViewModel: String =
-            "androidx.hilt:hilt-lifecycle-viewmodel:${Version.hiltViewModel}"
-        const val hiltCore: String = "com.google.dagger:hilt-core:${Version.daggerHilt}"
         const val hiltFragment: String =
             "androidx.hilt:hilt-navigation-fragment:${Version.hiltFragment}"
     }

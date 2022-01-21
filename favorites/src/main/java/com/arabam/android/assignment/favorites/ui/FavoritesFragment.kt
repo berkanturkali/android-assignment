@@ -10,8 +10,8 @@ import com.arabam.android.assignment.favorites.FavoritesFragmentViewModel
 import com.arabam.android.assignment.favorites.R
 import com.arabam.android.assignment.favorites.adapter.FavoritesAdapter
 import com.arabam.android.assignment.favorites.databinding.FragmentFavoritesLayoutBinding
-import com.arabam.android.assignment.listing.model.ItemClickListener
-import com.arabam.android.assignment.listing.model.ListingAdvert
+import com.arabam.android.assignment.model.ItemClickListener
+import com.arabam.android.assignment.model.ListingAdvert
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -74,5 +74,4 @@ class FavoritesFragment :
         val action = FavoritesFragmentDirections.actionFavoritesToDetailsGraph(item.id)
         findNavController().navigate(action)
     }
-
 }

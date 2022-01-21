@@ -41,12 +41,12 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
         val rv = binding.imageSlider.getChildAt(0) as RecyclerView
         rv.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    scrollToPosition(args.position)
-                }
-            })
+                    ViewTreeObserver.OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        scrollToPosition(args.position)
+                    }
+                })
         }
     }
 
