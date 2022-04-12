@@ -28,20 +28,20 @@
 * [Glide](https://github.com/bumptech/glide)
 * DataBinding
 
-## Project Structure
+## Module Design
 
-<img src="screenshots/modules.png" alt="home" width="450"/>
-
-* :app - application module that depends on all other modules. This module contains MainActivity and CustomApplication class.
-* :common - contains some common components like resources, views, base classes and only depends on domain module.
-* :core - contains di modules. 
-* :libraries:domain - contains domain models, repository interfaces.
-* :libraries:remote - contains components related to the network.
-* :libraries:database - contains components related to the database.
-* :libraries:data - contains implementations of repo classes and other stuff related to data. 
-* :listing - contains components related to the home screen of the app.
-* :details - contains components related to the details screen of the app.
-* :favorites - contains components related to the favorites screen of the app.
+| Module name        | Type                 | Description                                                      |
+| -------------      | -------------        | -------------                                                    |
+| [app](/app/)       | Android Application  | MainActivity, ArabamApp class also Navigation setup.                |
+| [core](/core/)     | Android Library | Cache-related components and DI modules.                                |
+| [common](/common/)     | Android Library | Common components like resources, views, base classes                               |
+| [libraries:remote](/libraries/remote/)   | Java/Kotlin Library  | Remote-related Components            |
+| [libraries:data](/libraries/data/)     | Java/Kotlin Library      | Data-related components.                                      |
+| [libraries:database](/libraries/database/) |Java/Kotlin Library    | Room-related components.                           |
+| [libraries:domain](/libraries/domain/) | Java/Kotlin Library       | Domain-related components.                         |
+| [listing](/listing/) | Android Library   | UI components for the Listing/Home screen.                         |
+| [details](/details/) | Android Library      | UI components for the Details screen.                                              |
+| [favorites](/favorites/) | Android Library      | UI components for the Favorites screen.                                              |
 
 ## API
 
@@ -50,6 +50,3 @@
 * Web Postman -> https://www.postman.com/yusufcakmak/workspace/arabam-assigment/overview
 * Postman Collection -> https://www.getpostman.com/collections/d0c83044d06639384b1b
 * Swagger -> http://sandbox.arabamd.com/swagger/index.html
-
-
-
