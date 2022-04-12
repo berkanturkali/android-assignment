@@ -14,7 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
+        android:layout_height="?android:listPreferredItemHeight"
         android:background="@drawable/divider">
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/margin_padding_8dp"
+            android:layout_marginStart="@dimen/dimen_8"
             android:text="@{String.format(@string/sort_text,item.title,item.direction.text)}"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
             android:id="@+id/iv_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            android:layout_marginEnd="@dimen/dimen_8"
             android:src="@drawable/ic_check"
             android:visibility="@{item.isSelected ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"

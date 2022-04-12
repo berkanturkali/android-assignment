@@ -1,16 +1,17 @@
 package com.arabam.android.assignment.listing.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.arabam.android.assignment.core.storage.HomeScreenPreferences
+import com.arabam.android.assignment.core.storage.PreferencesManager
+import com.arabam.android.assignment.domain.data.repo.AdvertRepo
 import com.arabam.android.assignment.listing.model.category.CategoryItem
 import com.arabam.android.assignment.listing.model.sort.SortDirections
 import com.arabam.android.assignment.listing.model.sort.SortItem
 import com.arabam.android.assignment.listing.model.sort.SortTypes
 import com.arabam.android.assignment.listing.model.year.YearItem
-import com.arabam.android.assignment.repo.AdvertRepo
-import com.example.core.storage.HomeScreenPreferences
-import com.example.core.storage.PreferencesManager
-import com.example.core.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flatMapLatest
@@ -27,10 +28,6 @@ class HomeFragmentViewModel @Inject constructor(
     private lateinit var sortItem: SortItem
 
     private var categoryId: Int? = null
-
-    private val _shouldScrollToTop = MutableLiveData<Event<Boolean>>()
-
-    val shouldScrollToTop: LiveData<Event<Boolean>> get() = _shouldScrollToTop
 
     private lateinit var year: YearItem
     val viewPreferencesFlow =
@@ -61,14 +58,12 @@ class HomeFragmentViewModel @Inject constructor(
     val adverts = _adverts.asLiveData().cachedIn(viewModelScope)
 
     fun updateSortOrder(item: SortItem) {
-        _shouldScrollToTop.value = Event(true)
         viewModelScope.launch(Dispatchers.IO) {
             manager.updateSortPreferences(item.direction?.value, item.type?.value)
         }
     }
 
     fun updateYear(year: YearItem) {
-        _shouldScrollToTop.value = Event(true)
         viewModelScope.launch(Dispatchers.IO) {
             manager.updateMinMaxYear(year.minYear, year.maxYear)
         }

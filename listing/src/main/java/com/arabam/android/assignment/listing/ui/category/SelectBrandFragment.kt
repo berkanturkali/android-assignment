@@ -8,14 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arabam.android.assignment.commons.utils.Constants.SELECTED_CATEGORY
+import com.arabam.android.assignment.common.utils.Constants.SELECTED_CATEGORY
 import com.arabam.android.assignment.listing.adapter.CategoriesAdapter
 import com.arabam.android.assignment.listing.databinding.FragmentSelectBrandBinding
 import com.arabam.android.assignment.listing.model.category.CategoryItem
-import com.arabam.android.assignment.model.ItemClickListener
-import com.example.core.observe
+import com.arabam.android.assignment.remote.model.ItemClickListener
+import com.arabam.android.assignment.core.observe
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint

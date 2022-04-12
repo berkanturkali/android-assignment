@@ -7,12 +7,12 @@ import androidx.fragment.app.commitNow
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter.FragmentTransactionCallback.OnPostEventListener
-import com.arabam.android.assignment.commons.utils.Constants.DESCRIPTION_KEY
-import com.arabam.android.assignment.commons.utils.Constants.INFO_KEY
+import com.arabam.android.assignment.common.utils.Constants.DESCRIPTION_KEY
+import com.arabam.android.assignment.common.utils.Constants.INFO_KEY
 import com.arabam.android.assignment.details.model.info.getInfoList
 import com.arabam.android.assignment.details.tabs.DescriptionFragment
 import com.arabam.android.assignment.details.tabs.InfoFragment
-import com.arabam.android.assignment.model.DetailAdvert
+import com.arabam.android.assignment.remote.model.DetailAdvert
 
 class DetailsFragmentPagerAdapter(
     fragmentManager: FragmentManager,

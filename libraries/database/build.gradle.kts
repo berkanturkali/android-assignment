@@ -3,8 +3,7 @@ import Dependencies.DB.roomCompiler
 import Dependencies.ProjectLib.domain
 
 plugins {
-    kotlinLibrary
-    kotlin(kotlinKapt)
+    kotlinLib
 }
 
 dependencies {

@@ -1,7 +1,7 @@
 import Dependencies.Network.pagingCommon
 
 plugins {
-    kotlinLibrary
+    kotlinLib
 }
 
 dependencies {

@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">arabam</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="favorites">Favoriler</string>
+    <string name="try_again">Tekrar deneyin</string>
+    <string name="no_result">Sonuç Bulunamadı.</string>
+    <string name="no_favorite">Favori Bulunmamaktadır.</string>
+    <string name="lorem">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+    qui officia deserunt mollit anim id est laborum</string>
+    <string name="advert_location">%1s, %2s</string>
+    <string name="advert_price">%1s TL</string>
+    <string name="sort">Sırala</string>
+    <string name="filter_by_year">Yıla göre filtrele</string>
+    <string name="clear">Temizle</string>
+    <string name="sort_text">%1s - %2s</string>
+    <string name="min_year_hint">Min:Örn 2011</string>
+    <string name="max_year_hint">Max:Örn 2030</string>
+    <string name="apply">Uygula</string>
+    <string name="no_image">İlana ait resim bulunmamaktır.</string>
+    <string name="address_tv">%1s/%2s</string>
+    <string name="properties_text">%1s . %2s km . %3s</string>
+    <string name="title_listing">Listing</string>
+    <string name="select">Seç</string>
+    <string name="show_profile">Profili Görüntüle</string>
+    <string name="slider_transition_name">slider_transition</string>
+    <string name="advert_image_transition_name">advert_image_transition</string>
+    <string name="advert_info_tab_title">İlan Bilgileri</string>
+    <string name="advert_description_tab_title">Açıklama</string>
+    <string name="advert_no">İlan No</string>
+    <string name="advert_date">İlan Tarihi</string>
+    <string name="advert_series">Seri</string>
+    <string name="advert_model">Model</string>
+    <string name="advert_year">Yıl</string>
+    <string name="advert_fuel_type">Yakıt Tipi</string>
+    <string name="advert_gear_type">Vites Tipi</string>
+    <string name="advert_kilometers">Kilometre</string>
+    <string name="price">Fiyat</string>
+    <string name="minimum">Minimum</string>
+    <string name="maksimum">Maksimum</string>
+    <string name="cancel">İptal</string>
+</resources>

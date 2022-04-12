@@ -6,8 +6,7 @@ include(
     ":libraries:data",
     ":listing",
     ":libraries:database",
-    ":commons",
+    ":common",
     ":details",
     ":favorites")
 rootProject.name = "arabam"
-rootProject.buildFileName = "build.gradle.kts"

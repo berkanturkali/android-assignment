@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.arabam.android.assignment.commons.utils.Constants.SELECTED_MAX_YEAR
-import com.arabam.android.assignment.commons.utils.Constants.SELECTED_MIN_YEAR
-import com.arabam.android.assignment.commons.utils.Constants.YEAR_KEY
-import com.arabam.android.assignment.commons.utils.setNavigationResult
+import com.arabam.android.assignment.common.utils.Constants.SELECTED_MAX_YEAR
+import com.arabam.android.assignment.common.utils.Constants.SELECTED_MIN_YEAR
+import com.arabam.android.assignment.common.utils.Constants.YEAR_KEY
+import com.arabam.android.assignment.common.utils.setNavigationResult
 import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.databinding.FragmentFilterByYearLayoutBinding
 import com.arabam.android.assignment.listing.model.year.YearItem

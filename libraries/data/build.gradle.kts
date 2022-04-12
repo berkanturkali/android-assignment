@@ -3,9 +3,8 @@ import Dependencies.ProjectLib.domain
 import Dependencies.ProjectLib.remote
 
 plugins {
-    kotlinLibrary
+    kotlinLib
 }
-
 dependencies {
     implementation(project(database))
     implementation(project(remote))

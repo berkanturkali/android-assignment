@@ -2,7 +2,7 @@ import Dependencies.Network.pagingCommon
 import Dependencies.ProjectLib.domain
 
 plugins {
-    kotlinLibrary
+    kotlinLib
 }
 dependencies {
     implementation(project(domain))

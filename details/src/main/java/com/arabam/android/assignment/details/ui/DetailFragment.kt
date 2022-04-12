@@ -17,8 +17,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.arabam.android.assignment.commons.base.BaseFragment
-import com.arabam.android.assignment.commons.utils.showSnack
+import com.arabam.android.assignment.common.base.BaseFragment
+import com.arabam.android.assignment.common.utils.showSnack
 import com.arabam.android.assignment.details.ImageClickListener
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.adapter.AdvertImagesViewPagerAdapter
@@ -28,10 +28,10 @@ import com.arabam.android.assignment.details.databinding.FragmentDetailLayoutBin
 import com.arabam.android.assignment.details.tabs.DescriptionFragment
 import com.arabam.android.assignment.details.tabs.InfoFragment
 import com.arabam.android.assignment.details.viewmodel.DetailFragmentViewModel
-import com.arabam.android.assignment.model.DetailAdvert
-import com.arabam.android.assignment.model.ListingAdvert
-import com.arabam.android.assignment.model.Resource
-import com.arabam.android.assignment.utils.resize
+import com.arabam.android.assignment.domain.utils.resize
+import com.arabam.android.assignment.remote.model.DetailAdvert
+import com.arabam.android.assignment.remote.model.ListingAdvert
+import com.arabam.android.assignment.remote.model.Resource
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +40,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment :
-    BaseFragment<FragmentDetailLayoutBinding, DetailFragmentViewModel>(),
+    BaseFragment<FragmentDetailLayoutBinding>(),
     ImageClickListener {
     private val mViewModel by viewModels<DetailFragmentViewModel>()
 
@@ -78,12 +78,18 @@ class DetailFragment :
     override val layoutId: Int
         get() = R.layout.fragment_detail_layout
 
-    override fun getVM(): DetailFragmentViewModel = mViewModel
-
-    override fun bindVM(binding: FragmentDetailLayoutBinding, vm: DetailFragmentViewModel) {
+    override fun bind(binding: FragmentDetailLayoutBinding) {
         this.binding = binding
-        binding.adapter = imagePagerAdapter
-        binding.lastVisitedRv.adapter = lastVisitedAdapter
+        postponeEnterTransition()
+        binding.apply {
+            root.doOnPreDraw { startPostponedEnterTransition() }
+            adapter = imagePagerAdapter
+            lastVisitedRv.adapter = lastVisitedAdapter
+        }
+        setMenuVisibility(false)
+        imagePagerAdapter.setListener(this)
+        subscribeObservers()
+        initButtons()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,15 +114,6 @@ class DetailFragment :
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(number)
         startActivity(intent)
-    }
-
-    override fun init() {
-        postponeEnterTransition()
-        binding.root.doOnPreDraw { startPostponedEnterTransition() }
-        setMenuVisibility(false)
-        imagePagerAdapter.setListener(this)
-        subscribeObservers()
-        initButtons()
     }
 
     private fun initButtons() {
@@ -192,8 +189,14 @@ class DetailFragment :
             }
         }
         mViewModel.lastVisitedItems.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) binding.lastItemsLl.visibility = View.VISIBLE
             lastVisitedAdapter.submitList(it)
+        }
+
+        mViewModel.showLastVisitedItems.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { show ->
+                val visibility = if (show) View.VISIBLE else View.GONE
+                binding.lastItemsLl.visibility = visibility
+            }
         }
     }
 

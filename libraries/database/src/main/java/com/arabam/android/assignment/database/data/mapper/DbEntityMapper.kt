@@ -1,13 +1,13 @@
 package com.arabam.android.assignment.database.data.mapper
 
 import com.arabam.android.assignment.database.data.entity.AdvertEntity
-import com.arabam.android.assignment.model.Category
-import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.remote.model.Category
+import com.arabam.android.assignment.remote.model.ListingAdvert
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DbEntityMapper @Inject constructor() : Mapper<AdvertEntity, ListingAdvert> {
+public class DbEntityMapper @Inject constructor() : Mapper<AdvertEntity, ListingAdvert> {
 
     override fun toDomain(entity: AdvertEntity?): ListingAdvert? {
         return entity?.let {

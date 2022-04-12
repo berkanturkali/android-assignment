@@ -6,10 +6,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.arabam.android.assignment.commons.databinding.AdvertItemBinding
+import com.arabam.android.assignment.common.databinding.AdvertItemBinding
 import com.arabam.android.assignment.listing.databinding.GridAdvertItemLayoutBinding
-import com.arabam.android.assignment.model.ItemClickListener
-import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.remote.model.ItemClickListener
+import com.arabam.android.assignment.remote.model.ListingAdvert
 import javax.inject.Inject
 
 class ListingAdapter @Inject constructor(

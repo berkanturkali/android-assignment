@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="title"
-    type="String"/>
+
+        <variable
+            name="title"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@drawable/divider"
-        android:layout_height="50dp">
+        android:layout_height="@dimen/dimen_40"
+        android:background="@drawable/divider">
 
         <TextView
             android:id="@+id/category_title"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dimen_8"
             android:gravity="center_vertical"
             android:text="@{title}"
-            android:layout_marginStart="@dimen/margin_padding_8dp"
             android:textColor="@color/light_gray"
             android:textStyle="bold"
             app:drawableEndCompat="@drawable/ic_down"

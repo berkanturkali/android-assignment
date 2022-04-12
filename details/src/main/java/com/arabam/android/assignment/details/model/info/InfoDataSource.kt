@@ -2,8 +2,8 @@ package com.arabam.android.assignment.details.model.info
 
 import android.content.Context
 import com.arabam.android.assignment.details.R
-import com.arabam.android.assignment.model.DetailAdvert
-import com.arabam.android.assignment.utils.formatPrice
+import com.arabam.android.assignment.remote.model.DetailAdvert
+import com.arabam.android.assignment.domain.utils.formatPrice
 
 fun getInfoList(advert: DetailAdvert, context: Context): List<Info> {
     val list = mutableListOf<Info>()
@@ -25,7 +25,7 @@ fun getInfoList(advert: DetailAdvert, context: Context): List<Info> {
                 context
                     .getString(R.string.advert_price, advert.price.formatPrice())
             ),
-            R.color.primaryColor
+            R.color.primary_color
         )
     )
     list.add(Info.InfoWithTitle(context.getString(R.string.advert_no), advert.id.toString(), R.color.link_color))

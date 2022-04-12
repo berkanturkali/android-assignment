@@ -5,19 +5,19 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.arabam.android.assignment.commons.base.BaseFragment
+import com.arabam.android.assignment.common.base.BaseFragment
 import com.arabam.android.assignment.favorites.FavoritesFragmentViewModel
 import com.arabam.android.assignment.favorites.R
 import com.arabam.android.assignment.favorites.adapter.FavoritesAdapter
 import com.arabam.android.assignment.favorites.databinding.FragmentFavoritesLayoutBinding
-import com.arabam.android.assignment.model.ItemClickListener
-import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.remote.model.ItemClickListener
+import com.arabam.android.assignment.remote.model.ListingAdvert
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavoritesFragment :
-    BaseFragment<FragmentFavoritesLayoutBinding, FavoritesFragmentViewModel>(),
+    BaseFragment<FragmentFavoritesLayoutBinding>(),
     ItemClickListener<ListingAdvert> {
 
     @Inject
@@ -30,15 +30,10 @@ class FavoritesFragment :
     override val layoutId: Int
         get() = R.layout.fragment_favorites_layout
 
-    override fun getVM(): FavoritesFragmentViewModel = viewModel
-
-    override fun bindVM(binding: FragmentFavoritesLayoutBinding, vm: FavoritesFragmentViewModel) {
+    override fun bind(binding: FragmentFavoritesLayoutBinding) {
         this.binding = binding
         binding.adapter = mAdapter
         mAdapter.setListener(this)
-    }
-
-    override fun init() {
         initSwipeToDelete()
         viewModel.favorites.observe(viewLifecycleOwner) {
             binding.favsRv.isVisible = it.isNotEmpty()

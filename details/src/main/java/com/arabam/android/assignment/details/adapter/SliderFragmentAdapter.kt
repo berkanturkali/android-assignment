@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.arabam.android.assignment.commons.utils.inflate
+import com.arabam.android.assignment.common.utils.inflate
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.databinding.ViewPagerItemBinding
 import javax.inject.Inject

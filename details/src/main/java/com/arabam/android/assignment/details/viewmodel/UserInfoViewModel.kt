@@ -2,8 +2,8 @@ package com.arabam.android.assignment.details.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.arabam.android.assignment.commons.utils.Constants.USER_NAME
-import com.arabam.android.assignment.commons.utils.Constants.USER_PHONE
+import com.arabam.android.assignment.common.utils.Constants.USER_NAME
+import com.arabam.android.assignment.common.utils.Constants.USER_PHONE
 import com.arabam.android.assignment.details.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

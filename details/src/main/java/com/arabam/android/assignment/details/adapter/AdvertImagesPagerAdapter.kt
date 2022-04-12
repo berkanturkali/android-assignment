@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assignment.details.ImageClickListener
 import com.arabam.android.assignment.details.databinding.ViewPagerItemBinding
-import com.arabam.android.assignment.utils.resize
+import com.arabam.android.assignment.domain.utils.resize
 import javax.inject.Inject
 
 class AdvertImagesViewPagerAdapter @Inject constructor(

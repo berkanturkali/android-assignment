@@ -7,14 +7,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.arabam.android.assignment.commons.base.BaseFragment
-import com.arabam.android.assignment.commons.utils.Constants
-import com.arabam.android.assignment.commons.utils.Constants.CATEGORY_KEY
-import com.arabam.android.assignment.commons.utils.Constants.YEAR_KEY
-import com.arabam.android.assignment.commons.utils.getNavigationResult
+import com.arabam.android.assignment.common.base.BaseFragment
+import com.arabam.android.assignment.common.utils.Constants
+import com.arabam.android.assignment.common.utils.Constants.CATEGORY_KEY
+import com.arabam.android.assignment.common.utils.Constants.YEAR_KEY
+import com.arabam.android.assignment.common.utils.getNavigationResult
 import com.arabam.android.assignment.listing.R
 import com.arabam.android.assignment.listing.adapter.AdvertLoadStateAdapter
 import com.arabam.android.assignment.listing.adapter.ListingAdapter
@@ -23,15 +24,18 @@ import com.arabam.android.assignment.listing.model.category.CategoryItem
 import com.arabam.android.assignment.listing.model.sort.SortItem
 import com.arabam.android.assignment.listing.model.year.YearItem
 import com.arabam.android.assignment.listing.viewmodel.HomeFragmentViewModel
-import com.arabam.android.assignment.model.ItemClickListener
-import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.remote.model.ItemClickListener
+import com.arabam.android.assignment.remote.model.ListingAdvert
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment :
-    BaseFragment<FragmentHomeLayoutBinding, HomeFragmentViewModel>(),
+    BaseFragment<FragmentHomeLayoutBinding>(),
     ItemClickListener<ListingAdvert> {
 
     private val mViewModel by viewModels<HomeFragmentViewModel>()
@@ -45,19 +49,9 @@ class HomeFragment :
 
     private var isGridMode = false
 
-    override fun getVM(): HomeFragmentViewModel = mViewModel
-
-    override fun bindVM(binding: FragmentHomeLayoutBinding, vm: HomeFragmentViewModel) {
+    override fun bind(binding: FragmentHomeLayoutBinding) {
         this.binding = binding
         binding.adapter = mAdapter
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun init() {
         subscribeObservers()
         getNavigationResult<SortItem>(R.id.home, Constants.SORT_KEY) {
             mViewModel.updateSortOrder(it)
@@ -86,6 +80,11 @@ class HomeFragment :
                 )
             findNavController().navigate(action)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     private fun initAdapter() {
@@ -120,16 +119,11 @@ class HomeFragment :
                 mAdapter.notifyItemRangeChanged(0, mAdapter.itemCount)
             }
         }
-        launchOnLifecycleScope {
-            mViewModel.shouldScrollToTop.observe(viewLifecycleOwner) {
-                it.getContentIfNotHandled()?.let {
-                    if (it) {
-                        binding.advertsRv.post {
-                            binding.advertsRv.layoutManager?.scrollToPosition(0)
-                        }
-                    }
-                }
-            }
+        lifecycleScope.launch {
+            mAdapter.loadStateFlow
+                .distinctUntilChangedBy { it.refresh }
+                .filter { it.refresh is LoadState.NotLoading }
+                .collectLatest { binding.advertsRv.scrollToPosition(0) }
         }
     }
 

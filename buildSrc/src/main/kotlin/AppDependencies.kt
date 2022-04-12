@@ -6,7 +6,7 @@ import Dependencies.View.Version.viewPager2
 
 const val kotlinAndroid: String = "android"
 const val kotlinKapt: String = "kapt"
-const val kotlinVersion: String = "1.5.21"
+const val kotlinVersion: String = "1.6.10"
 const val ktLintVersion: String = "0.37.2"
 
 object Config {
@@ -19,7 +19,7 @@ object Config {
     }
 
     object Android {
-        const val applicationId: String = "com.arabam.android.assigment"
+        const val applicationId: String = "com.arabam.android.assignment"
         const val testInstrumentationRunner: String = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
@@ -32,26 +32,36 @@ object Dependencies {
     object AndroidX : Libraries {
         object Version {
             const val coreKtx: String = "1.3.2"
-            const val navigation: String = "2.4.0-alpha07"
             const val fragment: String = "1.4.0-alpha07"
         }
 
         const val coreKtx: String = "androidx.core:core-ktx:${Version.coreKtx}"
-        const val navigationFragmentKtx: String =
-            "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
-        const val navigationUiKtx: String =
-            "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
+
         const val fragmentKtx: String = "androidx.fragment:fragment-ktx:${Version.fragment}"
 
         override val components: List<String>
             get() = listOf(
-                fragmentKtx, navigationFragmentKtx, navigationUiKtx
+                fragmentKtx, coreKtx
+            )
+    }
+
+    object Navigation:Libraries {
+        object Version {
+            const val navigation: String = "2.4.1"
+        }
+        const val navigationFragmentKtx: String =
+            "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
+        const val navigationUiKtx: String =
+            "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
+        override val components: List<String>
+            get() = listOf(
+                navigationFragmentKtx, navigationUiKtx
             )
     }
 
     object View : Libraries {
         object Version {
-            const val materialComponent: String = "1.4.0"
+            const val materialComponent: String = "1.3.0"
             const val appCompat: String = "1.4.0"
             const val constraintLayout: String = "2.0.0-beta6"
             const val swipeRefreshLayout: String = "1.1.0"
@@ -177,7 +187,7 @@ object Dependencies {
         const val app: String = ":app"
         const val core: String = ":core"
         const val domain: String = ":libraries:domain"
-        const val commons: String = ":commons"
+        const val common: String = ":common"
         const val remote: String = ":libraries:remote"
         const val data: String = ":libraries:data"
         const val listing: String = ":listing"

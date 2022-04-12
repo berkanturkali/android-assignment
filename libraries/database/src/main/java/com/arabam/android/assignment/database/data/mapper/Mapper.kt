@@ -1,10 +1,10 @@
 package com.arabam.android.assignment.database.data.mapper
 
-interface Mapper<Entity, Domain> {
+public interface Mapper<Entity, Domain> {
 
-    fun toDomain(entity: Entity?): Domain?
+    public fun toDomain(entity: Entity?): Domain?
 
-    fun fromDomain(domain: Domain): Entity
+    public fun fromDomain(domain: Domain): Entity
 
-    fun toDomainList(list: List<Entity>?): List<Domain>
+    public fun toDomainList(list: List<Entity>?): List<Domain>
 }

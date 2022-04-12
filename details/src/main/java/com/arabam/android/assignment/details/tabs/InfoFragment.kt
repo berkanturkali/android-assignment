@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arabam.android.assignment.commons.utils.Constants
+import com.arabam.android.assignment.common.utils.Constants
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.adapter.InfoFragmentAdapter
 import com.arabam.android.assignment.details.databinding.FragmentInfoLayoutBinding

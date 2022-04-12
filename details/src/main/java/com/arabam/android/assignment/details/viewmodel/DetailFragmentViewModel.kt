@@ -1,16 +1,17 @@
 package com.arabam.android.assignment.details.viewmodel
 
 import androidx.lifecycle.*
-import com.arabam.android.assignment.commons.utils.Constants.ADVERT_ID
-import com.arabam.android.assignment.model.DetailAdvert
-import com.arabam.android.assignment.model.ListingAdvert
-import com.arabam.android.assignment.model.Resource
-import com.arabam.android.assignment.repo.AdvertRepo
-import com.arabam.android.assignment.repo.DbRepo
-import com.example.core.utils.Event
+import com.arabam.android.assignment.common.utils.Constants.ADVERT_ID
+import com.arabam.android.assignment.core.utils.Event
+import com.arabam.android.assignment.domain.data.repo.AdvertRepo
+import com.arabam.android.assignment.domain.data.repo.DbRepo
+import com.arabam.android.assignment.remote.model.DetailAdvert
+import com.arabam.android.assignment.remote.model.ListingAdvert
+import com.arabam.android.assignment.remote.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -26,6 +27,10 @@ class DetailFragmentViewModel @Inject constructor(
     val advert: LiveData<Resource<DetailAdvert>> get() = _advert
 
     private val _lastVisitedItems = MutableLiveData<List<ListingAdvert>>()
+
+    private val _showLastVisitedItems = MutableLiveData<Event<Boolean>>()
+
+    val showLastVisitedItems: LiveData<Event<Boolean>> get() = _showLastVisitedItems
 
     private lateinit var listingAdvert: ListingAdvert
 
@@ -68,13 +73,16 @@ class DetailFragmentViewModel @Inject constructor(
 
     private fun isAdvertInFavorites(id: Int) {
         viewModelScope.launch(Dispatchers.Main) {
-            _isAdvertInDb.value = Event(withContext(Dispatchers.IO) { dbRepo.getAdvert(id) != null })
+            _isAdvertInDb.value =
+                Event(withContext(Dispatchers.IO) { dbRepo.getAdvert(id) != null })
         }
     }
 
     private fun getLastVisitedItems() {
         viewModelScope.launch(Dispatchers.Main) {
             _lastVisitedItems.value = dbRepo.getLastVisitedItems()
+            _showLastVisitedItems.value = Event(!_lastVisitedItems.value.isNullOrEmpty())
+
         }
     }
 

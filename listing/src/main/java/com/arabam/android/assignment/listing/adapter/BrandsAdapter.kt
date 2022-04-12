@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arabam.android.assignment.listing.databinding.BrandItemBinding
 import com.arabam.android.assignment.listing.model.category.CategoryItem
-import com.arabam.android.assignment.model.ItemClickListener
+import com.arabam.android.assignment.remote.model.ItemClickListener
 import javax.inject.Inject
 
 class CategoriesAdapter @Inject constructor() :

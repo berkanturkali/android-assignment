@@ -25,10 +25,9 @@
 
         <LinearLayout
             android:id="@+id/emptyView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,18 +36,18 @@
 
             <ImageView
                 android:id="@+id/emptyFavouriteIv"
-                android:layout_width="@dimen/empty_favorites_icon_width_height"
-                android:layout_height="@dimen/empty_favorites_icon_width_height"
+                android:layout_width="@dimen/dimen_128"
+                android:layout_height="@dimen/dimen_128"
                 android:src="@drawable/ic_star_outlined"
-                app:tint="@color/gray" />
+                app:tint="@color/x_light_gray" />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Large"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/no_favorite"
-                android:textColor="@color/gray" />
+                android:textColor="@color/x_light_gray" />
         </LinearLayout>
 
 

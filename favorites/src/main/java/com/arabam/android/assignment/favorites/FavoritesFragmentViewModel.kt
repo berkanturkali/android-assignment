@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.arabam.android.assignment.model.ListingAdvert
-import com.arabam.android.assignment.repo.DbRepo
+import com.arabam.android.assignment.remote.model.ListingAdvert
+import com.arabam.android.assignment.domain.data.repo.DbRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn

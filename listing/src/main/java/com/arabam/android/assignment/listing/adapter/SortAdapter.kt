@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.arabam.android.assignment.listing.databinding.SortItemBinding
 import com.arabam.android.assignment.listing.model.sort.SortItem
-import com.arabam.android.assignment.model.ItemClickListener
+import com.arabam.android.assignment.remote.model.ItemClickListener
 import javax.inject.Inject
 
 class SortAdapter @Inject constructor() :

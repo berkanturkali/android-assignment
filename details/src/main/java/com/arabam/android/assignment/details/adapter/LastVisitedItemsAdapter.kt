@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.arabam.android.assignment.commons.utils.inflate
+import com.arabam.android.assignment.common.utils.inflate
 import com.arabam.android.assignment.details.R
 import com.arabam.android.assignment.details.databinding.LastVisitedItemBinding
-import com.arabam.android.assignment.model.ListingAdvert
+import com.arabam.android.assignment.remote.model.ListingAdvert
 import javax.inject.Inject
 
 class LastVisitedItemsAdapter @Inject constructor(private val circularProgressDrawable: CircularProgressDrawable) :

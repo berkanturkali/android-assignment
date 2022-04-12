@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
-import com.arabam.android.assignment.commons.utils.Constants.SORT_KEY
-import com.arabam.android.assignment.commons.utils.setNavigationResult
+import com.arabam.android.assignment.common.utils.Constants.SORT_KEY
+import com.arabam.android.assignment.common.utils.setNavigationResult
 import com.arabam.android.assignment.listing.adapter.SortAdapter
 import com.arabam.android.assignment.listing.databinding.FragmentSortLayoutBinding
 import com.arabam.android.assignment.listing.model.sort.SortItem
 import com.arabam.android.assignment.listing.model.sort.getSortList
-import com.arabam.android.assignment.model.ItemClickListener
+import com.arabam.android.assignment.remote.model.ItemClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
