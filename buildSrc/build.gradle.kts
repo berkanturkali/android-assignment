@@ -1,27 +1,39 @@
-import Build_gradle.Plugin.androidLib
-import Build_gradle.Plugin.app
-import Build_gradle.Plugin.kotlinLib
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 gradlePlugin {
     plugins {
-        register(app) {
-            id = app
-            implementationClass = "plugin.ApplicationPlugin"
+        register("androidApplicationCompose") {
+            id = "arabam.android.application.compose"
+            implementationClass = "plugin.AndroidApplicationComposeConventionPlugin"
         }
 
-        register(androidLib) {
-            id = androidLib
-            implementationClass = "plugin.AndroidLibraryPlugin"
+        register("androidApplication") {
+            id = "arabam.android.application"
+            implementationClass = "plugin.AndroidApplicationConventionPlugin"
         }
 
-        register(kotlinLib) {
-            id = kotlinLib
-            implementationClass = "plugin.KotlinLibraryPlugin"
+        register("androidLibraryCompose") {
+            id = "arabam.android.library.compose"
+            implementationClass = "plugin.AndroidLibraryComposeConventionPlugin"
+        }
+
+        register("androidLibrary") {
+            id = "arabam.android.library"
+            implementationClass = "plugin.AndroidLibraryConventionPlugin"
+        }
+
+        register("androidFeature") {
+            id = "arabam.android.feature"
+            implementationClass = "plugin.AndroidFeatureConventionPlugin"
         }
     }
 }
@@ -32,20 +44,13 @@ repositories {
     maven("https://plugins.gradle.org/m2/")
 }
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    languageVersion = Plugin.Version.kotlin
-}
-
 object Plugin {
-    const val app: String = "app"
-    const val androidLib: String = "androidLibrary"
-    const val kotlinLib: String = "kotlinLibrary"
+
     object Version {
-        const val kotlin: String = "1.6.10"
-        const val androidGradle: String = "7.1.1"
-        const val navigation: String = "2.4.1"
-        const val daggerHiltAndroid: String = "2.38.1"
+        const val kotlin: String = "1.7.20"
+        const val androidGradle: String = "7.2.2"
+        const val navigation: String = "2.5.3"
+        const val daggerHiltAndroid: String = "2.43"
     }
 
     const val kotlin: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"

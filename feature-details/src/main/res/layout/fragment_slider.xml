@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="adapter"
+            type="com.arabam.android.assignment.feature.details.adapter.SliderFragmentAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionName="@{@string/slider_transition_name}"
+        android:background="@android:color/black">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/image_slider"
+            android:layout_width="match_parent"
+            android:adapter="@{adapter}"
+            android:orientation="horizontal"
+            android:layout_height="match_parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

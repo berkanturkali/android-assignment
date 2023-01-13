@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="advert"
+            type="com.arabam.android.assignment.core.model.ListingAdvert" />
+
+        <import type="com.arabam.android.assignment.core.common.utils.StringUtilsKt" />
+
+        <variable
+            name="progressDrawable"
+            type="androidx.swiperefreshlayout.widget.CircularProgressDrawable" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/advert_image"
+                circularProgressDrawable="@{progressDrawable}"
+                url="@{advert.photo}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/price_tv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:background="@color/primary_color"
+                android:padding="@dimen/dimen_16"
+                android:text="@{String.format(@string/advert_price(StringUtilsKt.formatPrice(advert.price)))}"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:text="450.000 TL" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/model_tv"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16"
+            android:text="@{advert.modelName}"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:text="Alfa Romeo 145 1.4" />
+
+        <TextView
+            android:id="@+id/advert_model_tv"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16"
+            android:text="@{advert.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/model_tv"
+            tools:text="Sahibinden Alfa Romeo 145 1.6 boxer 1995 Model" />
+
+        <TextView
+            android:id="@+id/advert_address_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16"
+            android:text="@{String.format(@string/advert_location,advert.location.cityName, advert.location.townName)}"
+            app:drawableStartCompat="@drawable/ic_location_custom_dimen"
+            app:layout_constraintEnd_toStartOf="@+id/advert_date_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/advert_model_tv"
+            tools:text="İstanbul / Ümraniye" />
+
+        <TextView
+            android:id="@+id/advert_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16"
+            android:drawablePadding="@dimen/dimen_4"
+            android:gravity="center_vertical"
+            android:text="@{advert.dateFormatted}"
+            app:drawableStartCompat="@drawable/ic_calendar_custom_dimen"
+            app:drawableTint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/advert_model_tv"
+            tools:text="17 Eylül 2021" />
+
+        <TextView
+            android:id="@+id/full_tv"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_marginTop="@dimen/dimen_8"
+            android:background="@drawable/divider"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dimen_8"
+            android:text="@{String.format(@string/properties_text,advert.properties[2].value,advert.properties[0].value,advert.properties[1].value)}"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/advert_address_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -9,7 +9,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.arabam.android.assignment.core.common.R.id
 import com.arabam.android.assignment.databinding.ActivityMainBinding
+import com.arabam.android.assignment.feature.favorites.R.id.favoritesFragment
+import com.arabam.android.assignment.feature.listing.R.id.home
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,13 +31,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigation() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
+            supportFragmentManager.findFragmentById(id.nav_host_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         val inflater = navController.navInflater
         val graph = inflater.inflate(R.navigation.app_graph)
         navHostFragment.navController.graph = graph
         val appBarConfiguration =
-            AppBarConfiguration(setOf(R.id.home, R.id.favoritesFragment))
+            AppBarConfiguration(setOf(home, favoritesFragment))
         binding.toolbar
             .setupWithNavController(navController, appBarConfiguration)
         binding.contentMain.bottomNavigationView.setupWithNavController(navController)

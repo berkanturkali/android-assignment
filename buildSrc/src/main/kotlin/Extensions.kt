@@ -1,35 +1,47 @@
-import org.gradle.api.Project
-import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import org.gradle.api.plugins.PluginContainer
-import org.gradle.kotlin.dsl.apply
+import org.gradle.api.plugins.PluginManager
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
-internal val PluginContainer.kotlinAndroid: Unit
+internal val PluginManager.kotlinAndroid: Unit
     get() {
         apply("org.jetbrains.kotlin.android")
     }
 
-internal val PluginContainer.androidModule: Unit
+internal val PluginManager.androidModule: Unit
     get() {
         apply("com.android.library")
     }
 
-internal val PluginContainer.kotlinKapt: Unit
+internal val PluginManager.kotlinKapt: Unit
     get() {
         apply("kotlin-kapt")
     }
 
-internal val PluginContainer.daggerHilt: Unit
+internal val PluginManager.daggerHilt: Unit
     get() {
         apply("dagger.hilt.android.plugin")
     }
 
-internal val PluginContainer.safeArgs: Unit
+internal val PluginManager.safeArgs: Unit
     get() {
         apply("androidx.navigation.safeargs.kotlin")
     }
+
+val PluginDependenciesSpec.androidApplication: PluginDependencySpec
+    get() = id("arabam.android.application")
+
+val PluginDependenciesSpec.androidApplicationCompose: PluginDependencySpec
+    get() = id("arabam.android.application.compose")
+
+val PluginDependenciesSpec.androidLibrary: PluginDependencySpec
+    get() = id("arabam.android.library")
+
+val PluginDependenciesSpec.androidLibraryCompose: PluginDependencySpec
+    get() = id("arabam.android.library.compose")
+
+val PluginDependenciesSpec.androidFeature: PluginDependencySpec
+    get() = id("arabam.android.feature")
 
 val PluginDependenciesSpec.daggerHilt: PluginDependencySpec
     get() = id("dagger.hilt.android.plugin")
@@ -37,28 +49,28 @@ val PluginDependenciesSpec.daggerHilt: PluginDependencySpec
 val PluginDependenciesSpec.parcelize: PluginDependencySpec
     get() = id("kotlin-parcelize")
 
-val PluginDependenciesSpec.androidApp: PluginDependencySpec
-    get() = id("app")
-
-val PluginDependenciesSpec.androidLib: PluginDependencySpec
-    get() = id("androidLibrary")
-
 val PluginDependenciesSpec.kotlinLib: PluginDependencySpec
     get() = id("kotlinLibrary")
-
-val PluginDependenciesSpec.ktlint: PluginDependencySpec
-    get() = id("ktlint")
-
-val Project.applyKtlint
-    get() = apply(plugin = "ktlint")
 
 fun DependencyHandler.implementation(dependency: Any) = add(
     "implementation", dependency
 )
 
-fun DependencyHandler.implementAll(dependencies:List<String>) {
+fun DependencyHandler.kapt(dependency: Any) = add(
+    "kapt", dependency
+)
+
+fun DependencyHandler.implementAll(dependencies: List<String>) {
     dependencies.forEach(::implementation)
 }
+
+fun DependencyHandler.implementAll(vararg dependencies: Any) {
+    dependencies.forEach(::implementation)
+}
+
+fun DependencyHandler.implementPlatform(dependency: Any) = add(
+    "implementation", platform(dependency)
+)
 
 fun DependencyHandler.testImplementation(dependency: Any) = add(
     "testImplementation", dependency
@@ -76,14 +88,24 @@ fun DependencyHandler.androidTestImplementation(vararg dependencies: Any) {
     dependencies.forEach(::androidTestImplementation)
 }
 
-fun DependencyHandler.testImplementation(vararg dependencies: Any) {
+
+fun DependencyHandler.implementAllTests(vararg dependencies: Any) {
     dependencies.forEach(::testImplementation)
 }
 
-fun DependencyHandler.kapt(dependency: Any): Dependency? = add(
-    "kapt", dependency
-)
 
-fun DependencyHandler.kapt(vararg dependencies: Any) {
-    dependencies.forEach(::kapt)
+fun DependencyHandler.implementAllAndroidTests(vararg dependencies: Any) {
+    dependencies.forEach(::androidTestImplementation)
+}
+
+fun DependencyHandler.implementAllTests(dependencyList: List<String>) {
+    dependencyList.forEach(::testImplementation)
+}
+
+fun DependencyHandler.implementAllAndroidTests(dependencyList: List<String>) {
+    dependencyList.forEach(::androidTestImplementation)
+}
+
+fun DependencyHandler.testImplementation(vararg dependencies: Any) {
+    dependencies.forEach(::testImplementation)
 }
