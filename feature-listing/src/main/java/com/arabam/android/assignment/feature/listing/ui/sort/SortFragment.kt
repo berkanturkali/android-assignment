@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.navigation.fragment.navArgs
 import com.arabam.android.assignment.core.common.utils.Constants.SORT_KEY
 import com.arabam.android.assignment.core.common.utils.setNavigationResult
-import com.arabam.android.assignment.core.model.ItemClickListener
 import com.arabam.android.assignment.feature.listing.adapter.SortAdapter
+import com.arabam.android.assignment.feature.listing.components.SortList
 import com.arabam.android.assignment.feature.listing.databinding.FragmentSortLayoutBinding
 import com.arabam.android.assignment.feature.listing.model.sort.SortItem
 import com.arabam.android.assignment.feature.listing.model.sort.getSortList
@@ -18,8 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SortFragment : BottomSheetDialogFragment(),
-    ItemClickListener<SortItem> {
+class SortFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var mAdapter: SortAdapter
@@ -39,16 +38,10 @@ class SortFragment : BottomSheetDialogFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.clearBtn.setOnClickListener {
-            setNavigationResult(SORT_KEY, SortItem())
-            dialog?.dismiss()
-        }
-        initRecycler()
+        setupUI()
     }
 
-    private fun initRecycler() {
-        binding.adapter = mAdapter
-        mAdapter.setClickListener(this)
+    private fun setupUI() {
         val items = getSortList()
         if (args.lastOrder.type != null && args.lastOrder.direction != null) {
             items.first {
@@ -58,12 +51,20 @@ class SortFragment : BottomSheetDialogFragment(),
                     this.isSelected = true
                 }
         }
-        mAdapter.submitList(items)
-        binding.clearBtn.isVisible = items.any { it.isSelected }
-    }
-
-    override fun onClick(item: SortItem) {
-        setNavigationResult(SORT_KEY, item)
-        dialog?.dismiss()
+        binding.sortList.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                SortList(
+                    list = items,
+                    onClearTextClick = {
+                        setNavigationResult(SORT_KEY, SortItem())
+                        dialog?.dismiss()
+                    },
+                    onItemClick = { item ->
+                        setNavigationResult(SORT_KEY, item)
+                        dialog?.dismiss()
+                    })
+            }
+        }
     }
 }

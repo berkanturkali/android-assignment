@@ -71,27 +71,35 @@ class HomeFragment :
             setContent {
                 ExpandableMenu(
                     FilterMenuItem.values().toList(),
-                    {}
+                    { item ->
+                        when (item) {
+                            FilterMenuItem.SORT -> {
+                                val action =
+                                    HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortItem())
+                                findNavController().navigate(action)
+                            }
+
+                            FilterMenuItem.FILTER_BY_YEAR -> {
+                                val action =
+                                    HomeFragmentDirections.actionHomeToFilterByYearFragment(
+                                        mViewModel.getYearItem()
+                                    )
+                                findNavController().navigate(action)
+                            }
+
+                            FilterMenuItem.FILTER_BY_MODEL -> {
+                                val action =
+                                    HomeFragmentDirections.actionHomeToCategoryContainerFragment(
+                                        mViewModel.getCategory()
+                                            ?: -1
+                                    )
+                                findNavController().navigate(action)
+                            }
+                        }
+                    }
                 )
             }
         }
-//        binding.filterByDateBtn.setOnClickListener {
-//            val action =
-//                HomeFragmentDirections.actionHomeToFilterByYearFragment(mViewModel.getYearItem())
-//            findNavController().navigate(action)
-//        }
-//        binding.sortBtn.setOnClickListener {
-//            val action = HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortItem())
-//            findNavController().navigate(action)
-//        }
-//        binding.modelBtn.setOnClickListener {
-//            val action =
-//                HomeFragmentDirections.actionHomeToCategoryContainerFragment(
-//                    mViewModel.getCategory()
-//                        ?: -1
-//                )
-//            findNavController().navigate(action)
-//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
