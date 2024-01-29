@@ -3,6 +3,7 @@ package plugin
 import Config
 import Dependencies
 import com.android.build.gradle.LibraryExtension
+import com.arabam.android.assignment.configureAndroidCompose
 import debugImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -22,6 +23,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.kapt")
             }
             extensions.configure<LibraryExtension> {
+                configureAndroidCompose(this)
                 defaultConfig {
                     testInstrumentationRunner = Config.Android.testInstrumentationRunner
 
@@ -54,6 +56,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                     Dependencies.Compose.COMPOSE_UI,
                     Dependencies.Compose.COMPOSE_MATERIAL,
                     Dependencies.Compose.COMPOSE_UI_TOOLING_PREV,
+                    Dependencies.Compose.COMPOSE_CONSTRAINT_LAYOUT
                 )
 
                 //debug implementation

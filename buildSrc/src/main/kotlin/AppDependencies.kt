@@ -55,6 +55,7 @@ object Dependencies {
 
         object Version {
             const val COMPOSE_KOTLIN_COMPILER_VERSION = "1.3.2"
+            const val COMPOSE_CONSTRAINT_LAYOUT_VERSION = "1.0.1"
         }
 
         const val COMPOSE_UI = "androidx.compose.ui:ui"
@@ -62,7 +63,7 @@ object Dependencies {
         const val COMPOSE_UI_TOOLING = "androidx.compose.ui:ui-tooling"
         const val COMPOSE_UI_TOOLING_PREV = "androidx.compose.ui:ui-tooling-preview"
         const val COMPOSE_UI_TEST_MANIFEST = "androidx.compose.ui:ui-test-manifest"
-        const val COMPOSE_CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout-compose"
+        const val COMPOSE_CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout-compose:${Version.COMPOSE_CONSTRAINT_LAYOUT_VERSION}"
         const val COMPOSE_LIVE_DATA = "androidx.compose.runtime:runtime-livedata"
     }
 

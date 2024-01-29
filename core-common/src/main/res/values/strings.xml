@@ -13,7 +13,7 @@
     <string name="advert_location">%1s, %2s</string>
     <string name="advert_price">%1s TL</string>
     <string name="sort">Sırala</string>
-    <string name="filter_by_year">Yıla göre filtrele</string>
+    <string name="filter_by_year">Yıla Göre Filtrele</string>
     <string name="clear">Temizle</string>
     <string name="sort_text">%1s - %2s</string>
     <string name="min_year_hint">Min:Örn 2011</string>
@@ -41,4 +41,5 @@
     <string name="minimum">Minimum</string>
     <string name="maksimum">Maksimum</string>
     <string name="cancel">İptal</string>
+    <string name="filter_by_model">Modele Göre Filtrele</string>
 </resources>

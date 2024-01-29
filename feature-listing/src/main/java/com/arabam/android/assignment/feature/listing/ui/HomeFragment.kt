@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +22,9 @@ import com.arabam.android.assignment.core.model.ListingAdvert
 import com.arabam.android.assignment.feature.listing.R
 import com.arabam.android.assignment.feature.listing.adapter.AdvertLoadStateAdapter
 import com.arabam.android.assignment.feature.listing.adapter.ListingAdapter
+import com.arabam.android.assignment.feature.listing.components.ExpandableMenu
 import com.arabam.android.assignment.feature.listing.databinding.FragmentHomeLayoutBinding
+import com.arabam.android.assignment.feature.listing.model.FilterMenuItem
 import com.arabam.android.assignment.feature.listing.model.category.CategoryItem
 import com.arabam.android.assignment.feature.listing.model.sort.SortItem
 import com.arabam.android.assignment.feature.listing.model.year.YearItem
@@ -63,23 +66,32 @@ class HomeFragment :
             mViewModel.updateCategory(it)
         }
         initAdapter()
-        binding.filterByDateBtn.setOnClickListener {
-            val action =
-                HomeFragmentDirections.actionHomeToFilterByYearFragment(mViewModel.getYearItem())
-            findNavController().navigate(action)
-        }
-        binding.sortBtn.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortItem())
-            findNavController().navigate(action)
-        }
-        binding.modelBtn.setOnClickListener {
-            val action =
-                HomeFragmentDirections.actionHomeToCategoryContainerFragment(
-                    mViewModel.getCategory()
-                        ?: -1
+        binding.filterMenu.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                ExpandableMenu(
+                    FilterMenuItem.values().toList(),
+                    {}
                 )
-            findNavController().navigate(action)
+            }
         }
+//        binding.filterByDateBtn.setOnClickListener {
+//            val action =
+//                HomeFragmentDirections.actionHomeToFilterByYearFragment(mViewModel.getYearItem())
+//            findNavController().navigate(action)
+//        }
+//        binding.sortBtn.setOnClickListener {
+//            val action = HomeFragmentDirections.actionHomeToSortFragment(mViewModel.getSortItem())
+//            findNavController().navigate(action)
+//        }
+//        binding.modelBtn.setOnClickListener {
+//            val action =
+//                HomeFragmentDirections.actionHomeToCategoryContainerFragment(
+//                    mViewModel.getCategory()
+//                        ?: -1
+//                )
+//            findNavController().navigate(action)
+//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,6 +154,7 @@ class HomeFragment :
                 mViewModel.setGridMode(!isGridMode)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

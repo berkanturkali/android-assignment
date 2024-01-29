@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -19,49 +18,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/menu"
+        <!-- region fab menu -->
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/filterMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_margin="@dimen/dimen_16"
-            android:elevation="@dimen/dimen_8"
             app:layout_anchorGravity="top|end"
+            android:elevation="1dp"
+            android:layout_margin="@dimen/dimen_16"
             app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:menu_colorNormal="@color/primary_color">
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/model_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_car"
-                app:fab_colorNormal="@color/primary_color"
-                app:fab_label="Model seç"
-                fab:fab_size="mini" />
-
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/sort_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_sort"
-                app:fab_colorNormal="@color/primary_color"
-                app:fab_label="@string/sort"
-                fab:fab_size="mini" />
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/filter_by_date_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_date"
-                app:fab_colorNormal="@color/primary_color"
-                app:fab_label="@string/filter_by_year"
-                fab:fab_size="mini" />
-
-
-        </com.github.clans.fab.FloatingActionMenu>
+            tools:composableName="com.arabam.android.assignment.feature.listing.components.ExpandableMenuKt.ExpandableMenuPrev"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/adverts_rv"

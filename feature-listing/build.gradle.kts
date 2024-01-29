@@ -1,9 +1,8 @@
-import Dependencies.Network.paging
 import Dependencies.ProjectLib.CORE_COMMON
-import Dependencies.ProjectLib.CORE_DATASTORE
 import Dependencies.ProjectLib.CORE_DATA
-import Dependencies.ProjectLib.FEATURE_DETAILS
+import Dependencies.ProjectLib.CORE_DATASTORE
 import Dependencies.ProjectLib.CORE_MODEL
+import Dependencies.ProjectLib.FEATURE_DETAILS
 
 plugins {
     androidLibrary
@@ -18,25 +17,23 @@ dependencies {
     implementation(project(CORE_MODEL))
     implementation(project(CORE_COMMON))
     implementation(project(CORE_DATA))
-    //pagination
-    implementation(paging)
 
-    //view
-    Dependencies.View.run {
-        implementation(swipeRefreshLayout)
-        implementation(fab)
-        implementation(materialComponent)
-    }
     //hilt
     implementation(Dependencies.DI.daggerHiltAndroid)
     kapt(Dependencies.DI.KAPT.daggerHilt)
 
-    //androidx
+    implementAll(
+        Dependencies.Navigation.components
+    )
+    implementAll(Dependencies.Coroutines.components)
     implementAll(Dependencies.AndroidX.components)
 
-    implementAll(Dependencies.Navigation.components)
+    implementAll(
+        Dependencies.View.materialComponent,
+        Dependencies.View.swipeRefreshLayout,
+        Dependencies.View.fab,
+        Dependencies.Network.paging,
+    )
 
-    //coroutines
-    implementAll(Dependencies.Coroutines.components)
 
 }
