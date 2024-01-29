@@ -6,7 +6,6 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,13 +21,15 @@ fun MenuItemLabel(
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        color = Color(android.graphics.Color.parseColor("#282931")),
+        color = colorResource(id = com.arabam.android.assignment.core.common.R.color.primary_color).copy(
+            alpha = 0.7f
+        ),
         contentColor = colorResource(id = com.arabam.android.assignment.core.common.R.color.on_primary)
     ) {
 
         Text(
             text = label,
-            fontSize = 10.sp,
+            fontSize = 12.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(vertical = 4.dp, horizontal = 24.dp)
         )

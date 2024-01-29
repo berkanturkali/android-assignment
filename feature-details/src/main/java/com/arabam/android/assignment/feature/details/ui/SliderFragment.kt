@@ -1,17 +1,14 @@
 package com.arabam.android.assignment.feature.details.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
-import com.arabam.android.assignment.core.common.R.id.nav_host_container
 import com.arabam.android.assignment.feature.details.R.layout
 import com.arabam.android.assignment.feature.details.adapter.SliderFragmentAdapter
 import com.arabam.android.assignment.feature.details.databinding.FragmentSliderBinding
-import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,11 +24,6 @@ class SliderFragment : Fragment(layout.fragment_slider) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = nav_host_container
-            duration = 300
-            scrimColor = Color.TRANSPARENT
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

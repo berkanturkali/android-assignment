@@ -9,11 +9,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.arabam.android.assignment.core.common.R.id
+import com.arabam.android.assignment.core.model.BottomNavigationViewItemReselectListenerMediator
 import com.arabam.android.assignment.databinding.ActivityMainBinding
 import com.arabam.android.assignment.feature.favorites.R.id.favoritesFragment
 import com.arabam.android.assignment.feature.listing.R.id.home
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var navController: NavController
+
+    @Inject
+    lateinit var bottomNavigationViewMediator: BottomNavigationViewItemReselectListenerMediator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigation() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(id.nav_host_container) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
         navController = navHostFragment.findNavController()
         val inflater = navController.navInflater
         val graph = inflater.inflate(R.navigation.app_graph)
@@ -40,11 +44,14 @@ class MainActivity : AppCompatActivity() {
             AppBarConfiguration(setOf(home, favoritesFragment))
         binding.toolbar
             .setupWithNavController(navController, appBarConfiguration)
-        binding.contentMain.bottomNavigationView.setupWithNavController(navController)
+        binding.bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolbarTitle.text = destination.label
-            binding.contentMain.bottomNavigationView.isVisible =
+            binding.bottomNavigationView.isVisible =
                 appBarConfiguration.topLevelDestinations.contains(destination.id)
+        }
+        binding.bottomNavigationView.setOnItemReselectedListener { item ->
+            bottomNavigationViewMediator.onItemReselected(item)
         }
     }
 }
