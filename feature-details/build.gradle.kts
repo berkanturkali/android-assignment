@@ -9,6 +9,7 @@ plugins {
     androidFeature
     parcelize
 }
+android.namespace = "com.arabam.android.assignment.feature.details"
 dependencies {
 
     //project lib

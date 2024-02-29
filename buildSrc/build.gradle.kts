@@ -5,8 +5,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 gradlePlugin {
@@ -47,10 +47,10 @@ repositories {
 object Plugin {
 
     object Version {
-        const val kotlin: String = "1.7.20"
-        const val androidGradle: String = "7.2.2"
-        const val navigation: String = "2.5.3"
-        const val daggerHiltAndroid: String = "2.43"
+        const val kotlin: String = "1.9.21"
+        const val androidGradle: String = "8.1.3"
+        const val navigation: String = "2.7.3"
+        const val daggerHiltAndroid: String = "2.50"
     }
 
     const val kotlin: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"

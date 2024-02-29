@@ -5,7 +5,10 @@ import Dependencies.View.swipeRefreshLayout
 
 plugins {
     androidLibrary
+    androidLibraryCompose
 }
+
+android.namespace = "com.arabam.android.assignment.core.common"
 
 dependencies {
 
@@ -24,6 +27,8 @@ dependencies {
 
     //view
     implementation(Dependencies.View.materialComponent)
+
+    implementAll(Dependencies.Compose.COMPOSE_UI, Dependencies.Compose.COMPOSE_MATERIAL)
 
     //glide
     implementation(glide)

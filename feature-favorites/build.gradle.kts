@@ -8,7 +8,7 @@ plugins {
     androidLibrary
     androidFeature
 }
-
+android.namespace = "com.arabam.android.assignment.feature.favorites"
 dependencies {
     implementation(project(CORE_DATASTORE))
     implementation(project(CORE_MODEL))

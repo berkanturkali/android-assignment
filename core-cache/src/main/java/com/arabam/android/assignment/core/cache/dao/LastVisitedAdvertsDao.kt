@@ -1,7 +1,7 @@
 package com.arabam.android.assignment.core.cache.dao
 
 import androidx.room.*
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy.Companion.REPLACE
 import com.arabam.android.assignment.core.cache.data.entity.VisitedAdvert
 
 @Dao

@@ -4,8 +4,9 @@ import Dependencies.ProjectLib.CORE_MODEL
 
 plugins {
     androidLibrary
-}
 
+}
+android.namespace = "com.arabam.android.assignment.core.network"
 android.defaultConfig.buildConfigField("String", "BASE_URL", "\"http://sandbox.arabamd.com/\"")
 
 dependencies {

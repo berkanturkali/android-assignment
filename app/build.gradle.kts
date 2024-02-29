@@ -51,6 +51,7 @@ android {
     kapt {
         correctErrorTypes = true
     }
+    namespace = "com.arabam.android.assignment"
 }
 
 hilt {

@@ -7,6 +7,8 @@ plugins {
 android.defaultConfig.buildConfigField("int", "databaseVersion", 1.toString())
 android.defaultConfig.buildConfigField("String", "databaseName", "\"arabam_db\"")
 
+android.namespace = "com.arabam.android.assignment.core.cache"
+
 dependencies {
     implementation(project(CORE_MODEL))
 

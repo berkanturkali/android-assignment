@@ -9,21 +9,10 @@
         android:background="@color/xx_light_gray"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/brands_rv"
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/brandList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/brand_item" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                tools:composableName="com.arabam.android.assignment.feature.listing.components.BrandListKt.BrandListPrev" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

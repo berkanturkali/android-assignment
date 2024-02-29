@@ -6,6 +6,8 @@ plugins {
     androidLibrary
 }
 
+android.namespace = "com.arabam.android.assignment.core.data"
+
 dependencies {
 
     implementation(project(CORE_CACHE))

@@ -10,6 +10,8 @@ plugins {
     parcelize
 }
 
+android.namespace = "com.arabam.android.assignment.feature.listing"
+
 dependencies {
     //project lib
     implementation(project(FEATURE_DETAILS))
@@ -33,6 +35,7 @@ dependencies {
         Dependencies.View.swipeRefreshLayout,
         Dependencies.View.fab,
         Dependencies.Network.paging,
+        Dependencies.Compose.COMPOSE_LIVE_DATA
     )
 
 

@@ -13,10 +13,10 @@ import Dependencies.View.Version.viewPager2
 
 object GradlePlugins{
     object Version {
-        const val KOTLIN: String = "1.7.20"
-        const val ANDROID_GRADLE: String = "7.2.2"
+        const val KOTLIN: String = "1.9.21"
+        const val ANDROID_GRADLE: String = "8.1.3"
         const val NAVIGATION_COMPONENT_SAFEARGS: String = "2.5.3"
-        const val DAGGER_HILT_ANDROID: String = "2.43"
+        const val DAGGER_HILT_ANDROID: String = "2.50"
     }
 
     const val KOTLIN: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.KOTLIN}"
@@ -30,8 +30,8 @@ object GradlePlugins{
 object Config {
     object Version {
         const val minSdkVersion: Int = 21
-        const val compileSdkVersion: Int = 33
-        const val targetSdkVersion: Int = 33
+        const val compileSdkVersion: Int = 34
+        const val targetSdkVersion: Int = 34
         const val versionName: String = "1.0"
         const val versionCode: Int = 1
     }
@@ -50,12 +50,13 @@ object Dependencies {
 
     object Compose {
         object Bom {
-            const val COMPOSE_BOM = "androidx.compose:compose-bom:2022.12.00"
+            const val COMPOSE_BOM = "androidx.compose:compose-bom:2024.01.00"
         }
 
         object Version {
-            const val COMPOSE_KOTLIN_COMPILER_VERSION = "1.3.2"
+            const val COMPOSE_KOTLIN_COMPILER_VERSION = "1.5.7"
             const val COMPOSE_CONSTRAINT_LAYOUT_VERSION = "1.0.1"
+            const val COMPOSE_RUNTIME_VERSION = "1.0.0"
         }
 
         const val COMPOSE_UI = "androidx.compose.ui:ui"
@@ -64,7 +65,8 @@ object Dependencies {
         const val COMPOSE_UI_TOOLING_PREV = "androidx.compose.ui:ui-tooling-preview"
         const val COMPOSE_UI_TEST_MANIFEST = "androidx.compose.ui:ui-test-manifest"
         const val COMPOSE_CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout-compose:${Version.COMPOSE_CONSTRAINT_LAYOUT_VERSION}"
-        const val COMPOSE_LIVE_DATA = "androidx.compose.runtime:runtime-livedata"
+        const val COMPOSE_LIVE_DATA = "androidx.compose.runtime:runtime-livedata:${Version.COMPOSE_RUNTIME_VERSION}"
+        const val COMPOSE_TEXT = "androidx.compose.ui:ui-text-android"
     }
 
     object AndroidX : Library {
@@ -87,7 +89,7 @@ object Dependencies {
 
     object Navigation : Library {
         object Version {
-            const val navigation: String = "2.5.3"
+            const val navigation: String = "2.7.3"
         }
 
         const val navigationFragmentKtx: String =
@@ -159,7 +161,7 @@ object Dependencies {
     object DI {
         object Version {
             const val javaxInject: String = "1"
-            const val daggerHilt: String = "2.43"
+            const val daggerHilt: String = "2.50"
             const val hiltFragment: String = "1.0.0"
         }
 
@@ -190,7 +192,7 @@ object Dependencies {
 
     object DB : Library {
         object Version {
-            const val room_version = "2.3.0"
+            const val room_version = "2.6.1"
         }
 
         const val roomRuntime = "androidx.room:room-runtime:$room_version"

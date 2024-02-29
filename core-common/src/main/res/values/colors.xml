@@ -20,4 +20,5 @@
     <color name="dark_gray">#657786</color>
     <color name="on_primary">@color/white</color>
     <color name="checkmark_color">#45C538</color>
+    <color name="tertiary_color">#1B9BF0</color>
 </resources>

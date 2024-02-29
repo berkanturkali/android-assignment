@@ -42,4 +42,7 @@
     <string name="maksimum">Maksimum</string>
     <string name="cancel">İptal</string>
     <string name="filter_by_model">Modele Göre Filtrele</string>
+
+    <string name="brand_and_model_count">%1$s (%2$d)</string>
+    <string name="remove_selection">Seçimi Kaldır</string>
 </resources>

@@ -62,6 +62,9 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="-1" />
+        <argument
+            android:name="showBadge"
+            app:argType="boolean" />
     </dialog>
 
 </navigation>

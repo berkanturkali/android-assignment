@@ -22,5 +22,8 @@
         <argument
             android:name="models"
             app:argType="com.arabam.android.assignment.feature.listing.model.category.CategoryItem[]" />
+        <argument
+            android:name="logo"
+            app:argType="integer" />
     </dialog>
 </navigation>

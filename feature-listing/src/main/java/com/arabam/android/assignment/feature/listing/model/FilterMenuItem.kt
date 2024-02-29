@@ -8,6 +8,7 @@ import com.arabam.android.assignment.core.common.R.string
 enum class FilterMenuItem(
     @StringRes val label: Int,
     @DrawableRes val icon: Int,
+    var showBadge: Boolean = false,
 ) {
     SORT(string.sort, drawable.ic_sort),
     FILTER_BY_YEAR(string.filter_by_year, drawable.ic_date),

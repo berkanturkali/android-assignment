@@ -11,7 +11,10 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Badge
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -23,7 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,6 +39,7 @@ import kotlinx.coroutines.delay
 fun ExpandableMenu(
     menuList: List<FilterMenuItem>,
     onItemClick: (FilterMenuItem) -> Unit,
+    showBadge: Boolean,
     modifier: Modifier = Modifier,
 ) {
 
@@ -82,7 +86,7 @@ fun ExpandableMenu(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
 
-        menuList.forEachIndexed { index, _ ->
+        menuList.forEachIndexed { index, item ->
             LaunchedEffect(key1 = buttonState) {
                 val delayDuration = if (buttonState == ButtonState.EXPANDED) 200L else 75L
                 delay(delayDuration * index)
@@ -102,17 +106,27 @@ fun ExpandableMenu(
                 label = stringResource(menuList[index].label),
                 onMenuItemClick = {
                     onItemClick(menuList[index])
-                }
+                },
+                showBadge = item.showBadge && buttonState == ButtonState.EXPANDED
             )
         }
-        MenuButton(
-            buttonSize = buttonSize,
-            iconRotationDegree = iconRotationDegree,
-            onButtonClick = {
-                buttonState =
-                    if (buttonState == ButtonState.EXPANDED) ButtonState.COLLAPSED else ButtonState.EXPANDED
-            })
+        Box(contentAlignment = Alignment.TopEnd) {
+            MenuButton(
+                buttonSize = buttonSize,
+                iconRotationDegree = iconRotationDegree,
+                onButtonClick = {
+                    buttonState =
+                        if (buttonState == ButtonState.EXPANDED) ButtonState.COLLAPSED else ButtonState.EXPANDED
+                })
 
+            androidx.compose.animation.AnimatedVisibility(visible = showBadge && buttonState == ButtonState.COLLAPSED) {
+                Badge(
+                    backgroundColor = colorResource(id = color.tertiary_color),
+                    modifier = Modifier.padding(top = 4.dp, end = 4.dp)
+                )
+            }
+
+        }
     }
 }
 
@@ -125,5 +139,5 @@ enum class ButtonState {
 @Preview
 @Composable
 fun ExpandableMenuPrev() {
-    ExpandableMenu(emptyList(), {})
+    ExpandableMenu(emptyList(), {}, true)
 }

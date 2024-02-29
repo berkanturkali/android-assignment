@@ -2,11 +2,13 @@ package com.arabam.android.assignment.feature.listing.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Badge
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -24,9 +26,10 @@ import com.arabam.android.assignment.core.common.R
 @Composable
 fun MenuItem(
     size: Dp,
-    menuButtonSize:Dp,
+    menuButtonSize: Dp,
     label: String,
     @DrawableRes icon: Int,
+    showBadge: Boolean,
     onMenuItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
     labelModifier: Modifier = Modifier,
@@ -39,29 +42,40 @@ fun MenuItem(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         MenuItemLabel(label = label, modifier = labelModifier)
-        Button(
-            onClick = {
-                onMenuItemClick(label)
-            },
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = colorResource(
-                    R.color.primary_color,
-                ),
-                contentColor = colorResource(R.color.on_primary)
-            ),
-            modifier = modifier
-                .padding(horizontal = menuButtonSize / 2f - size / 2f)
-                .clip(CircleShape)
-                .size(size),
 
-            contentPadding = PaddingValues(0.dp),
-        ) {
-            Icon(
-                painter = painterResource(id = icon),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(size / 1.8f)
-            )
+        Box(contentAlignment = Alignment.TopEnd) {
+            Button(
+                onClick = {
+                    onMenuItemClick(label)
+                },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = colorResource(
+                        R.color.primary_color,
+                    ),
+                    contentColor = colorResource(R.color.on_primary)
+                ),
+                modifier = modifier
+                    .padding(horizontal = menuButtonSize / 2f - size / 2f)
+                    .clip(CircleShape)
+                    .size(size),
+
+                contentPadding = PaddingValues(0.dp),
+            ) {
+                Icon(
+                    painter = painterResource(id = icon),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(size / 1.8f)
+                )
+            }
+            if (showBadge) {
+                Badge(
+                    backgroundColor = colorResource(id = R.color.tertiary_color),
+                    modifier = modifier
+                        .padding(top = 3.dp, end = 6.dp)
+                        .size(size / 5f)
+                )
+            }
         }
     }
 }
@@ -74,6 +88,7 @@ fun MenuItemPrev() {
         icon = R.drawable.ic_add,
         label = "Label",
         onMenuItemClick = { /*TODO*/ },
-        menuButtonSize = 36.dp
-        )
+        menuButtonSize = 36.dp,
+        showBadge = true
+    )
 }

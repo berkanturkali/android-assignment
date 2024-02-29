@@ -5,6 +5,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -35,6 +37,8 @@ import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+private const val TAG = "HomeFragment"
 
 @AndroidEntryPoint
 class HomeFragment :
@@ -69,8 +73,13 @@ class HomeFragment :
         binding.filterMenu.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
+                val showBadgeOnExpandableMenuButton by
+                mViewModel.showBadgeOnExpandableMenuButton.collectAsState(initial = false)
+
+                val filterMenu by mViewModel.filterMenu.collectAsState(initial = emptyList())
+
                 ExpandableMenu(
-                    FilterMenuItem.values().toList(),
+                    filterMenu,
                     { item ->
                         when (item) {
                             FilterMenuItem.SORT -> {
@@ -90,13 +99,15 @@ class HomeFragment :
                             FilterMenuItem.FILTER_BY_MODEL -> {
                                 val action =
                                     HomeFragmentDirections.actionHomeToCategoryContainerFragment(
-                                        mViewModel.getCategory()
-                                            ?: -1
+                                        id = mViewModel.getCategory()
+                                            ?: -1,
+                                        showBadge = showBadgeOnExpandableMenuButton,
                                     )
                                 findNavController().navigate(action)
                             }
                         }
-                    }
+                    },
+                    showBadge = showBadgeOnExpandableMenuButton
                 )
             }
         }

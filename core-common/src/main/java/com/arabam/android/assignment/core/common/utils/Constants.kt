@@ -31,4 +31,6 @@ object Constants {
     const val ADVERT_ID = "id"
 
     const val PREFERENCES_NAME = "preferences"
+
+    const val SHOW_BADGE_ON_SELECT_BRAND_FRAGMENT = "show_badge_on_select_brand_fragment"
 }

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
  * Configures base Kotlin with Android options
  */
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *>
+    commonExtension: CommonExtension<*, *, *, *,*>
 ) {
 
     commonExtension.apply {
@@ -26,6 +26,7 @@ internal fun Project.configureKotlinAndroid(
 
         buildFeatures {
             dataBinding.isEnabled = true
+            buildConfig = true
         }
 
 
@@ -39,7 +40,6 @@ internal fun Project.configureKotlinAndroid(
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-opt-in=kotlinx.coroutines.FlowPreview",
                 "-opt-in=kotlin.Experimental",
-                "-Xjvm-default=compatibility"
             )
 
             // Set JVM target to 1.8
@@ -48,6 +48,6 @@ internal fun Project.configureKotlinAndroid(
     }
 }
 
-fun CommonExtension<*, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+fun CommonExtension<*, *, *, *,*>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }

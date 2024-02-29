@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.arabam.android.assignment.core.common.utils.Constants.CATEGORY_KEY
 import com.arabam.android.assignment.core.common.utils.Constants.SELECTED_CATEGORY
+import com.arabam.android.assignment.core.common.utils.Constants.SHOW_BADGE_ON_SELECT_BRAND_FRAGMENT
 import com.arabam.android.assignment.core.common.utils.observe
 import com.arabam.android.assignment.core.common.utils.setNavigationResult
 import com.arabam.android.assignment.feature.listing.R
@@ -44,6 +45,7 @@ class CategoryContainerFragment : BottomSheetDialogFragment() {
         navController = navHostFragment.navController
         val bundle = Bundle()
         bundle.putInt(SELECTED_CATEGORY, args.id)
+        bundle.putBoolean(SHOW_BADGE_ON_SELECT_BRAND_FRAGMENT, args.showBadge)
         navController.setGraph(R.navigation.category_graph, bundle)
         binding.categoryToolbar.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
