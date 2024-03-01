@@ -1,11 +1,15 @@
 package com.arabam.android.assignment.feature.details.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.arabam.android.assignment.core.common.utils.Constants.ADVERT_ID
 import com.arabam.android.assignment.core.data.repo.abstraction.AdvertRepo
 import com.arabam.android.assignment.core.data.repo.abstraction.DbRepo
-import com.arabam.android.assignment.core.model.Event
 import com.arabam.android.assignment.core.model.DetailAdvert
+import com.arabam.android.assignment.core.model.Event
 import com.arabam.android.assignment.core.model.ListingAdvert
 import com.arabam.android.assignment.core.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,6 +39,10 @@ class DetailFragmentViewModel @Inject constructor(
     private lateinit var listingAdvert: ListingAdvert
 
     val lastVisitedItems: LiveData<List<ListingAdvert>> get() = _lastVisitedItems
+
+    private val _images = MutableLiveData<List<String>>()
+
+    val images: LiveData<List<String>> get() = _images
 
     init {
         savedStateHandle.get<Int>(ADVERT_ID)?.let {
@@ -103,5 +111,9 @@ class DetailFragmentViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             dbRepo.insertToLastVisited(advert)
         }
+    }
+
+    fun setImages(images: List<String>) {
+        _images.value = images
     }
 }

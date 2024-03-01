@@ -10,20 +10,25 @@ import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.arabam.android.assignment.core.common.R.*
+import com.arabam.android.assignment.core.common.R.drawable
 import com.arabam.android.assignment.core.common.base.BaseFragment
+import com.arabam.android.assignment.core.common.utils.resize
 import com.arabam.android.assignment.core.common.utils.showSnack
+import com.arabam.android.assignment.core.model.DetailAdvert
+import com.arabam.android.assignment.core.model.ListingAdvert
+import com.arabam.android.assignment.core.model.Resource
 import com.arabam.android.assignment.feature.details.ImageClickListener
 import com.arabam.android.assignment.feature.details.R
-import com.arabam.android.assignment.feature.details.R.id.*
-import com.arabam.android.assignment.feature.details.R.menu.*
+import com.arabam.android.assignment.feature.details.R.id.profile
+import com.arabam.android.assignment.feature.details.R.menu.fragment_details_menu
 import com.arabam.android.assignment.feature.details.adapter.AdvertImagesViewPagerAdapter
 import com.arabam.android.assignment.feature.details.adapter.DetailsFragmentPagerAdapter
 import com.arabam.android.assignment.feature.details.adapter.LastVisitedItemsAdapter
@@ -31,12 +36,7 @@ import com.arabam.android.assignment.feature.details.databinding.FragmentDetailL
 import com.arabam.android.assignment.feature.details.tabs.DescriptionFragment
 import com.arabam.android.assignment.feature.details.tabs.InfoFragment
 import com.arabam.android.assignment.feature.details.viewmodel.DetailFragmentViewModel
-import com.arabam.android.assignment.core.common.utils.resize
-import com.arabam.android.assignment.core.model.DetailAdvert
-import com.arabam.android.assignment.core.model.ListingAdvert
-import com.arabam.android.assignment.core.model.Resource
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -86,7 +86,14 @@ class DetailFragment :
         postponeEnterTransition()
         binding.apply {
             root.doOnPreDraw { startPostponedEnterTransition() }
-            adapter = imagePagerAdapter
+            advertImagesVp.setContent {
+
+                val images by mViewModel.images.observeAsState()
+
+                binding.details.apply {
+
+                }
+            }
             lastVisitedRv.adapter = lastVisitedAdapter
         }
         setMenuVisibility(false)
@@ -150,6 +157,7 @@ class DetailFragment :
                     showSnack(it.message!!)
                     showProgress(false)
                 }
+
                 is Resource.Success -> {
                     it.data?.let { advert ->
                         this.advert = advert
@@ -214,7 +222,7 @@ class DetailFragment :
         binding.callFab.contentDescription = item.userInfo.phoneFormatted
         binding.messageFab.contentDescription = item.userInfo.phoneFormatted
         binding.noImageTv.isVisible = item.photos.isEmpty()
-        imagePagerAdapter.setList(item.photos)
+        mViewModel.setImages(item.photos.map { it.resize() })
     }
 
     private fun initTabLayout(
@@ -242,6 +250,7 @@ class DetailFragment :
                 showUserProfile()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -256,17 +265,6 @@ class DetailFragment :
     }
 
     override fun onImageClick(images: List<String>, position: Int, view: View) {
-        val action =
-            DetailFragmentDirections.actionDetailFragmentToSliderFragment(
-                images.map { it.resize() }
-                    .toTypedArray(),
-                position
-            )
-        val transitionName = resources.getString(string.slider_transition_name)
-        val extras = FragmentNavigatorExtras(view to transitionName)
-        findNavController().navigate(action, extras)
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = 300
-        }
+
     }
 }

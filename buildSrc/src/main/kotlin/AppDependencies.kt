@@ -11,7 +11,7 @@ import Dependencies.Util.Version.dataStore
 import Dependencies.View.Version.glideVersion
 import Dependencies.View.Version.viewPager2
 
-object GradlePlugins{
+object GradlePlugins {
     object Version {
         const val KOTLIN: String = "1.9.21"
         const val ANDROID_GRADLE: String = "8.1.3"
@@ -64,9 +64,19 @@ object Dependencies {
         const val COMPOSE_UI_TOOLING = "androidx.compose.ui:ui-tooling"
         const val COMPOSE_UI_TOOLING_PREV = "androidx.compose.ui:ui-tooling-preview"
         const val COMPOSE_UI_TEST_MANIFEST = "androidx.compose.ui:ui-test-manifest"
-        const val COMPOSE_CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout-compose:${Version.COMPOSE_CONSTRAINT_LAYOUT_VERSION}"
-        const val COMPOSE_LIVE_DATA = "androidx.compose.runtime:runtime-livedata:${Version.COMPOSE_RUNTIME_VERSION}"
+        const val COMPOSE_CONSTRAINT_LAYOUT =
+            "androidx.constraintlayout:constraintlayout-compose:${Version.COMPOSE_CONSTRAINT_LAYOUT_VERSION}"
+        const val COMPOSE_LIVE_DATA =
+            "androidx.compose.runtime:runtime-livedata:${Version.COMPOSE_RUNTIME_VERSION}"
         const val COMPOSE_TEXT = "androidx.compose.ui:ui-text-android"
+    }
+
+    object Coil {
+        object Version {
+            const val COIL_VERSION = "2.6.0"
+        }
+
+        const val COIL = "io.coil-kt:coil-compose:${Coil.Version.COIL_VERSION}"
     }
 
     object AndroidX : Library {

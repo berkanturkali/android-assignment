@@ -40,4 +40,9 @@ dependencies {
     //coroutines
     implementation(Dependencies.Coroutines.kotlinAndroid)
 
+    //coil
+    implementation(Dependencies.Coil.COIL)
+
+    implementation(Dependencies.Compose.COMPOSE_LIVE_DATA)
+
 }
