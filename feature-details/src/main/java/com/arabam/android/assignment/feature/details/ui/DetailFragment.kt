@@ -14,12 +14,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.arabam.android.assignment.core.common.R.drawable
 import com.arabam.android.assignment.core.common.R.string
 import com.arabam.android.assignment.core.common.base.BaseFragment
 import com.arabam.android.assignment.core.common.utils.resize
+import com.arabam.android.assignment.core.common.viewmodel.MainActivityViewModel
 import com.arabam.android.assignment.core.model.DetailAdvert
 import com.arabam.android.assignment.core.model.ListingAdvert
 import com.arabam.android.assignment.core.model.Resource
@@ -42,6 +44,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailFragment :
     BaseFragment<FragmentDetailLayoutBinding>() {
     private val mViewModel by viewModels<DetailFragmentViewModel>()
+
+    private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
     private val permissionResultLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -128,11 +132,18 @@ class DetailFragment :
             }
         }
         setMenuVisibility(false)
+        subscribeObservers()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    private fun subscribeObservers() {
+        mViewModel.showBadgeOnFavoritesItem.observe(viewLifecycleOwner) {
+            activityViewModel.setShowBadgeOnFavoritesItem(it)
+        }
     }
 
     private fun initOptionList() {

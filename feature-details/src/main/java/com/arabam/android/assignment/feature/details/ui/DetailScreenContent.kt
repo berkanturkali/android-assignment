@@ -62,7 +62,9 @@ fun DetailScreenContent(
         }
 
         item {
-            LastVisitedAdverts(adverts = lastVisitedAdverts)
+            if (lastVisitedAdverts.isNotEmpty()) {
+                LastVisitedAdverts(adverts = lastVisitedAdverts)
+            }
         }
     }
 }

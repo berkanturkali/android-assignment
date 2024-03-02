@@ -38,8 +38,6 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "HomeFragment"
-
 @AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeLayoutBinding>(),

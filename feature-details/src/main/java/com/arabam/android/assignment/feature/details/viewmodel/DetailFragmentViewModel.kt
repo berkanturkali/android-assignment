@@ -17,6 +17,7 @@ import com.arabam.android.assignment.core.model.Resource
 import com.arabam.android.assignment.feature.details.model.Option
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -44,6 +45,10 @@ class DetailFragmentViewModel @Inject constructor(
 
     val setFav get() = _setFav.asStateFlow()
 
+    private val _showBadgeOnFavoritesItem = MutableLiveData<Boolean>()
+
+    val showBadgeOnFavoritesItem: LiveData<Boolean> get() = _showBadgeOnFavoritesItem
+
 
     var optionList by mutableStateOf(mutableListOf<Option>())
 
@@ -66,15 +71,26 @@ class DetailFragmentViewModel @Inject constructor(
     }
 
     fun addToFav(advert: ListingAdvert) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepo.addToFav(advert)
+        viewModelScope.launch(Dispatchers.Main) {
+            val isAdvertAlreadyInFavorites = async {
+                withContext(Dispatchers.IO) { dbRepo.getAdvert(advert.id) } != null
+            }.await()
+
+            if (!isAdvertAlreadyInFavorites) {
+                viewModelScope.launch(Dispatchers.IO) {
+                    dbRepo.addToFav(advert)
+                }
+                _showBadgeOnFavoritesItem.value = true
+            }
         }
+
     }
 
     fun removeFromFav(advert: ListingAdvert) {
         viewModelScope.launch(Dispatchers.IO) {
             dbRepo.removeFromFav(advert)
         }
+        _showBadgeOnFavoritesItem.value = false
     }
 
     private fun checkTheAdvertInFavorites(id: Int) {
