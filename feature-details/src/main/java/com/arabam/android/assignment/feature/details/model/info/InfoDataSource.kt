@@ -42,19 +42,27 @@ fun getInfoList(advert: DetailAdvert, context: Context): List<Info> {
     list.add(
         Info.InfoWithTitle(context.getString(R.string.advert_model), advert.modelName.split(" ")[1])
     )
-    list.add(
-        Info.InfoWithTitle(context.getString(R.string.advert_year), advert.properties[2].value)
-    )
-    list.add(
-        Info.InfoWithTitle(context.getString(R.string.advert_fuel_type), advert.properties[4].value)
-    )
-    list.add(
-        Info.InfoWithTitle(context.getString(R.string.advert_gear_type), advert.properties[3].value)
-    )
-    list.add(
-        Info.InfoWithTitle(
-            context.getString(R.string.advert_kilometers), advert.properties[0].value
+    if (advert.properties.isNotEmpty() && advert.properties.size >= 5) {
+        list.add(
+            Info.InfoWithTitle(context.getString(R.string.advert_year), advert.properties[2].value)
         )
-    )
+        list.add(
+            Info.InfoWithTitle(
+                context.getString(R.string.advert_fuel_type),
+                advert.properties[4].value
+            )
+        )
+        list.add(
+            Info.InfoWithTitle(
+                context.getString(R.string.advert_gear_type),
+                advert.properties[3].value
+            )
+        )
+        list.add(
+            Info.InfoWithTitle(
+                context.getString(R.string.advert_kilometers), advert.properties[0].value
+            )
+        )
+    }
     return list
 }

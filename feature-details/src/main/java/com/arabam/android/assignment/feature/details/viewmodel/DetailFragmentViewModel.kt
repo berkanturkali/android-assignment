@@ -1,5 +1,8 @@
 package com.arabam.android.assignment.feature.details.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -9,13 +12,13 @@ import com.arabam.android.assignment.core.common.utils.Constants.ADVERT_ID
 import com.arabam.android.assignment.core.data.repo.abstraction.AdvertRepo
 import com.arabam.android.assignment.core.data.repo.abstraction.DbRepo
 import com.arabam.android.assignment.core.model.DetailAdvert
-import com.arabam.android.assignment.core.model.Event
 import com.arabam.android.assignment.core.model.ListingAdvert
 import com.arabam.android.assignment.core.model.Resource
+import com.arabam.android.assignment.feature.details.model.Option
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -32,35 +35,30 @@ class DetailFragmentViewModel @Inject constructor(
 
     private val _lastVisitedItems = MutableLiveData<List<ListingAdvert>>()
 
-    private val _showLastVisitedItems = MutableLiveData<Event<Boolean>>()
-
-    val showLastVisitedItems: LiveData<Event<Boolean>> get() = _showLastVisitedItems
-
     private lateinit var listingAdvert: ListingAdvert
 
     val lastVisitedItems: LiveData<List<ListingAdvert>> get() = _lastVisitedItems
 
-    private val _images = MutableLiveData<List<String>>()
 
-    val images: LiveData<List<String>> get() = _images
+    private val _setFav = MutableStateFlow(false)
+
+    val setFav get() = _setFav.asStateFlow()
+
+
+    var optionList by mutableStateOf(mutableListOf<Option>())
+
+    var id: Int? = null
 
     init {
         savedStateHandle.get<Int>(ADVERT_ID)?.let {
+            id = it
             getAdvert(it)
-            isAdvertInFavorites(it)
+            checkTheAdvertInFavorites(it)
         }
         getLastVisitedItems()
     }
 
-    private val _isAdvertInDb = MutableLiveData<Event<Boolean>>()
-
-    val isAdvertInDb: LiveData<Event<Boolean>> get() = _isAdvertInDb
-
-    private val _setFav = MutableStateFlow<Boolean?>(null)
-
-    val setFav: StateFlow<Boolean?> get() = _setFav
-
-    private fun getAdvert(id: Int) {
+    fun getAdvert(id: Int) {
         _advert.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.Main) {
             _advert.value = repo.advert(id)
@@ -79,18 +77,16 @@ class DetailFragmentViewModel @Inject constructor(
         }
     }
 
-    private fun isAdvertInFavorites(id: Int) {
+    private fun checkTheAdvertInFavorites(id: Int) {
         viewModelScope.launch(Dispatchers.Main) {
-            _isAdvertInDb.value =
-                Event(withContext(Dispatchers.IO) { dbRepo.getAdvert(id) != null })
+            _setFav.value =
+                withContext(Dispatchers.IO) { dbRepo.getAdvert(id) != null }
         }
     }
 
     private fun getLastVisitedItems() {
         viewModelScope.launch(Dispatchers.Main) {
             _lastVisitedItems.value = dbRepo.getLastVisitedItems()
-            _showLastVisitedItems.value = Event(!_lastVisitedItems.value.isNullOrEmpty())
-
         }
     }
 
@@ -111,9 +107,5 @@ class DetailFragmentViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             dbRepo.insertToLastVisited(advert)
         }
-    }
-
-    fun setImages(images: List<String>) {
-        _images.value = images
     }
 }

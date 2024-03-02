@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <data>
-        <variable
-            name="adapter"
-            type="com.arabam.android.assignment.feature.details.adapter.SliderFragmentAdapter" />
-    </data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionName="@{@string/slider_transition_name}"
-        android:background="@android:color/black">
+        android:background="@android:color/black"
+        android:transitionName="@{@string/slider_transition_name}">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/image_slider"
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/slider"
             android:layout_width="match_parent"
-            android:adapter="@{adapter}"
-            android:orientation="horizontal"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

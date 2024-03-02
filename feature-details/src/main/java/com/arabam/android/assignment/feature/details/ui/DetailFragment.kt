@@ -1,53 +1,49 @@
 package com.arabam.android.assignment.feature.details.ui
 
-import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.View.GONE
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.core.view.doOnPreDraw
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.arabam.android.assignment.core.common.R.drawable
+import com.arabam.android.assignment.core.common.R.string
 import com.arabam.android.assignment.core.common.base.BaseFragment
 import com.arabam.android.assignment.core.common.utils.resize
-import com.arabam.android.assignment.core.common.utils.showSnack
 import com.arabam.android.assignment.core.model.DetailAdvert
 import com.arabam.android.assignment.core.model.ListingAdvert
 import com.arabam.android.assignment.core.model.Resource
-import com.arabam.android.assignment.feature.details.ImageClickListener
 import com.arabam.android.assignment.feature.details.R
 import com.arabam.android.assignment.feature.details.R.id.profile
 import com.arabam.android.assignment.feature.details.R.menu.fragment_details_menu
-import com.arabam.android.assignment.feature.details.adapter.AdvertImagesViewPagerAdapter
-import com.arabam.android.assignment.feature.details.adapter.DetailsFragmentPagerAdapter
-import com.arabam.android.assignment.feature.details.adapter.LastVisitedItemsAdapter
+import com.arabam.android.assignment.feature.details.components.DetailsErrorView
+import com.arabam.android.assignment.feature.details.components.DetailsLoadingView
 import com.arabam.android.assignment.feature.details.databinding.FragmentDetailLayoutBinding
-import com.arabam.android.assignment.feature.details.tabs.DescriptionFragment
-import com.arabam.android.assignment.feature.details.tabs.InfoFragment
+import com.arabam.android.assignment.feature.details.model.Option
+import com.arabam.android.assignment.feature.details.model.OptionType
+import com.arabam.android.assignment.feature.details.model.command.AddRemoveFavoritesCommand
+import com.arabam.android.assignment.feature.details.model.command.OpenMessageScreenCommand
+import com.arabam.android.assignment.feature.details.model.command.RequestCallCommand
+import com.arabam.android.assignment.feature.details.model.info.getInfoList
 import com.arabam.android.assignment.feature.details.viewmodel.DetailFragmentViewModel
-import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment :
-    BaseFragment<FragmentDetailLayoutBinding>(),
-    ImageClickListener {
+    BaseFragment<FragmentDetailLayoutBinding>() {
     private val mViewModel by viewModels<DetailFragmentViewModel>()
 
-    private val requestPermission =
+    private val permissionResultLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 makeCall()
@@ -56,26 +52,7 @@ class DetailFragment :
             }
         }
 
-    @Inject
-    lateinit var imagePagerAdapter: AdvertImagesViewPagerAdapter
-
-    @Inject
-    lateinit var circularProgressDrawable: CircularProgressDrawable
-
-    @Inject
-    lateinit var lastVisitedAdapter: LastVisitedItemsAdapter
-
-    private lateinit var viewpagerAdapter: DetailsFragmentPagerAdapter
-
     private lateinit var advert: DetailAdvert
-
-    private lateinit var tabLayoutMediator: TabLayoutMediator
-    private val titles = arrayOf("İlan Bilgileri", "Açıklama")
-
-    private val fragments = listOf(
-        InfoFragment(),
-        DescriptionFragment()
-    )
 
     private lateinit var binding: FragmentDetailLayoutBinding
     override val layoutId: Int
@@ -83,23 +60,74 @@ class DetailFragment :
 
     override fun bind(binding: FragmentDetailLayoutBinding) {
         this.binding = binding
-        postponeEnterTransition()
         binding.apply {
-            root.doOnPreDraw { startPostponedEnterTransition() }
-            advertImagesVp.setContent {
+            details.setContent {
 
-                val images by mViewModel.images.observeAsState()
+                val advertResource by mViewModel.advert.observeAsState()
 
-                binding.details.apply {
+                val lastVisitedAdverts by mViewModel.lastVisitedItems.observeAsState()
 
+                val isFav by mViewModel.setFav.collectAsState()
+
+                Box(modifier = Modifier.fillMaxSize()) {
+                    when (advertResource) {
+                        is Resource.Loading -> {
+                            DetailsLoadingView()
+                        }
+
+                        is Resource.Error -> {
+                            val error = (advertResource as Resource.Error).message
+                            DetailsErrorView(
+                                message = error ?: stringResource(id = string.something_went_wrong),
+                                onTryAgainButtonClick = {
+                                    mViewModel.id?.let(mViewModel::getAdvert)
+                                })
+                        }
+
+                        is Resource.Success -> {
+                            (advertResource as Resource.Success<DetailAdvert>).data?.let { advert ->
+                                this@DetailFragment.advert = advert
+                                val listingAdvert = ListingAdvert(
+                                    category = advert.category,
+                                    date = advert.date,
+                                    dateFormatted = advert.dateFormatted,
+                                    id = advert.id,
+                                    location = advert.location,
+                                    modelName = advert.modelName,
+                                    photo = advert.photos[0].resize(),
+                                    price = advert.price,
+                                    priceFormatted = advert.priceFormatted,
+                                    properties = advert.properties,
+                                    title = advert.title
+                                )
+                                mViewModel.initAdvert(listingAdvert)
+                                setMenuVisibility(true)
+                                initOptionList()
+                                DetailScreenContent(
+                                    description = advert.text,
+                                    images = advert.photos,
+                                    infoList = getInfoList(advert, requireContext()),
+                                    options = mViewModel.optionList,
+                                    lastVisitedAdverts = lastVisitedAdverts ?: emptyList(),
+                                    isFav = isFav,
+                                    onAdvertImageClick = { position ->
+                                        val action =
+                                            DetailFragmentDirections.actionDetailFragmentToSliderFragment(
+                                                advert.photos.map { it.resize() }.toTypedArray(),
+                                                position
+                                            )
+                                        findNavController().navigate(action)
+                                    }
+                                )
+                            }
+                        }
+
+                        null -> Unit
+                    }
                 }
             }
-            lastVisitedRv.adapter = lastVisitedAdapter
         }
         setMenuVisibility(false)
-        imagePagerAdapter.setListener(this)
-        subscribeObservers()
-        initButtons()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,136 +135,40 @@ class DetailFragment :
         setHasOptionsMenu(true)
     }
 
+    private fun initOptionList() {
+        mViewModel.optionList =
+            mutableListOf(
+                Option(
+                    drawable.ic_phone,
+                    RequestCallCommand(permissionResultLauncher),
+                    type = OptionType.CALL
+                ),
+                Option(
+                    drawable.ic_star_outlined,
+                    AddRemoveFavoritesCommand(mViewModel),
+                    type = OptionType.FAVORITE
+                ),
+                Option(
+                    drawable.ic_message,
+                    OpenMessageScreenCommand(
+                        requireContext(),
+                        advert.userInfo.phoneFormatted
+                    ),
+                    type = OptionType.MESSAGE
+                )
+            )
+    }
+
     private fun makeCall() {
-        val number = "tel:" + binding.callFab.contentDescription
+        val number = "tel:" + advert.userInfo.phoneFormatted
         startActivity(Intent(Intent.ACTION_CALL, Uri.parse(number)))
     }
 
     private fun openDial() {
-        val number = "tel:" + binding.callFab.contentDescription
+        val number = "tel:" + advert.userInfo.phoneFormatted
         val intent = Intent(Intent.ACTION_DIAL)
         intent.data = Uri.parse(number)
         startActivity(intent)
-    }
-
-    private fun openMessageScreen() {
-        val number = "sms:" + binding.messageFab.contentDescription
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(number)
-        startActivity(intent)
-    }
-
-    private fun initButtons() {
-        binding.addToFav.setOnClickListener {
-            mViewModel.setFav.value?.let {
-                if (it) {
-                    mViewModel.removeFromFav(mViewModel.getAdvert())
-                    mViewModel.setFav(false)
-                } else {
-                    mViewModel.addToFav(mViewModel.getAdvert())
-                    mViewModel.setFav(true)
-                }
-            }
-        }
-        binding.callFab.setOnClickListener {
-            requestPermission.launch(Manifest.permission.CALL_PHONE)
-        }
-        binding.messageFab.setOnClickListener {
-            openMessageScreen()
-        }
-    }
-
-    private fun subscribeObservers() {
-        mViewModel.advert.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> {
-                    showProgress(true)
-                }
-
-                is Resource.Error -> {
-                    showSnack(it.message!!)
-                    showProgress(false)
-                }
-
-                is Resource.Success -> {
-                    it.data?.let { advert ->
-                        this.advert = advert
-                        bindAdvert(advert)
-                        val listingAdvert = ListingAdvert(
-                            category = advert.category,
-                            date = advert.date,
-                            dateFormatted = advert.dateFormatted,
-                            id = advert.id,
-                            location = advert.location,
-                            modelName = advert.modelName,
-                            photo = advert.photos[0].resize(),
-                            price = advert.price,
-                            priceFormatted = advert.priceFormatted,
-                            properties = advert.properties,
-                            title = advert.title
-                        )
-                        mViewModel.initAdvert(listingAdvert)
-                        setMenuVisibility(true)
-                        binding.optionsLl.visibility = View.VISIBLE
-                    }
-                    showProgress(false)
-                }
-            }
-        }
-        mViewModel.isAdvertInDb.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()
-                ?.let { inDb ->
-                    val bg = if (inDb) drawable.ic_star else drawable.ic_star_outlined
-                    binding.addToFav.setImageResource(bg)
-                    mViewModel.setFav(inDb)
-                }
-        }
-
-        launchOnLifecycleScope {
-            mViewModel.setFav.collectLatest {
-                it?.let {
-                    val bg = if (it) drawable.ic_star else drawable.ic_star_outlined
-                    binding.addToFav.setImageResource(bg)
-                }
-            }
-        }
-        mViewModel.lastVisitedItems.observe(viewLifecycleOwner) {
-            lastVisitedAdapter.submitList(it)
-        }
-
-        mViewModel.showLastVisitedItems.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()
-                ?.let { show ->
-                    val visibility = if (show) View.VISIBLE else View.GONE
-                    binding.lastItemsLl.visibility = visibility
-                }
-        }
-    }
-
-    private fun showProgress(show: Boolean) {
-        binding.progressBar.visibility = if (show) View.VISIBLE else GONE
-    }
-
-    private fun bindAdvert(item: DetailAdvert) {
-        initTabLayout(fragments, item)
-        binding.callFab.contentDescription = item.userInfo.phoneFormatted
-        binding.messageFab.contentDescription = item.userInfo.phoneFormatted
-        binding.noImageTv.isVisible = item.photos.isEmpty()
-        mViewModel.setImages(item.photos.map { it.resize() })
-    }
-
-    private fun initTabLayout(
-        fragments: List<Fragment>,
-        advert: DetailAdvert
-    ) {
-        viewpagerAdapter =
-            DetailsFragmentPagerAdapter(childFragmentManager, lifecycle, fragments, advert, this)
-        binding.viewpager.adapter = viewpagerAdapter
-        binding.viewpager.isUserInputEnabled = false
-        tabLayoutMediator = TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->
-            tab.text = titles[position]
-        }
-        tabLayoutMediator.attach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -262,9 +194,5 @@ class DetailFragment :
                 name = advert.userInfo.nameSurname
             )
         findNavController().navigate(action)
-    }
-
-    override fun onImageClick(images: List<String>, position: Int, view: View) {
-
     }
 }

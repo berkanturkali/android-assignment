@@ -1,11 +1,9 @@
 package com.arabam.android.assignment.feature.details.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun Slider(
@@ -13,19 +11,16 @@ fun Slider(
     images: List<String>,
     modifier: Modifier = Modifier
 ) {
-
     Box(
         modifier = modifier
-            .fillMaxSize()
-            .background(Color.Black)
     ) {
-
         AdvertImagePager(
+            childModifier = Modifier
+                .fillMaxSize(),
             pageCount = images.size,
             images = images,
             onImageClick = { _, _ -> },
             initialPage = initialPage
         )
-
     }
 }

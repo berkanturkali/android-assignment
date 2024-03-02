@@ -3,28 +3,23 @@ package com.arabam.android.assignment.feature.details.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.arabam.android.assignment.core.common.R
 import com.arabam.android.assignment.core.common.utils.resize
-import kotlin.math.absoluteValue
 
 @Composable
 fun AdvertImagePager(
@@ -32,9 +27,9 @@ fun AdvertImagePager(
     images: List<String>,
     onImageClick: (String, Int) -> Unit,
     modifier: Modifier = Modifier,
+    childModifier: Modifier = Modifier,
     initialPage: Int = 0,
 ) {
-
     val pagerState = rememberPagerState(pageCount = { pageCount }, initialPage = initialPage)
 
     HorizontalPager(state = pagerState, modifier = modifier) { page ->
@@ -56,28 +51,16 @@ fun AdvertImagePager(
             }
 
         } else {
-            Card(modifier = Modifier
-                .fillMaxSize()
-                .clickable {
-                    onImageClick(images[page], page)
-                }
-                .graphicsLayer {
-                    val pageOffset = (
-                            (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
-                            ).absoluteValue
-
-                    alpha = lerp(
-                        start = 0.5f,
-                        stop = 1f,
-                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                    )
-                }) {
-                Image(
-                    painter = painter,
-                    contentDescription = null,
-                    alignment = Alignment.Center,
-                )
-            }
+            Image(
+                painter = painter,
+                contentDescription = null,
+                alignment = Alignment.Center,
+                modifier = childModifier
+                    .fillMaxWidth()
+                    .clickable {
+                        onImageClick(images[page], page)
+                    }
+            )
         }
 
     }
