@@ -1,17 +1,17 @@
 
 <a href="https://play.google.com/store/apps/details?id=com.dogan.arabam&hl=tr"><img src="https://arbimg1.mncdn.com/assets/dist/img/tek-tur-large.gif"/>
 
-|                                                                  Home                                                                  |                                                                  Details                                                                  |       
-|:--------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------:|
-| <img src="screenshots/home_fragment.gif" alt="home" width="250"/> <img src="screenshots/home_fragment_fab.gif" alt="fab" width="250"/> |                                  <img src="screenshots/details_fragment.gif" alt="details" width="250"/>                                  |
+|                                                             Home                                                             |                              Details                               |       
+|:----------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------:|
+| <img src="assets/home_fragment.gif" alt="home" width="250"/> <img src="assets/home_fragment_fab.gif" alt="fab" width="250"/> | <img src="assets/details_fragment.gif" alt="details" width="250"/> |
 
-|                                  Favorites                                  |                                                              Sort & Filter                                                              |
-|:---------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------:|  
-| <img src="screenshots/favorites_fragment.gif" alt="favorites" width="250"/> | <img src="screenshots/sort_fragment.gif" alt="sort" width="250"/> <img src="screenshots/filter_by_model.gif" alt="filter" width="250"/> |
+|                               Favorites                                |                                                         Sort & Filter                                                         |
+|:----------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------:|  
+| <img src="assets/favorites_fragment.gif" alt="favorites" width="250"/> | <img src="assets/sort_fragment.gif" alt="sort" width="250"/> <img src="assets/filter_by_model.gif" alt="filter" width="250"/> |
 
-|                        Advert Images                         |      
-|:------------------------------------------------------------:|
- | <img src="screenshots/slider.gif" alt="slider" width="250"/> |
+|                      Advert Images                      |      
+|:-------------------------------------------------------:|
+ | <img src="assets/slider.gif" alt="slider" width="250"/> |
 
 
 ## Features
@@ -36,20 +36,9 @@
 * [Glide](https://github.com/bumptech/glide)
 * [Coil](https://coil-kt.github.io/coil/)
 
-## Module Design
+## Module Structure
 
-| Module name        | Type                 | Description                                                      |
-| -------------      | -------------        | -------------                                                    |
-| [app](/app/)       | Android Application  | MainActivity, ArabamApp class also Navigation setup.                |
-| [core](/core/)     | Android Library | Cache-related components and DI modules.                                |
-| [common](/common/)     | Android Library | Common components like resources, views, base classes                               |
-| [libraries:remote](/libraries/remote/)   | Java/Kotlin Library  | Remote-related Components            |
-| [libraries:data](/libraries/data/)     | Java/Kotlin Library      | Data-related components.                                      |
-| [libraries:database](/libraries/database/) |Java/Kotlin Library    | Room-related components.                           |
-| [libraries:domain](/libraries/domain/) | Java/Kotlin Library       | Domain-related components.                         |
-| [listing](/listing/) | Android Library   | UI components for the Listing/Home screen.                         |
-| [details](/details/) | Android Library      | UI components for the Details screen.                                              |
-| [favorites](/favorites/) | Android Library      | UI components for the Favorites screen.                                              |
+<img src="assets/module_structure.png" alt="favorites" width="850"/>
 
 ## API
 
