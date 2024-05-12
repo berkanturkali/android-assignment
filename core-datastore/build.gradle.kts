@@ -1,29 +1,21 @@
-import Dependencies.DI
-import Dependencies.ProjectLib.CORE_COMMON
-import Dependencies.ProjectLib.CORE_DATA
-import Dependencies.View
+import plugin.com.arabam.android.assignment.Modules
+import plugin.com.arabam.android.assignment.implementAll
+import plugin.com.arabam.android.assignment.implementAllModules
 
 plugins {
-    androidLibrary
+    alias(libs.plugins.arabam.android.library)
 }
 
 android.namespace = "com.arabam.android.assignment.core.datastore"
 
 dependencies {
 
-    //project lib
-    implementation(project(CORE_DATA))
-    implementation(project(CORE_COMMON))
+    implementAllModules(
+        Modules.CORE_DATA,
+        Modules.CORE_COMMON,
+    )
 
-    //hilt
-    implementation(DI.daggerHiltAndroid)
-    kapt(DI.KAPT.daggerHilt)
-
-    //view
-    implementation(View.swipeRefreshLayout)
-
-    //jetpack datastore
-    implementation(Dependencies.Util.jetpackDataStore)
-
-
+    implementAll(
+        libs.androidx.datastore
+    )
 }

@@ -61,7 +61,7 @@ class HomeFragmentViewModel @Inject constructor(
             preferences
         }
         .flatMapLatest {
-            repo.allAdverts(
+            repo.fetchAllAdverts(
                 it.category,
                 it.sortType,
                 it.sortDirection,

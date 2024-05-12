@@ -1,42 +1,26 @@
-import Dependencies.ProjectLib.CORE_COMMON
-import Dependencies.ProjectLib.CORE_DATA
-import Dependencies.ProjectLib.CORE_DATASTORE
-import Dependencies.ProjectLib.CORE_MODEL
-import Dependencies.ProjectLib.FEATURE_DETAILS
+import plugin.com.arabam.android.assignment.Modules
+import plugin.com.arabam.android.assignment.implementAll
+import plugin.com.arabam.android.assignment.implementAllModules
 
 plugins {
-    androidLibrary
-    androidFeature
-    parcelize
+    alias(libs.plugins.arabam.android.feature)
 }
 
 android.namespace = "com.arabam.android.assignment.feature.listing"
 
 dependencies {
-    //project lib
-    implementation(project(FEATURE_DETAILS))
-    implementation(project(CORE_DATASTORE))
-    implementation(project(CORE_MODEL))
-    implementation(project(CORE_COMMON))
-    implementation(project(CORE_DATA))
-
-    //hilt
-    implementation(Dependencies.DI.daggerHiltAndroid)
-    kapt(Dependencies.DI.KAPT.daggerHilt)
-
-    implementAll(
-        Dependencies.Navigation.components
-    )
-    implementAll(Dependencies.Coroutines.components)
-    implementAll(Dependencies.AndroidX.components)
-
-    implementAll(
-        Dependencies.View.materialComponent,
-        Dependencies.View.swipeRefreshLayout,
-        Dependencies.View.fab,
-        Dependencies.Network.paging,
-        Dependencies.Compose.COMPOSE_LIVE_DATA
+    implementAllModules(
+        Modules.FEATURE_DETAILS,
+        Modules.CORE_MODEL,
+        Modules.CORE_DATASTORE,
+        Modules.CORE_DATA,
+        Modules.CORE_COMMON,
     )
 
-
+    implementAll(
+        libs.jetbrains.coroutines,
+        libs.google.material,
+        libs.androidx.swipe.refresh,
+        libs.androidx.paging3
+    )
 }

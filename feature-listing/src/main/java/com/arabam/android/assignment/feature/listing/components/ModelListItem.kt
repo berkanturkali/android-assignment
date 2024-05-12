@@ -39,7 +39,7 @@ fun ModelListItem(
 
         Text(
             text = model.name!!,
-            color = colorResource(id = R.color.primary_color),
+            color = colorResource(id = R.color.primary_text_color),
             fontWeight = FontWeight.Medium,
             modifier = Modifier
                 .constrainAs(name) {

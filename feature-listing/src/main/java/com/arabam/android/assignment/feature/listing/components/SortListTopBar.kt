@@ -47,7 +47,7 @@ fun SortListTopBar(
                 text = stringResource(id = R.string.sort),
                 fontWeight = FontWeight.Bold,
                 color = colorResource(
-                    id = color.primary_color
+                    id = color.primary_text_color
                 ),
             )
         }

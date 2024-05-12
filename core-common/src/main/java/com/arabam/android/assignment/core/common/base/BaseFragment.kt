@@ -57,19 +57,18 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment(),
         }
     }
 
-    private fun findRecyclerViewChild(parent: ViewGroup): RecyclerView? {
-        var recyclerView: RecyclerView? = null
-        parent.children.forEach {
-            if (it is ViewGroup) {
-                if (it is RecyclerView) {
-                    recyclerView = it
-                    return@forEach
-                } else {
-                    recyclerView = findRecyclerViewChild(it)
+    private fun findRecyclerViewChild(viewGroup: ViewGroup): RecyclerView? {
+        viewGroup.children.forEach {
+            if (it is RecyclerView) {
+                return it
+            } else if (it is ViewGroup) {
+                val childRecyclerView = findRecyclerViewChild(it)
+                if (childRecyclerView != null) {
+                    return childRecyclerView
                 }
             }
         }
-        return recyclerView
+        return null
     }
 
     override fun onDestroyView() {

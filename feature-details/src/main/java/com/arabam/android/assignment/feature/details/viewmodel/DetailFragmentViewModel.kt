@@ -36,8 +36,6 @@ class DetailFragmentViewModel @Inject constructor(
 
     private val _lastVisitedItems = MutableLiveData<List<ListingAdvert>>()
 
-    private lateinit var listingAdvert: ListingAdvert
-
     val lastVisitedItems: LiveData<List<ListingAdvert>> get() = _lastVisitedItems
 
 
@@ -50,6 +48,8 @@ class DetailFragmentViewModel @Inject constructor(
     val showBadgeOnFavoritesItem: LiveData<Boolean> get() = _showBadgeOnFavoritesItem
 
 
+    private lateinit var listingAdvert: ListingAdvert
+
     var optionList by mutableStateOf(mutableListOf<Option>())
 
     var id: Int? = null
@@ -57,16 +57,16 @@ class DetailFragmentViewModel @Inject constructor(
     init {
         savedStateHandle.get<Int>(ADVERT_ID)?.let {
             id = it
-            getAdvert(it)
+            fetchAdvert(it)
             checkTheAdvertInFavorites(it)
         }
         getLastVisitedItems()
     }
 
-    fun getAdvert(id: Int) {
+    fun fetchAdvert(id: Int) {
         _advert.value = Resource.Loading()
         viewModelScope.launch(Dispatchers.Main) {
-            _advert.value = repo.advert(id)
+            _advert.value = repo.fetchAdvert(id)
         }
     }
 
@@ -77,7 +77,7 @@ class DetailFragmentViewModel @Inject constructor(
             }.await()
 
             if (!isAdvertAlreadyInFavorites) {
-                viewModelScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.IO) {
                     dbRepo.addToFav(advert)
                 }
                 _showBadgeOnFavoritesItem.value = true
@@ -87,8 +87,8 @@ class DetailFragmentViewModel @Inject constructor(
     }
 
     fun removeFromFav(advert: ListingAdvert) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepo.removeFromFav(advert)
+        viewModelScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) { dbRepo.removeFromFav(advert) }
         }
         _showBadgeOnFavoritesItem.value = false
     }
@@ -106,11 +106,9 @@ class DetailFragmentViewModel @Inject constructor(
         }
     }
 
-    fun initAdvert(advert: ListingAdvert) {
-        if (!::listingAdvert.isInitialized) {
-            this.listingAdvert = advert
-            insertIntoLastVisitedItems(this.listingAdvert)
-        }
+    fun insertAdvertInToLastVisitedItems(advert: ListingAdvert) {
+        this.listingAdvert = advert
+        insertIntoLastVisitedItems(advert)
     }
 
     fun getAdvert() = listingAdvert

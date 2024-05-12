@@ -1,29 +1,24 @@
 import BuildType.Companion.Debug
 import BuildType.Companion.Release
-import Dependencies.ProjectLib.CORE_COMMON
-import Dependencies.ProjectLib.CORE_DATA
-import Dependencies.ProjectLib.CORE_CACHE
-import Dependencies.ProjectLib.CORE_DATASTORE
-import Dependencies.ProjectLib.FEATURE_DETAILS
-import Dependencies.ProjectLib.CORE_MODEL
-import Dependencies.ProjectLib.FEATURE_FAVORITES
-import Dependencies.ProjectLib.FEATURE_LISTING
-import Dependencies.ProjectLib.CORE_NETWORK
+import plugin.com.arabam.android.assignment.Modules
+import plugin.com.arabam.android.assignment.implementAll
+import plugin.com.arabam.android.assignment.implementAllModules
 
 plugins {
-    androidApplication
-    androidApplicationCompose
+    alias(libs.plugins.arabam.android.application)
+    alias(libs.plugins.arabam.android.application.compose)
+    alias(libs.plugins.arabam.android.hilt)
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 
 }
 
 android {
     defaultConfig {
-        applicationId = Config.Android.applicationId
-        minSdk = Config.Version.minSdkVersion
-        targetSdk = Config.Version.targetSdkVersion
-        versionCode = Config.Version.versionCode
-        versionName = Config.Version.versionName
-        testInstrumentationRunner = Config.Android.testInstrumentationRunner
+        applicationId = "com.arabam.android.assignment"
+        versionCode = 1
+        versionName = "1.0.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -59,13 +54,21 @@ hilt {
 }
 
 dependencies {
-    implementation(project(CORE_DATASTORE))
-    implementation(project(CORE_MODEL))
-    implementation(project(CORE_NETWORK))
-    implementation(project(CORE_DATA))
-    implementation(project(CORE_CACHE))
-    implementation(project(CORE_COMMON))
-    implementation(project(FEATURE_LISTING))
-    implementation(project(FEATURE_DETAILS))
-    implementation(project(FEATURE_FAVORITES))
+    implementAllModules(
+        Modules.CORE_DATASTORE,
+        Modules.CORE_MODEL,
+        Modules.CORE_NETWORK,
+        Modules.CORE_DATA,
+        Modules.CORE_CACHE,
+        Modules.CORE_COMMON,
+        Modules.FEATURE_LISTING,
+        Modules.FEATURE_DETAILS,
+        Modules.FEATURE_FAVORITES,
+    )
+
+    implementAll(
+        libs.androidx.navigation.ui.ktx,
+        libs.androidx.navigation.fragment.ktx
+    )
+
 }

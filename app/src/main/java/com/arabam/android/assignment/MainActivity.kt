@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             val badge = binding.bottomNavigationView.getOrCreateBadge(id.favorites_graph)
             badge.backgroundColor = ContextCompat.getColor(
                 this,
-                color.tertiary_color
+                color.primary_color
             )
             badge.isVisible = showBadge
         }

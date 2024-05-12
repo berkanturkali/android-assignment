@@ -89,7 +89,7 @@ fun InfoWithTitleItem(
         Text(
             text = title,
             style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            color = colorResource(id = R.color.primary_color),
+            color = colorResource(id = R.color.primary_text_color),
             modifier = paddingModifier
         )
 

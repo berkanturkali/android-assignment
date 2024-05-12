@@ -1,16 +1,16 @@
 package com.arabam.android.assignment.core.cache.data.mapper
 
 import com.arabam.android.assignment.core.model.ListingAdvert
-import com.arabam.android.assignment.core.cache.data.entity.AdvertEntity
+import com.arabam.android.assignment.core.cache.data.entity.FavoriteAdvertEntity
 import com.arabam.android.assignment.core.model.Category
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class DbEntityMapper @Inject constructor() :
-    Mapper<AdvertEntity, ListingAdvert> {
+class DbEntityMapper @Inject constructor() :
+    Mapper<FavoriteAdvertEntity, ListingAdvert> {
 
-    override fun toDomain(entity: AdvertEntity?): ListingAdvert? {
+    override fun toDomain(entity: FavoriteAdvertEntity?): ListingAdvert? {
         return entity?.let {
             ListingAdvert(
                 id = it.id,
@@ -28,8 +28,8 @@ public class DbEntityMapper @Inject constructor() :
         }
     }
 
-    override fun fromDomain(domain: ListingAdvert): AdvertEntity {
-        return AdvertEntity(
+    override fun fromDomain(domain: ListingAdvert): FavoriteAdvertEntity {
+        return FavoriteAdvertEntity(
             id = domain.id,
             location = domain.location,
             photo = domain.photo,
@@ -38,7 +38,7 @@ public class DbEntityMapper @Inject constructor() :
         )
     }
 
-    override fun toDomainList(list: List<AdvertEntity>?): List<ListingAdvert> {
+    override fun toDomainList(list: List<FavoriteAdvertEntity>?): List<ListingAdvert> {
         return if (!list.isNullOrEmpty()) {
             list.map { toDomain(it)!! }
         } else {

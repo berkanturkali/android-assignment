@@ -1,48 +1,26 @@
-import Dependencies.ProjectLib.CORE_COMMON
-import Dependencies.ProjectLib.CORE_DATA
-import Dependencies.ProjectLib.CORE_DATASTORE
-import Dependencies.ProjectLib.CORE_MODEL
-import Dependencies.Util.jsoup
+import plugin.com.arabam.android.assignment.Modules
+import plugin.com.arabam.android.assignment.implementAll
+import plugin.com.arabam.android.assignment.implementAllModules
 
 plugins {
-    androidLibrary
-    androidFeature
-    parcelize
+    alias(libs.plugins.arabam.android.feature)
 }
 android.namespace = "com.arabam.android.assignment.feature.details"
 dependencies {
 
-    //project lib
-    implementation(project(CORE_MODEL))
-    implementation(project(CORE_COMMON))
-    implementation(project(CORE_DATA))
-    implementation(project(CORE_DATASTORE))
+    implementAllModules(
+        Modules.CORE_MODEL,
+        Modules.CORE_COMMON,
+        Modules.CORE_DATA,
+        Modules.CORE_DATASTORE,
+    )
 
-    //view
-    Dependencies.View.run {
-        implementation(swipeRefreshLayout)
-        implementation(viewPager)
-        implementation(materialComponent)
-    }
-
-    //jsoup
-    implementation(jsoup)
-
-    //hilt
-    implementation(Dependencies.DI.daggerHiltAndroid)
-    kapt(Dependencies.DI.KAPT.daggerHilt)
-    //androidx
-    implementAll(Dependencies.AndroidX.components)
-
-    //navigation component
-    implementAll(Dependencies.Navigation.components)
-
-    //coroutines
-    implementation(Dependencies.Coroutines.kotlinAndroid)
-
-    //coil
-    implementation(Dependencies.Coil.COIL)
-
-    implementation(Dependencies.Compose.COMPOSE_LIVE_DATA)
-
+    implementAll(
+        libs.androidx.swipe.refresh,
+        libs.androidx.view.pager,
+        libs.google.material,
+        libs.jsoup,
+        libs.jetbrains.coroutines,
+        libs.coil.compose,
+    )
 }

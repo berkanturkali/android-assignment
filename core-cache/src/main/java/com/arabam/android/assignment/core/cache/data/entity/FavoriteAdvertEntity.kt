@@ -5,14 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.arabam.android.assignment.core.model.Location
 
-@Entity(tableName = "last_visited_adverts")
-public data class VisitedAdvert(
+@Entity
+data class FavoriteAdvertEntity(
     @PrimaryKey
     val id: Int,
     @Embedded
     val location: Location,
     var photo: String,
     val price: Int,
-    val model: String,
-    val visitedAt: Long = System.currentTimeMillis()
+    val title: String,
 )

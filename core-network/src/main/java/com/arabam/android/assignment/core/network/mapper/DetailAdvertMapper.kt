@@ -1,5 +1,6 @@
 package com.arabam.android.assignment.core.network.mapper
 
+import com.arabam.android.assignment.core.common.utils.resize
 import com.arabam.android.assignment.core.model.DetailAdvert
 import com.arabam.android.assignment.core.network.mapper.base.RemoteModelMapper
 import com.arabam.android.assignment.core.network.model.DetailAdvertDto
@@ -19,7 +20,7 @@ public class DetailAdvertMapper @Inject constructor(
             id = model.id,
             location = model.location,
             modelName = model.modelName,
-            photos = model.photos,
+            photos = model.photos.map { it.resize() },
             price = model.price,
             priceFormatted = model.priceFormatted,
             properties = propertyRemoteMapper.mapModelList(model.properties),

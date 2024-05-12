@@ -21,7 +21,7 @@ fun MenuItemLabel(
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        color = colorResource(id = com.arabam.android.assignment.core.common.R.color.primary_color).copy(
+        color = colorResource(id = com.arabam.android.assignment.core.common.R.color.primary_text_color).copy(
             alpha = 0.7f
         ),
         contentColor = colorResource(id = com.arabam.android.assignment.core.common.R.color.on_primary)

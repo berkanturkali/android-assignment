@@ -22,7 +22,7 @@ fun AdvertDescription(
         modifier = modifier.padding(16.dp),
         text = description,
         style = MaterialTheme.typography.body1,
-        color = colorResource(id = R.color.primary_color)
+        color = colorResource(id = R.color.primary_text_color)
     )
 }
 

@@ -1,4 +1,4 @@
-import java.util.*
+import java.util.Locale
 
 interface BuildType {
 
@@ -19,7 +19,7 @@ private object BuildTypeDebug : BuildType {
     override val isMinifyEnabled: Boolean get() = false
     override val isTestCoverageEnabled: Boolean get() = true
     override val applicationIdSuffix: String get() = ".$name"
-    override val versionNameSuffix: String get() = "-${name.toUpperCase(Locale.getDefault())}"
+    override val versionNameSuffix: String get() = "-${name.uppercase(Locale.getDefault())}"
 }
 
 private object BuildTypeRelease : BuildType {
@@ -27,5 +27,5 @@ private object BuildTypeRelease : BuildType {
     override val isMinifyEnabled: Boolean get() = true
     override val isTestCoverageEnabled: Boolean get() = true
     override val applicationIdSuffix: String get() = ".$name"
-    override val versionNameSuffix: String get() = "-${name.toUpperCase(Locale.getDefault())}"
+    override val versionNameSuffix: String get() = "-${name.uppercase(Locale.getDefault())}"
 }

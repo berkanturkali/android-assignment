@@ -3,16 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/xx_light_gray"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        android:layout_height="wrap_content">
 
-            <androidx.compose.ui.platform.ComposeView
-                android:id="@+id/brandList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:composableName="com.arabam.android.assignment.feature.listing.components.BrandListKt.BrandListPrev" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/brandList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:composableName="com.arabam.android.assignment.feature.listing.components.BrandListKt.BrandListPrev" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

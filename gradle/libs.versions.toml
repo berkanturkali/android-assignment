@@ -1,0 +1,103 @@
+[versions]
+androidXCore = "1.12.0"
+androidXAppCompat = "1.6.1"
+material = "1.11.0"
+junit4 = "4.13.2"
+androidXJunit = "1.1.5"
+androidXEspresso = "3.5.1"
+kotlin = "1.9.22"
+androidGradlePlugin = "8.3.2"
+retrofit = "2.11.0"
+okhttp = "4.12.0"
+hilt = "2.51"
+truth = "1.4.2"
+splashScreen = "1.0.1"
+androidXLifecycleViewModel = "2.7.0"
+androidXFragmentKtx = "1.6.2"
+androidXNavigation = "2.7.7"
+androidXComposeBom = "2024.04.00"
+androidXComposeCompiler = "1.5.8"
+androidXComposeConstraintLayout = "1.0.1"
+androidXRoom = "2.6.1"
+androidXComposeLiveData = "1.6.1"
+timber = "5.0.1"
+androidXViewPager = "1.1.0-beta01"
+coil = "2.6.0"
+androidXSwipeRefreshLayout = "1.1.0"
+androidXViewPager2 = "1.1.0-beta01"
+androidXPaging = "3.0.1"
+gson = "2.8.7"
+androidXDataSource = "1.0.0"
+jsoup = "1.13.1"
+mockWebServer = "4.10.0"
+mockk = "1.12.4"
+coroutines = "1.7.3"
+glide = "4.16.0"
+
+[libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidXAppCompat" }
+androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCore" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+junit = { group = "junit", name = "junit", version.ref = "junit4" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidXEspresso" }
+androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidXJunit" }
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+androidx-paging3 = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidXPaging" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+google-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+okhttp-mock-web-server = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockWebServer" }
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidXLifecycleViewModel" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidXFragmentKtx" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "androidXNavigation" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "androidXNavigation" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidXComposeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-material = { group = "androidx.compose.material", name = "material" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "androidXComposeConstraintLayout" }
+androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "androidXComposeLiveData" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidXRoom" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidXRoom" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidXRoom" }
+jakewharton-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+androidx-view-pager = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "androidXViewPager2" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+jetbrains-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidXDataSource" }
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
+androidx-swipe-refresh = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "androidXSwipeRefreshLayout" }
+bumptech-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+retrofit-gson-converterfactory = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
+
+
+# Dependencies of the included build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+androidx-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "androidXNavigation" }
+com-android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+
+# Plugins defined by this project
+arabam-android-application = { id = "arabam.android.application", version = "unspecified" }
+arabam-android-application-compose = { id = "arabam.android.application.compose", version = "unspecified" }
+arabam-android-library = { id = "arabam.android.library", version = "unspecified" }
+arabam-android-library-compose = { id = "arabam.android.library.compose", version = "unspecified" }
+arabam-android-feature = { id = "arabam.android.feature", version = "unspecified" }
+arabam-android-hilt = { id = "arabam.android.hilt", version = "unspecified" }
+
+
+
+
+
+

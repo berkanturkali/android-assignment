@@ -6,26 +6,26 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.arabam.android.assignment.core.data.repo.abstraction.AdvertRepo
 import com.arabam.android.assignment.core.data.util.safeApiCall
+import com.arabam.android.assignment.core.model.DetailAdvert
+import com.arabam.android.assignment.core.model.ListingAdvert
+import com.arabam.android.assignment.core.model.Resource
 import com.arabam.android.assignment.core.network.ApiService
 import com.arabam.android.assignment.core.network.mapper.AdvertRemoteMapper
 import com.arabam.android.assignment.core.network.mapper.DetailAdvertMapper
 import com.arabam.android.assignment.core.network.pagination.AdvertsPagingSource
-import com.arabam.android.assignment.core.model.DetailAdvert
-import com.arabam.android.assignment.core.model.ListingAdvert
-import com.arabam.android.assignment.core.model.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class AdvertRepoImpl @Inject constructor(
+class AdvertRepoImpl @Inject constructor(
     private val api: ApiService,
     private val advertMapper: AdvertRemoteMapper,
     private val detailAdvertMapper: DetailAdvertMapper,
 ) : AdvertRepo {
 
-    override fun allAdverts(
+    override fun fetchAllAdverts(
         categoryId: Int?,
         sort: Int?,
         direction: Int?,
@@ -50,8 +50,8 @@ public class AdvertRepoImpl @Inject constructor(
             }
         }
 
-    override suspend fun advert(id: Int): Resource<DetailAdvert> =
+    override suspend fun fetchAdvert(id: Int): Resource<DetailAdvert> =
         safeApiCall(detailAdvertMapper) {
-            api.advert(id)
+            api.fetchAdvert(id)
         }
 }

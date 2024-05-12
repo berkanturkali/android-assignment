@@ -1,18 +1,23 @@
-import Dependencies.ProjectLib.CORE_CACHE
-import Dependencies.ProjectLib.CORE_MODEL
-import Dependencies.ProjectLib.CORE_NETWORK
+import plugin.com.arabam.android.assignment.Modules
+import plugin.com.arabam.android.assignment.implementAll
+import plugin.com.arabam.android.assignment.implementAllModules
 
 plugins {
-    androidLibrary
+    alias(libs.plugins.arabam.android.library)
 }
 
 android.namespace = "com.arabam.android.assignment.core.data"
 
 dependencies {
 
-    implementation(project(CORE_CACHE))
-    implementation(project(CORE_NETWORK))
-    implementation(project(CORE_MODEL))
-    implementation(Dependencies.Network.pagingCommon)
-    implementAll(Dependencies.Network.components)
+    implementAllModules(
+        Modules.CORE_CACHE,
+        Modules.CORE_NETWORK,
+        Modules.CORE_MODEL,
+    )
+
+    implementAll(
+        libs.androidx.paging3,
+        libs.retrofit.core,
+    )
 }

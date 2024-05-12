@@ -1,6 +1,6 @@
 package com.arabam.android.assignment.core.network.model
 
-public data class ListingAdvertDto(
+data class ListingAdvertDto(
     val category: CategoryDto,
     val date: String,
     val dateFormatted: String,

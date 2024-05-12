@@ -7,8 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="title_color">#0A1E33</color>
-    <color name="primary_color">#1D1D1F</color>
+    <color name="primary_text_color">#0A1E33</color>
+    <color name="primary_color">#e40030</color>
     <color name="gray">#C1C1C1</color>
     <color name="secondary">#ffdb4d</color>
     <color name="error">#db471e</color>
@@ -23,4 +23,5 @@
     <color name="tertiary_color">#0066CC</color>,
     <color name="divider_color">#2F3336</color>
     <color name="fav_star_color">#FFFF02</color>
+    <color name="expandable_menu_badge_color">@color/secondary</color>
 </resources>

@@ -17,7 +17,7 @@ object DbModule {
     fun provideDb(@ApplicationContext context: Context): ArabamDb = ArabamDb.build(context)
 
     @Provides
-    fun provideDao(db: ArabamDb) = db.dao()
+    fun provideFavoritesDao(db: ArabamDb) = db.favoritesDao()
 
     @Provides
     fun provideLastVisitedItemsDao(db: ArabamDb) = db.lastVisitedItemsDao()

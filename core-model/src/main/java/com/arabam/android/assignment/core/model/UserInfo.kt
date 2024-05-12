@@ -1,6 +1,6 @@
 package com.arabam.android.assignment.core.model
 
-public data class UserInfo(
+data class UserInfo(
     val id: Int,
     val nameSurname: String,
     val phone: String,

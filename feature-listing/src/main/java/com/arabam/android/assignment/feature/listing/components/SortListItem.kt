@@ -40,7 +40,7 @@ fun SortListItem(
                 stringResource(id = R.string.sort_text), item.title!!, item.direction?.text
             ),
             fontWeight = FontWeight.Bold,
-            color = colorResource(id = R.color.primary_color)
+            color = colorResource(id = R.color.primary_text_color)
         )
 
         if (showCheckmark) {

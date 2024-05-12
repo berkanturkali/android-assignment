@@ -55,7 +55,7 @@ fun LastVisitedAdvertsTitle(
         modifier = modifier,
         text = stringResource(id = R.string.last_visited_adverts),
         style = MaterialTheme.typography.h6,
-        color = colorResource(id = R.color.primary_color)
+        color = colorResource(id = R.color.primary_text_color)
     )
 }
 
@@ -78,7 +78,7 @@ fun LastVisitedAdvertsList(
                     stringResource(id = R.string.advert_location),
                     advert.location.cityName,
                     advert.location.townName
-                )
+                ),
             )
         }
     }
@@ -112,9 +112,11 @@ fun LastVisitedAdvertItem(
                 .fillMaxWidth()
         ) {
 
-            Box(modifier = Modifier
-                .height(150.dp)
-                .fillMaxWidth()) {
+            Box(
+                modifier = Modifier
+                    .height(150.dp)
+                    .fillMaxWidth()
+            ) {
                 Image(
                     painter = painter,
                     contentDescription = null,
@@ -143,7 +145,7 @@ fun LastVisitedAdvertItem(
             Text(
                 text = modelName,
                 style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.SemiBold),
-                color = colorResource(id = R.color.primary_color),
+                color = colorResource(id = R.color.primary_text_color),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp, start = 8.dp, end = 8.dp)
@@ -152,7 +154,7 @@ fun LastVisitedAdvertItem(
             Text(
                 text = address,
                 style = MaterialTheme.typography.caption,
-                color = colorResource(id = R.color.primary_color),
+                color = colorResource(id = R.color.primary_text_color),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp, vertical = 12.dp)
@@ -169,7 +171,7 @@ fun LastVisitedAdvertItemPrev() {
             image = "",
             price = "450.000 TL",
             modelName = "Model",
-            address = "Karşıyaka/İzmir"
+            address = "Karşıyaka/İzmir",
         )
     }
 }

@@ -1,6 +1,6 @@
 package com.arabam.android.assignment.core.model
 
-public data class ListingAdvert(
+data class ListingAdvert(
     val category: Category,
     val date: String,
     val dateFormatted: String,

@@ -1,36 +1,23 @@
-import Dependencies.ProjectLib.CORE_MODEL
-import Dependencies.View.glide
-import Dependencies.View.glideAnnotation
-import Dependencies.View.swipeRefreshLayout
+import plugin.com.arabam.android.assignment.Modules
+import plugin.com.arabam.android.assignment.implementAll
+import plugin.com.arabam.android.assignment.implementProject
 
 plugins {
-    androidLibrary
-    androidLibraryCompose
+    alias(libs.plugins.arabam.android.library)
+    alias(libs.plugins.arabam.android.library.compose)
 }
 
 android.namespace = "com.arabam.android.assignment.core.common"
 
 dependencies {
 
-    //project lib
-    implementation(project(CORE_MODEL))
+    implementProject(Modules.CORE_MODEL)
 
-    //swipe refresh
-    implementation(swipeRefreshLayout)
-
-    //androidx
-    Dependencies.AndroidX.run {
-        implementation(coreKtx)
-    }
-
-    implementAll(Dependencies.Navigation.components)
-
-    //view
-    implementation(Dependencies.View.materialComponent)
-
-    implementAll(Dependencies.Compose.COMPOSE_UI, Dependencies.Compose.COMPOSE_MATERIAL)
-
-    //glide
-    implementation(glide)
-    annotationProcessor(glideAnnotation)
+    implementAll(
+        libs.androidx.swipe.refresh,
+        libs.google.material,
+        libs.androidx.navigation.fragment.ktx,
+        libs.androidx.navigation.ui.ktx,
+        libs.bumptech.glide
+    )
 }

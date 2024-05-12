@@ -70,7 +70,7 @@ fun MenuItem(
             }
             if (showBadge) {
                 Badge(
-                    backgroundColor = colorResource(id = R.color.tertiary_color),
+                    backgroundColor = colorResource(id = R.color.expandable_menu_badge_color),
                     modifier = modifier
                         .padding(top = 3.dp, end = 6.dp)
                         .size(size / 5f)

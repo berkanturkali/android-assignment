@@ -84,7 +84,7 @@ class DetailFragment :
                             DetailsErrorView(
                                 message = error ?: stringResource(id = string.something_went_wrong),
                                 onTryAgainButtonClick = {
-                                    mViewModel.id?.let(mViewModel::getAdvert)
+                                    mViewModel.id?.let(mViewModel::fetchAdvert)
                                 })
                         }
 
@@ -104,7 +104,7 @@ class DetailFragment :
                                     properties = advert.properties,
                                     title = advert.title
                                 )
-                                mViewModel.initAdvert(listingAdvert)
+                                mViewModel.insertAdvertInToLastVisitedItems(listingAdvert)
                                 setMenuVisibility(true)
                                 initOptionList()
                                 DetailScreenContent(
@@ -112,7 +112,7 @@ class DetailFragment :
                                     images = advert.photos,
                                     infoList = getInfoList(advert, requireContext()),
                                     options = mViewModel.optionList,
-                                    lastVisitedAdverts = lastVisitedAdverts ?: emptyList(),
+                                    lastVisitedAdverts = lastVisitedAdverts?.filter { it.id != mViewModel.id } ?: emptyList(),
                                     isFav = isFav,
                                     onAdvertImageClick = { position ->
                                         val action =

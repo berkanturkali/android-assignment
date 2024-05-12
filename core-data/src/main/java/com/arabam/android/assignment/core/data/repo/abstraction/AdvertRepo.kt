@@ -6,8 +6,8 @@ import com.arabam.android.assignment.core.model.ListingAdvert
 import com.arabam.android.assignment.core.model.Resource
 import kotlinx.coroutines.flow.Flow
 
-public interface AdvertRepo {
-    public fun allAdverts(
+interface AdvertRepo {
+    fun fetchAllAdverts(
         categoryId: Int?,
         sort: Int?,
         direction: Int?,
@@ -15,5 +15,5 @@ public interface AdvertRepo {
         maxYear: Int?,
     ): Flow<PagingData<ListingAdvert>>
 
-    public suspend fun advert(id: Int): Resource<DetailAdvert>
+    suspend fun fetchAdvert(id: Int): Resource<DetailAdvert>
 }

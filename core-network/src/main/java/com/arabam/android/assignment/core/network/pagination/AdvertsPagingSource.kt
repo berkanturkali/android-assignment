@@ -2,13 +2,13 @@ package com.arabam.android.assignment.core.network.pagination
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.arabam.android.assignment.core.common.utils.resize
 import com.arabam.android.assignment.core.network.ApiService
 import com.arabam.android.assignment.core.network.model.ListingAdvertDto
-import com.arabam.android.assignment.core.common.utils.resize
 import retrofit2.HttpException
 import java.io.IOException
 
-public class AdvertsPagingSource(
+class AdvertsPagingSource(
     private val service: ApiService,
     private val categoryId: Int?,
     private val sort: Int?,
@@ -28,7 +28,7 @@ public class AdvertsPagingSource(
         val take = 10
         return try {
             val response =
-                service.allAdverts(
+                service.fetchAllAdverts(
                     skip,
                     id = categoryId,
                     sort = sort,

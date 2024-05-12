@@ -1,15 +1,15 @@
 package com.arabam.android.assignment.core.cache.data.mapper
 
-import com.arabam.android.assignment.core.model.ListingAdvert
-import com.arabam.android.assignment.core.cache.data.entity.VisitedAdvert
+import com.arabam.android.assignment.core.cache.data.entity.LastVisitedAdvertEntity
 import com.arabam.android.assignment.core.model.Category
+import com.arabam.android.assignment.core.model.ListingAdvert
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 public class VisitedEntityMapper @Inject constructor() :
-    Mapper<VisitedAdvert, ListingAdvert> {
-    override fun toDomain(entity: VisitedAdvert?): ListingAdvert? {
+    Mapper<LastVisitedAdvertEntity, ListingAdvert> {
+    override fun toDomain(entity: LastVisitedAdvertEntity?): ListingAdvert? {
         return entity?.let {
             ListingAdvert(
                 id = it.id,
@@ -27,17 +27,17 @@ public class VisitedEntityMapper @Inject constructor() :
         }
     }
 
-    override fun fromDomain(domain: ListingAdvert): VisitedAdvert {
-        return VisitedAdvert(
+    override fun fromDomain(domain: ListingAdvert): LastVisitedAdvertEntity {
+        return LastVisitedAdvertEntity(
             id = domain.id,
             location = domain.location,
             photo = domain.photo,
             price = domain.price,
-            model = domain.modelName
+            model = domain.modelName,
         )
     }
 
-    override fun toDomainList(list: List<VisitedAdvert>?): List<ListingAdvert> {
+    override fun toDomainList(list: List<LastVisitedAdvertEntity>?): List<ListingAdvert> {
         return if (!list.isNullOrEmpty()) {
             list.map { toDomain(it)!! }
         } else {

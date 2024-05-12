@@ -60,7 +60,7 @@ fun SelectModelFragmentTopBar(
                     onCloseButtonClick()
                 }
                 .padding(16.dp),
-            tint = colorResource(id = color.primary_color)
+            tint = colorResource(id = color.primary_text_color)
         )
 
     }

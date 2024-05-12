@@ -1,8 +1,18 @@
+package plugin.com.arabam.android.assignment
+
+import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.PluginManager
+import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.project
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
+
+val Project.libs
+    get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 internal val PluginManager.kotlinAndroid: Unit
     get() {
         apply("org.jetbrains.kotlin.android")
@@ -109,3 +119,11 @@ fun DependencyHandler.implementAllAndroidTests(dependencyList: List<String>) {
 fun DependencyHandler.testImplementation(vararg dependencies: Any) {
     dependencies.forEach(::testImplementation)
 }
+fun DependencyHandler.implementProject(projectLib: String) = add(
+    "implementation", project(projectLib)
+)
+
+fun DependencyHandler.implementAllModules(vararg projectLibs: String) {
+    projectLibs.forEach(::implementProject)
+}
+

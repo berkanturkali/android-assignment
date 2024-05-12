@@ -121,7 +121,7 @@ fun ExpandableMenu(
 
             androidx.compose.animation.AnimatedVisibility(visible = showBadge && buttonState == ButtonState.COLLAPSED) {
                 Badge(
-                    backgroundColor = colorResource(id = color.tertiary_color),
+                    backgroundColor = colorResource(id = color.expandable_menu_badge_color),
                     modifier = Modifier.padding(top = 4.dp, end = 4.dp)
                 )
             }

@@ -5,59 +5,51 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/xx_light_gray"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsingToolbarLayout"
-                android:layout_width="0dp"
-                android:layout_height="?android:actionBarSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/categoryToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_scrollFlags="noScroll">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/category_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/primary_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_scrollFlags="noScroll"
-                    app:titleTextColor="@color/white" />
+                app:layout_scrollFlags="noScroll"
+                app:titleTextColor="@color/white">
 
                 <TextView
                     android:id="@+id/category_toolbar_title"
                     style="@style/TextAppearance.AppCompat.Medium"
-                    tools:text="Lorem"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_margin="16dp"
                     android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="Lorem" />
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </androidx.appcompat.widget.Toolbar>
 
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/category_container_fragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:defaultNavHost="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/collapsingToolbarLayout"
-                 />
+                app:layout_constraintTop_toBottomOf="@id/categoryToolbar" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

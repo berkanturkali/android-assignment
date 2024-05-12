@@ -6,10 +6,10 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-public interface ApiService {
+interface ApiService {
 
     @GET("api/v1/listing")
-    public suspend fun allAdverts(
+    suspend fun fetchAllAdverts(
         @Query("skip") skip: Int,
         @Query("take") take: Int = 10,
         @Query("categoryId") id: Int?,
@@ -20,7 +20,7 @@ public interface ApiService {
     ): List<ListingAdvertDto>
 
     @GET("api/v1/detail")
-    public suspend fun advert(
+    suspend fun fetchAdvert(
         @Query("id") id: Int,
     ): Response<DetailAdvertDto>
 }

@@ -1,31 +1,32 @@
-package com.arabam.android.assignment
-import Config
+package plugin.com.arabam.android.assignment
+
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+
 /**
  * Configures base Kotlin with Android options
  */
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *,*>
+    commonExtension: CommonExtension<*, *, *, *, *, *>
 ) {
 
     commonExtension.apply {
-        compileSdk = Config.Version.compileSdkVersion
+        compileSdk = 34
 
         defaultConfig {
-            minSdk = Config.Version.minSdkVersion
+            minSdk = 24
         }
 
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_1_8
-            targetCompatibility = JavaVersion.VERSION_1_8
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
         }
 
         buildFeatures {
-            dataBinding.isEnabled = true
+            dataBinding.enable = true
             buildConfig = true
         }
 
@@ -42,12 +43,11 @@ internal fun Project.configureKotlinAndroid(
                 "-opt-in=kotlin.Experimental",
             )
 
-            // Set JVM target to 1.8
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
 }
 
-fun CommonExtension<*, *, *, *,*>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+fun CommonExtension<*, *, *, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }

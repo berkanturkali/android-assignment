@@ -63,7 +63,7 @@ fun BrandListItem(
                             modelCount
                         ),
                         fontWeight = FontWeight.Bold,
-                        color = colorResource(id = R.color.primary_color)
+                        color = colorResource(id = R.color.primary_text_color)
                     )
                 }
             }
