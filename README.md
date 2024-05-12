@@ -1,21 +1,29 @@
 
 <a href="https://play.google.com/store/apps/details?id=com.dogan.arabam&hl=tr"><img src="https://arbimg1.mncdn.com/assets/dist/img/tek-tur-large.gif"/>
-</a>
-|                          Home                           |                         Details                     |                Favorites                 |
-| :----------------------------------------------------:  | :-------------------------------------------------: |:---------------------------------------: |
-|<img src="screenshots/home.gif" alt="home" width="250"/> | <img src="screenshots/details.gif" alt="details" width="250"/>| <img src="screenshots/favorites.gif" alt="favorites" width="250"/>|
+
+|                                                                  Home                                                                  |                                                                  Details                                                                  |       
+|:--------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------:|
+| <img src="screenshots/home_fragment.gif" alt="home" width="250"/> <img src="screenshots/home_fragment_fab.gif" alt="fab" width="250"/> |                                  <img src="screenshots/details_fragment.gif" alt="details" width="250"/>                                  |
+
+|                                  Favorites                                  |                                                              Sort & Filter                                                              |
+|:---------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------:|  
+| <img src="screenshots/favorites_fragment.gif" alt="favorites" width="250"/> | <img src="screenshots/sort_fragment.gif" alt="sort" width="250"/> <img src="screenshots/filter_by_model.gif" alt="filter" width="250"/> |
+
+|                        Advert Images                         |      
+|:------------------------------------------------------------:|
+ | <img src="screenshots/slider.gif" alt="slider" width="250"/> |
 
 
 ## Features
-* Kotlin Coroutines with Flow
-* Clean Architecture with MVVM
+* Kotlin Coroutines & Flow
 * Android Architecture Components
-* Multi-module architecture
-* Dagger Hilt
-* Kotlin Gradle DSL
+* Multi-module
+* XML & Compose
+* Kotlin DSL
 
 ## Libraries
 
+* [Jetpack Compose](https://developer.android.com/develop/ui/compose/setup)
 * [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started)
 * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 * [LiveData](https://developer.android.com/jetpack/androidx/releases/lifecycle)
@@ -26,7 +34,7 @@
 * [Jetpack Datastore](https://developer.android.com/topic/libraries/architecture/datastore)
 * [Timber](https://github.com/JakeWharton/timber)
 * [Glide](https://github.com/bumptech/glide)
-* DataBinding
+* [Coil](https://coil-kt.github.io/coil/)
 
 ## Module Design
 
